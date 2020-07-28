@@ -66,7 +66,7 @@
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
                data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="{{route('inicio')}}">{{ config('app.name') }} - Universidad Popular del Cesar</a>
+            <a class="navbar-brand" href="{{route('inicio')}}">{{ config('app.name') }} - LIQUOR STORE</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -165,31 +165,13 @@
                                     class="material-icons">person</i><span>Usuarios</span></a></li>
                     @endif
                 @endif
-                @if(session()->exists('MOD_GENERAL'))
-                    @if($location=='general')
-                        <li class="active"><a href="{{route('admin.general')}}"><i
-                                    class="material-icons">settings</i><span>Generales</span></a></li>
+                @if(session()->exists('MOD_ALMACEN'))
+                    @if($location=='almacen')
+                        <li class="active"><a href="{{route('admin.almacen')}}"><i
+                                    class="material-icons">settings</i><span>Almacen</span></a></li>
                     @else
-                        <li><a href="{{route('admin.general')}}"><i
-                                    class="material-icons">settings</i><span>Generales</span></a></li>
-                    @endif
-                @endif
-                @if(session()->exists('MOD_ACADEMICO'))
-                    @if($location=='academico')
-                        <li class="active"><a href="{{route('admin.academico')}}"><i
-                                    class="material-icons">description</i><span>Academico</span></a></li>
-                    @else
-                        <li><a href="{{route('admin.academico')}}"><i
-                                    class="material-icons">description</i><span>Academico</span></a></li>
-                    @endif
-                @endif
-                @if(session()->exists('MOD_INTERVENCION'))
-                    @if($location=='intervencion')
-                        <li class="active"><a href="{{route('admin.intervencion')}}"><i
-                                    class="material-icons">layers</i><span>Intervenciones</span></a></li>
-                    @else
-                        <li><a href="{{route('admin.intervencion')}}"><i
-                                    class="material-icons">layers</i><span>Intervenciones</span></a></li>
+                        <li><a href="{{route('admin.almacen')}}"><i
+                                    class="material-icons">settings</i><span>Almacen</span></a></li>
                     @endif
                 @endif
                 <li>

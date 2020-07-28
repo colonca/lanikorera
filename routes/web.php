@@ -32,9 +32,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('usuarios', 'MenuController@usuarios')->name('admin.usuarios');
     Route::post('acceso', 'HomeController@confirmaRol')->name('rol');
     Route::get('inicio', 'HomeController@inicio')->name('inicio');
-    Route::get('general', 'MenuController@general')->name('admin.general');
-    Route::get('intervencion', 'MenuController@intervencion')->name('admin.intervencion');
-    Route::get('academico', 'MenuController@academico')->name('admin.academico');
+    Route::get('almacen', 'MenuController@almacen')->name('admin.almacen');
     Route::get('auditoria', 'MenuController@auditoria')->name('admin.auditoria');
     //NOTIFICACIONES
     Route::resource('notificaciones', 'NotificacionController');
