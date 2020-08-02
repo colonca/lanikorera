@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('almacen', 'MenuController@almacen')->name('admin.almacen');
     Route::get('auditoria', 'MenuController@auditoria')->name('admin.auditoria');
     Route::get('compras', 'MenuController@compras')->name('admin.compras');
+    Route::get('ventas', 'MenuController@ventas')->name('admin.ventas');
     //NOTIFICACIONES
     Route::resource('notificaciones', 'NotificacionController');
 });
@@ -67,5 +68,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
 });
 Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::resource('proveedores','proveedoresController');
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
+    Route::resource('clientes','ClientesController');
 });
 

@@ -25,5 +25,9 @@ class MenuController extends Controller
     {
         return view('menu.compras')->with('location', 'compras');
     }
+    public function ventas()
+    {
+        return view('menu.ventas')->with('location', 'ventas');
+    }
 
 }

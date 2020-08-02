@@ -183,6 +183,15 @@
                                     class="material-icons">settings</i><span>Compras</span></a></li>
                     @endif
                 @endif
+                @if(session()->exists('MOD_VENTAS'))
+                    @if($location=='ventas')
+                        <li class="active"><a href="{{route('admin.ventas')}}"><i
+                                    class="material-icons">settings</i><span>Ventas</span></a></li>
+                    @else
+                        <li><a href="{{route('admin.ventas')}}"><i
+                                    class="material-icons">settings</i><span>Ventas</span></a></li>
+                    @endif
+                @endif
                 <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
