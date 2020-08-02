@@ -25,7 +25,8 @@ class MarcasController extends Controller
      */
     public function create()
     {
-        //
+        $location = 'almacen';
+        return view('almacen.marcas.create')->with('location',$location);
     }
 
     /**
@@ -36,7 +37,22 @@ class MarcasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required'
+        ]);
+
+        $marca =  new Marcas();
+        $marca->nombre = $request->nombre;
+        $result = $marca->save();
+
+        if($result){
+            flash("La Marca <strong>" . $marca->nombre . "</strong> fue almacenada de forma exitosa!")->success();
+            return  redirect()->route('marcas.index');
+        }else{
+            flash("La Marca <strong>" . $marca->nombre . "</strong> no fue almacenada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
+
     }
 
     /**
