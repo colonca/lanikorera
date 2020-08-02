@@ -2,7 +2,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
     <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li class="active"><a href="{{route('admin.almacen')}}">Almacen</a></li>
+    <li class="active"><a href="{{route('admin.compras')}}">Compras</a></li>
 </ol>
 @endsection
 @section('content')
@@ -11,20 +11,20 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    DATOS DEL ALMACEN<small>MENÚ</small>
+                   DATO DE LAS COMPRAS<small>MENÚ</small>
                 </h2>
             </div>
             <div class="body">
                 <div class="alert bg-teal alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong>Detalles: </strong> Gestione los proveedores.
+                    <strong>Detalles: </strong> Gestione los proveedores, y compras realizadas.
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_PROVEEDORES'))
                     <a href="{{route('proveedores.index')}}" class="btn btn-primary btn-lg  waves-effect">
                         <div>
                             <span><i class="material-icons">view_module</i></span>
-                            <span>MARCAS</span>
+                            <span>PROVEEDORES</span>
                             <span class="ink animate"></span></div>
                     </a>
                     @endif

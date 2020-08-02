@@ -36,7 +36,7 @@
             <div class="row bort">
                 <div class="copyright">
                     © 2020 PEBI. Todos los Derechos Reservados.
-                    <div class="credits">Desarrollado por <a href="#">Jordan Cuadro</a> & <a href="#">Camilo Colon</a>
+                    <div class="credits">Desarrollado por <a href="#">Alberto Rojas</a> & <a href="#">Camilo Colon</a>
                     </div>
                 </div>
             </div>

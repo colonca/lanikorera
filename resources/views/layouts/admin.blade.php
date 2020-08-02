@@ -174,6 +174,15 @@
                                     class="material-icons">settings</i><span>Almacen</span></a></li>
                     @endif
                 @endif
+                @if(session()->exists('MOD_COMPRAS'))
+                    @if($location=='compras')
+                        <li class="active"><a href="{{route('admin.compras')}}"><i
+                                    class="material-icons">settings</i><span>Compras</span></a></li>
+                    @else
+                        <li><a href="{{route('admin.compras')}}"><i
+                                    class="material-icons">settings</i><span>Compras</span></a></li>
+                    @endif
+                @endif
                 <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
@@ -188,12 +197,12 @@
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">
-                &copy; 2020 SIAT. Todos los Derechos Reservados. <a href="javascript:void(0);">AdminBSB - Material De
+                &copy; 2020 LA NIKORERA. Todos los Derechos Reservados. <a href="javascript:void(0);">AdminBSB - Material De
                     sign</a>.
                 </d
                 iv>
                 <div class="version">
-                    <b>Desarrollado Por: </b> <a href="#">Jordan Cuadro</a> & <a href="#">Camilo Colon</a>
+                    <b>Desarrollado Por: </b> <a href="#">Alberto Rojas</a> & <a href="#">Camilo Colon</a>
                 </div>
             </div>
             <!-- #Footer -->

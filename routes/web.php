@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('inicio', 'HomeController@inicio')->name('inicio');
     Route::get('almacen', 'MenuController@almacen')->name('admin.almacen');
     Route::get('auditoria', 'MenuController@auditoria')->name('admin.auditoria');
+    Route::get('compras', 'MenuController@compras')->name('admin.compras');
     //NOTIFICACIONES
     Route::resource('notificaciones', 'NotificacionController');
 });
@@ -55,5 +56,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'usuarios'], function () {
     Route::get('usuario/{id}/delete', 'UsuarioController@destroy')->name('usuario.delete');
     Route::post('operaciones', 'UsuarioController@operaciones')->name('usuario.operaciones');
     Route::post('usuario/contrasenia/cambiar/admin/finalizar', 'UsuarioController@cambiarPass')->name('usuario.cambiarPass');
+    //GRUPO DE RUTAS PARA ALMACEN
+
+});
+Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
+    Route::resource('marcas','MarcasController');
+    Route::resource('categorias','CategoriasController');
+    Route::resource('embalajes','EmbalajesController');
+    Route::resource('bodegas','BodegasController');
+});
+Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
+    Route::resource('proveedores','proveedoresController');
 });
 
