@@ -12,8 +12,19 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    CLIENTES- LISTADO DE TODOS LOS CLIENTES.
+                    CLIENTES- LISTADO DE CLIENTES EN EL SISTEMA.
                 </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="{{ route('clientes.create') }}">Agregar Nuevo cliente</a></li>
+                            <li><a data-toggle="modal" data-target="#mdModal">Ayuda</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <div class="body">
                 <div class="table-responsive">
@@ -32,8 +43,11 @@
                         <tbody>
                             @foreach($clientes as $clientes)
                             <tr>
-                                <td>{{$clientes->id}}</td>
-                                <td>{{$clientes->nombre}}
+                                <td>{{$clientes->identificacion}}
+                                <td>{{$clientes->nombres}}
+                                <td>{{$clientes->apellidos}}
+                                <td>{{$clientes->telefono}}
+                                <td>{{$clientes->email}}
                                 <td>{{$clientes->created_at}}</td>
                                 <td>{{$clientes->updated_at}}</td>
                             </tr>

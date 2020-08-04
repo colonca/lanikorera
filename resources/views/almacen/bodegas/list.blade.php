@@ -12,8 +12,19 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    BODEGAS - LISTADO DE TODOS LAS BODEGAS DE LA NIKORERA.
+                    BODEGAS - LISTADO DE BODEGAS EN EL SISTEMA.
                 </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="{{ route('bodegas.create') }}">Agregar Nueva Bodega</a></li>
+                            <li><a data-toggle="modal" data-target="#mdModal">Ayuda</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <div class="body">
                 <div class="table-responsive">

@@ -12,7 +12,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    MARCAS - LISTADO DE TODOS LAS MARCAS EN EL SISTEMA
+                    MARCAS - LISTADO DE MARCAS EN EL SISTEMA.
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">

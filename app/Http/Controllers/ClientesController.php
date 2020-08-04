@@ -25,7 +25,8 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Clientes::all();
+        return view('ventas.clientes.create')->with('clientes',$clientes)->with('location','ventas');
     }
 
     /**
@@ -36,7 +37,29 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'identificacion' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'telefono' => 'required',
+            'email' => 'required'
+        ]);
+
+        $clientes =  new Clientes();
+        $clientes->identificacion = $request->identificacion;
+        $clientes->nombres = $request->nombres;
+        $clientes->apellidos = $request->apellidos;
+        $clientes->telefono = $request->telefono;
+        $clientes->email = $request->email;
+        $result = $clientes->save();
+
+        if($result){
+            flash("El Cliente <strong>" . $clientes->nombres . "</strong> fue almacenado de forma exitosa!")->success();
+            return  redirect()->route('clientes.index');
+        }else{
+            flash("El Cliente <strong>" . $clientes->nombres . "</strong> no fue almacenado de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

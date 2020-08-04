@@ -25,7 +25,8 @@ class ProveedoresController extends Controller
      */
     public function create()
     {
-        //
+        $location = 'compras';
+        return view('compras.proveedores.create')->with('location',$location);
     }
 
     /**
@@ -36,7 +37,21 @@ class ProveedoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required'
+        ]);
+
+        $proveedor =  new Proveedores();
+        $proveedor->nombre = $request->nombre;
+        $result = $proveedor->save();
+
+        if($result){
+            flash("El Proveedor <strong>" . $proveedor->nombre . "</strong> fue almacenado de forma exitosa!")->success();
+            return  redirect()->route('proveedores.index');
+        }else{
+            flash("El Proveedor <strong>" . $proveedor->nombre. "</strong> no fue almacenada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

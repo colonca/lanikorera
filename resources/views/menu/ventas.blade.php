@@ -17,13 +17,13 @@
             <div class="body">
                 <div class="alert bg-teal alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong>Detalles: </strong> Gestione los proveedores.
+                    <strong>Detalles: </strong> Gestione Clientes y las ventas realizadas.
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_CLIENTES'))
                     <a href="{{route('clientes.index')}}" class="btn btn-primary btn-lg  waves-effect">
                         <div>
-                            <span><i class="material-icons">view_module</i></span>
+                            <span><i class="material-icons">contacts</i></span>
                             <span>CLIENTES</span>
                             <span class="ink animate"></span></div>
                     </a>

@@ -168,28 +168,28 @@
                 @if(session()->exists('MOD_ALMACEN'))
                     @if($location=='almacen')
                         <li class="active"><a href="{{route('admin.almacen')}}"><i
-                                    class="material-icons">settings</i><span>Almacen</span></a></li>
+                                    class="material-icons">storefront</i><span>Almacen</span></a></li>
                     @else
                         <li><a href="{{route('admin.almacen')}}"><i
-                                    class="material-icons">settings</i><span>Almacen</span></a></li>
+                                    class="material-icons">storefront</i><span>Almacen</span></a></li>
                     @endif
                 @endif
                 @if(session()->exists('MOD_COMPRAS'))
                     @if($location=='compras')
                         <li class="active"><a href="{{route('admin.compras')}}"><i
-                                    class="material-icons">settings</i><span>Compras</span></a></li>
+                                    class="material-icons">style</i><span>Compras</span></a></li>
                     @else
                         <li><a href="{{route('admin.compras')}}"><i
-                                    class="material-icons">settings</i><span>Compras</span></a></li>
+                                    class="material-icons">style</i><span>Compras</span></a></li>
                     @endif
                 @endif
                 @if(session()->exists('MOD_VENTAS'))
                     @if($location=='ventas')
                         <li class="active"><a href="{{route('admin.ventas')}}"><i
-                                    class="material-icons">settings</i><span>Ventas</span></a></li>
+                                    class="material-icons">import_contacts</i><span>Ventas</span></a></li>
                     @else
                         <li><a href="{{route('admin.ventas')}}"><i
-                                    class="material-icons">settings</i><span>Ventas</span></a></li>
+                                    class="material-icons">import_contacts</i><span>Ventas</span></a></li>
                     @endif
                 @endif
                 <li>

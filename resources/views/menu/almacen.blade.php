@@ -17,13 +17,13 @@
             <div class="body">
                 <div class="alert bg-teal alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong>Detalles: </strong> Gestione los proveedores.
+                    <strong>Detalles: </strong> Gestione las Marcas, Categorias, Embalajes de los productos como también las bodegas de la nikorera.
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_MARCAS'))
                     <a href="{{route('marcas.index')}}" class="btn btn-primary btn-lg  waves-effect">
                         <div>
-                            <span><i class="material-icons">view_module</i></span>
+                            <span><i class="material-icons">bubble_chart</i></span>
                             <span>MARCAS</span>
                             <span class="ink animate"></span></div>
                     </a>
@@ -31,7 +31,7 @@
                     @if(session()->exists('PAG_CATEGORIAS'))
                     <a href="{{route('categorias.index')}}" class="btn bg-deep-orange btn-lg  waves-effect">
                         <div>
-                            <span><i class="material-icons">pages</i></span>
+                            <span><i class="material-icons">category</i></span>
                             <span>CATEGORÍAS</span>
                             <span class="ink animate"></span></div>
                     </a>
@@ -39,7 +39,7 @@
                     @if(session()->exists('PAG_EMBALAJES'))
                     <a href="{{route('embalajes.index')}}" class="btn bg-green btn-lg  waves-effect">
                         <div>
-                            <span><i class="material-icons">group</i></span>
+                            <span><i class="material-icons">account_balance_wallet</i></span>
                             <span>EMBALAJES</span>
                             <span class="ink animate"></span>
                         </div>
@@ -48,7 +48,7 @@
                     @if(session()->exists('PAG_BODEGAS'))
                     <a href="{{route('bodegas.index')}}" class="btn bg-brown btn-lg waves-effect">
                         <div>
-                            <span><i class="material-icons">group</i></span>
+                            <span><i class="material-icons">store</i></span>
                             <span>BODEGAS</span>
                             <span class="ink animate"></span>
                         </div>

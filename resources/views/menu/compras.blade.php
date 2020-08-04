@@ -23,7 +23,7 @@
                     @if(session()->exists('PAG_PROVEEDORES'))
                     <a href="{{route('proveedores.index')}}" class="btn btn-primary btn-lg  waves-effect">
                         <div>
-                            <span><i class="material-icons">view_module</i></span>
+                            <span><i class="material-icons">connect_without_contact</i></span>
                             <span>PROVEEDORES</span>
                             <span class="ink animate"></span></div>
                     </a>

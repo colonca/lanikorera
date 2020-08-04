@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\embalaje;
+use App\embalajes;
 use Illuminate\Http\Request;
 
 class EmbalajesController extends Controller
@@ -14,8 +14,8 @@ class EmbalajesController extends Controller
      */
     public function index()
     {
-        $embalajes  = Embalaje::all();
-        return view('almacen.embalajes.list')->with('embalaje',$embalajes)->with('location','almacen');
+        $embalajes  = embalajes::all();
+        return view('almacen.embalajes.list')->with('embalajes',$embalajes)->with('location','almacen');
     }
 
     /**
@@ -25,7 +25,8 @@ class EmbalajesController extends Controller
      */
     public function create()
     {
-        //
+        $location = 'almacen';
+        return view('almacen.embalajes.create')->with('location',$location);
     }
 
     /**
@@ -36,16 +37,30 @@ class EmbalajesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'descripcion' => 'required'
+        ]);
+
+        $embalaje =  new Embalajes();
+        $embalaje->descripcion = $request->descripcion;
+        $result = $embalaje->save();
+
+        if($result){
+            flash("El Embalaje <strong>" . $embalaje->descripcion . "</strong> fue almacenado de forma exitosa!")->success();
+            return  redirect()->route('embalajes.index');
+        }else{
+            flash("El Embalaje <strong>" . $embalaje->descripcion. "</strong> no fue almacenada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\embalaje  $embalaje
+     * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function show(embalaje $embalaje)
+    public function show(embalajes $embalaje)
     {
         //
     }
@@ -53,10 +68,10 @@ class EmbalajesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\embalaje  $embalaje
+     * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function edit(embalaje $embalaje)
+    public function edit(embalajes $embalaje)
     {
         //
     }
@@ -65,10 +80,10 @@ class EmbalajesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\embalaje  $embalaje
+     * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, embalaje $embalaje)
+    public function update(Request $request, embalajes $embalaje)
     {
         //
     }
@@ -76,10 +91,10 @@ class EmbalajesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\embalaje  $embalaje
+     * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function destroy(embalaje $embalaje)
+    public function destroy(embalajes $embalaje)
     {
         //
     }

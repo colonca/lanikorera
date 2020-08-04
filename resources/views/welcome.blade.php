@@ -18,7 +18,7 @@
             <div class="logo text-center">
                 <img src="{{asset('img/logo.png')}}" alt="logo" width="350">
                 <h2>Bienvenido!</h2>
-                <h3>SIAT - Universidad Popular del Cesar</h3>
+                <h3>LA NIKORERA-Liquor store</h3>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
         <div class="container">
             <div class="row bort">
                 <div class="copyright">
-                    © 2020 PEBI. Todos los Derechos Reservados.
+                    © 2020 La Nikorera. Todos los Derechos Reservados.
                     <div class="credits">Desarrollado por <a href="#">Alberto Rojas</a> & <a href="#">Camilo Colon</a>
                     </div>
                 </div>

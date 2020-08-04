@@ -12,8 +12,19 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    EMBALAJE - LISTADO DE LOS EMBALAJES DE LOS PRODUCTOS
+                    EMBALAJE - LISTADO DE EMBALAJES DE LOS PRODUCTOS EN EL SISTEMA.
                 </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="{{ route('embalajes.create') }}">Agregar Nuevo Embalaje</a></li>
+                            <li><a data-toggle="modal" data-target="#mdModal">Ayuda</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
             <div class="body">
                 <div class="table-responsive">
@@ -27,12 +38,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($embalaje as $embalaje)
+                            @foreach($embalajes as $embalajes)
                             <tr>
-                                <td>{{$embalaje->id}}</td>
-                                <td>{{$embalaje->descripcion}}
-                                <td>{{$embalaje->created_at}}</td>
-                                <td>{{$embalaje->updated_at}}</td>
+                                <td>{{$embalajes->id}}</td>
+                                <td>{{$embalajes->descripcion}}
+                                <td>{{$embalajes->created_at}}</td>
+                                <td>{{$embalajes->updated_at}}</td>
                             </tr>
                             @endforeach
                         </tbody>

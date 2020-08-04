@@ -25,7 +25,8 @@ class BodegasController extends Controller
      */
     public function create()
     {
-        //
+        $location = 'almacen';
+        return view('almacen.bodegas.create')->with('location',$location);
     }
 
     /**
@@ -36,7 +37,21 @@ class BodegasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required'
+        ]);
+
+        $bodega =  new Bodegas();
+        $bodega->nombre = $request->nombre;
+        $result = $bodega->save();
+
+        if($result){
+            flash("La Bodega <strong>" . $bodega->nombre . "</strong> fue almacenada de forma exitosa!")->success();
+            return  redirect()->route('bodegas.index');
+        }else{
+            flash("La Bodega <strong>" . $bodega->nombre . "</strong> no fue almacenada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**
