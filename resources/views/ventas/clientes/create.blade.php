@@ -7,6 +7,13 @@
         <li class="active"><a href="">Creando un nuevo cliente</a></li>
     </ol>
 @endsection
+@section('style')
+    <style>
+        .form-line {
+            margin-bottom: 10px;
+        }
+    </style>
+@endsection
 @section('content')
 <div class="row clearfix">
     <div class="col-md-12">
@@ -38,24 +45,24 @@
                             @csrf
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Identidicación</label>
-                                    <div class="form-line">
-                                        <br/><input type="text" class="form-control" placeholder="Escriba la cedula del cliente" name="identificacion" required="required" />
+                                    <div class="form-line" >
+                                        <label for="exampleFormControlSelect1">Identidicación</label>
+                                        <br/><input type="number" class="form-control" placeholder="Escriba la cedula del cliente" name="identificacion" required="required" />
                                     </div>
-                                    <label for="exampleFormControlSelect1">Nombres</label>
                                     <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Nombres</label>
                                         <br/><input type="text" class="form-control" placeholder="Escriba nombre del cliente" name="nombres"required="required"/>
                                     </div>
-                                    <label for="exampleFormControlSelect1">Apellidos</label>
                                     <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Apellidos</label>
                                         <br/><input type="text" class="form-control" placeholder="Escriba apellidos del cliente" name="apellidos" required="required"/>
                                     </div>
-                                    <label for="exampleFormControlSelect1">Telefono</label>
                                     <div class="form-line">
-                                        <br/><input type="text" class="form-control" placeholder="Escriba telefono del cliente" name="telefono" required="required"/>
+                                        <label for="exampleFormControlSelect1">Telefono</label>
+                                        <br/><input type="number" class="form-control" placeholder="Escriba telefono del cliente" name="telefono" required="required"/>
                                     </div>
-                                    <label for="exampleFormControlSelect1">Email</label>
                                     <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Email</label>
                                         <br/><input type="email" class="form-control" placeholder="email@example.com" name="email" required="required" />
                                     </div>
                                 </div>

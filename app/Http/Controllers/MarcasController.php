@@ -41,6 +41,13 @@ class MarcasController extends Controller
             'nombre' => 'required'
         ]);
 
+        $exist = Marcas::where('nombre',$request->nombre)->first();
+
+        if($exist){
+            flash("El nombre de la marca $request->nombre ya existe")->error();
+            return  redirect()->back();
+        }
+
         $marca =  new Marcas();
         $marca->nombre = $request->nombre;
         $result = $marca->save();
@@ -72,9 +79,11 @@ class MarcasController extends Controller
      * @param  \App\Marcas  $marcas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Marcas $marcas)
+    public function edit($id)
     {
-        //
+        $marca = Marcas::findOrFail($id);
+        $location = 'almacen';
+        return view('almacen.marcas.edit',compact('marca','location'));
     }
 
     /**
@@ -84,9 +93,20 @@ class MarcasController extends Controller
      * @param  \App\Marcas  $marcas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Marcas $marcas)
+    public function update(Request $request,  $id)
     {
-        //
+
+        $marca =  Marcas::findOrFail($id);
+        $marca->nombre = $request->nombre;
+        $result = $marca->save();
+        if($result){
+            flash("La Marca <strong>" . $marca->nombre . "</strong> fue actualizada de forma exitosa!")->success();
+            return  redirect()->route('marcas.index');
+        }else{
+            flash("La Marca <strong>" . $marca->nombre . "</strong> no fue actualizada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
+
     }
 
     /**
