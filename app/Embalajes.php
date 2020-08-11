@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Embalaje extends Model
+class Embalajes extends Model
 {
     protected $fillable = ['id','descripcion'];
 }

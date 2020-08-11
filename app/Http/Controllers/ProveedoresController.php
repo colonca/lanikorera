@@ -71,9 +71,11 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedores $proveedores)
+    public function edit($id)
     {
-        //
+        $proveedor = Proveedores::findOrFail($id);
+        $location = 'compras';
+        return view('compras.proveedores.edit',compact('proveedor','location'));
     }
 
     /**
@@ -83,9 +85,18 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedores $proveedores)
+    public function update(Request $request, $id)
     {
-        //
+        $proveedor =  Proveedores::findOrFail($id);
+        $proveedor->nombre = $request->nombre;
+        $result = $proveedor->save();
+        if($result){
+            flash("El Proveedor <strong>" . $proveedor->nombre . "</strong> fue actualizado de forma exitosa!")->success();
+            return  redirect()->route('proveedores.index');
+        }else{
+            flash("El Proveedor <strong>" . $proveedor->nombre . "</strong> no fue actualizado de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

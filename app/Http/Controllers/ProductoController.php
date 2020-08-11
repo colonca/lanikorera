@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Embalaje;
+use App\Embalajes;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +28,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $embalajes =  Embalaje::all();
+        $embalajes =  Embalajes::all();
         $location = 'almacen';
         return view('almacen.productos.create',compact('embalajes','location'));
     }

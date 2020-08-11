@@ -2,9 +2,9 @@
 @section('breadcrumb')
     <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
         <li><a href="{{route('inicio')}}">Inicio</a></li>
-        <li><a href="{{route('admin.almacen')}}">Almacen</a></li>
-        <li class="active"><a href="{{route('categorias.index')}}">Categorías</a></li>
-        <li class="active"><a href="">Creando una nueva categoría</a></li>
+        <li><a href="{{route('admin.ventas')}}">Ventas</a></li>
+        <li class="active"><a href="{{route('clientes.index')}}">Clientes</a></li>
+        <li class="active"><a href="">Editado Cliente{{$clientes->nombres}}</a></li>
     </ol>
 @endsection
 @section('style')
@@ -20,7 +20,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    CATEGORÍAS DE LOS PRODUCTOS - MÓDULO ALMACEN.
+                   Editando Categoría - MÓDULO ALMACEN DEL SISTEMA
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
@@ -38,26 +38,39 @@
                     @component('layouts.errors')
                     @endcomponent
                 </div>
-                <h1 class="card-inside-title">DATOS DE LA CATEGORÍA</h1>
+                <h1 class="card-inside-title">DATOS DEL CLIENTE</h1>
                 <div class="row clearfix">
                     <div class="col-md-12">
-                        <form class="form-horizontal" method="POST" action="{{route('categorias.store')}}">
+                        <form class="form-horizontal" method="POST" action="{{route('clientes.update', $clientes->id)}}">
                             @csrf
+                            <input name="_method" type="hidden" value="PUT" />
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <div class="form-line">
-                                        <label for="exampleFormControlSelect1">Nombre</label>
-                                        <br/><input type="text" class="form-control" placeholder="Escriba el nombre de la categoria" name="nombre" required="required" />
+                                    <div class="form-line" >
+                                        <label for="exampleFormControlSelect1">Identidicación</label>
+                                        <br/><input type="number" class="form-control" placeholder="Escriba la cedula del cliente" value="{{$clientes->identificacion}}" name="identificacion" required="required" />
                                     </div>
                                     <div class="form-line">
-                                        <label for="exampleFormControlSelect1">Descripción</label>
-                                        <br/><input type="text" class="form-control" placeholder="Escriba la descripcion de la categoria" name="descripcion"/>
+                                        <label for="exampleFormControlSelect1">Nombres</label>
+                                        <br/><input type="text" class="form-control" placeholder="Escriba nombre del cliente" value="{{$clientes->nombres}}" name="nombres"required="required"/>
+                                    </div>
+                                    <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Apellidos</label>
+                                        <br/><input type="text" class="form-control" placeholder="Escriba apellidos del cliente" value="{{$clientes->apellidos}}" name="apellidos" required="required"/>
+                                    </div>
+                                    <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Telefono</label>
+                                        <br/><input type="number" class="form-control" placeholder="Escriba telefono del cliente" value="{{$clientes->telefono}}" name="telefono" required="required"/>
+                                    </div>
+                                    <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Email</label>
+                                        <br/><input type="email" class="form-control" placeholder="email@example.com" value="{{$clientes->email}}" name="email" required="required" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <br/><br/><a href="{{route('categorias.index')}}" class="btn bg-red waves-effect">Cancelar</a>
+                                    <br/><br/><a href="{{route('clientes.index')}}" class="btn bg-red waves-effect">Cancelar</a>
                                     <button class="btn bg-indigo waves-effect" type="reset">Limpiar Formulario</button>
-                                    <button class="btn bg-green waves-effect" type="submit">Guardar</button>
+                                    <button class="btn bg-green waves-effect" type="submit">Actualizar</button>
                                 </div>
                             </div>
                         </form>
@@ -75,7 +88,7 @@
                 <h4 class="modal-title" id="defaultModalLabel">SOBRE LOS MÓDULOS</h4>
             </div>
             <div class="modal-body">
-                <strong>Agregue nuevas marcas,</strong>
+                <strong>Agregue nuevos clientes</strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">ACEPTAR</button>

@@ -46,10 +46,10 @@ class EmbalajesController extends Controller
         $result = $embalaje->save();
 
         if($result){
-            flash("El Embalaje <strong>" . $embalaje->descripcion . "</strong> fue almacenado de forma exitosa!")->success();
+            flash("El Embalajes <strong>" . $embalaje->descripcion . "</strong> fue almacenado de forma exitosa!")->success();
             return  redirect()->route('embalajes.index');
         }else{
-            flash("El Embalaje <strong>" . $embalaje->descripcion. "</strong> no fue almacenada de forma exitosa!")->error();
+            flash("El Embalajes <strong>" . $embalaje->descripcion. "</strong> no fue almacenada de forma exitosa!")->error();
             return  redirect()->back();
         }
     }
@@ -71,9 +71,11 @@ class EmbalajesController extends Controller
      * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function edit(embalajes $embalaje)
+    public function edit($id)
     {
-        //
+        $embalaje = Embalajes::findOrFail($id);
+        $location = 'almacen';
+        return view('almacen.embalajes.edit',compact('embalaje','location'));
     }
 
     /**
@@ -83,9 +85,18 @@ class EmbalajesController extends Controller
      * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, embalajes $embalaje)
+    public function update(Request $request, $id)
     {
-        //
+        $embalaje =  Embalajes::findOrFail($id);
+        $embalaje->descripcion = $request->descripcion;
+        $result = $embalaje->save();
+        if($result){
+            flash("El Embalaje <strong>" . $embalaje->descripcion . "</strong> fue actualizado de forma exitosa!")->success();
+            return  redirect()->route('embalajes.index');
+        }else{
+            flash("El Embalaje <strong>" . $embalaje->descripcion . "</strong> no fue actualizado de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

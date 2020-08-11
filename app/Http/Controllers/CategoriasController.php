@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Categoria;
+use App\Categorias;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
@@ -14,7 +14,7 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        $categorias  = Categoria::all();
+        $categorias  = Categorias::all();
         return view('almacen.categorias.list')->with('categoria',$categorias)->with('location','almacen');
     }
 
@@ -41,16 +41,16 @@ class CategoriasController extends Controller
             'nombre' => 'required'
         ]);
 
-        $categoria =  new Categoria();
+        $categoria =  new Categorias();
         $categoria->nombre = $request->nombre;
         $categoria->descripcion= $request->descripcion;
         $result = $categoria->save();
 
         if($result){
-            flash("La Categoria <strong>" . $categoria->nombre . "</strong> fue almacenada de forma exitosa!")->success();
+            flash("La Categorias <strong>" . $categoria->nombre . "</strong> fue almacenada de forma exitosa!")->success();
             return  redirect()->route('categorias.index');
         }else{
-            flash("La Categoria <strong>" . $categoria->nombre . "</strong> no fue almacenada de forma exitosa!")->error();
+            flash("La Categorias <strong>" . $categoria->nombre . "</strong> no fue almacenada de forma exitosa!")->error();
             return  redirect()->back();
         }
     }
@@ -58,10 +58,10 @@ class CategoriasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Categorias  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show(Categorias $categoria)
     {
         //
     }
@@ -69,33 +69,45 @@ class CategoriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Categorias  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria)
+    public function edit($id)
     {
-        //
+        $categoria = Categorias::findOrFail($id);
+        $location = 'almacen';
+        return view('almacen.categorias.edit',compact('categoria','location'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Categorias  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, $id)
     {
-        //
+        $categoria =  Categorias::findOrFail($id);
+        $categoria->nombre = $request->nombre;
+        $categoria->descripcion = $request->descripcion;
+        $result = $categoria->save();
+        if($result){
+            flash("La Categoría <strong>" . $categoria->nombre . "</strong> fue actualizada de forma exitosa!")->success();
+            return  redirect()->route('categorias.index');
+        }else{
+            flash("La Categoría <strong>" . $categoria->nombre . "</strong> no fue actualizada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categoria  $categoria
+     * @param  \App\Categorias  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Categorias $categoria)
     {
         //
     }

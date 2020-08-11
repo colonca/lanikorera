@@ -57,7 +57,7 @@
                     @if(session()->exists('PAG_PRODUCTOS'))
                             <a href="{{route('productos.index')}}" class="btn bg-black btn-lg waves-effect">
                                 <div>
-                                    <span><i class="material-icons">store</i></span>
+                                    <span><i class="material-icons">sports_bar</i></span>
                                     <span>PRODUCTOS</span>
                                     <span class="ink animate"></span>
                                 </div>

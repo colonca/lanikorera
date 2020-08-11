@@ -38,6 +38,7 @@
                                 <th>Email</th>
                                 <th>Creado</th>
                                 <th>Modificado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +51,12 @@
                                 <td>{{$clientes->email}}
                                 <td>{{$clientes->created_at}}</td>
                                 <td>{{$clientes->updated_at}}</td>
+                                <td style="text-align: center;">
+                                    <a href="{{ route('clientes.edit',$clientes->id)}}"
+                                       class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                       data-placement="top" title="Editar Categoria"><i
+                                            class="material-icons">mode_edit</i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

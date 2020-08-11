@@ -36,6 +36,7 @@
                                 <th>Descripción</th>
                                 <th>Creado</th>
                                 <th>Modificado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,12 @@
                                 <td>{{$categoria->descripcion}}
                                 <td>{{$categoria->created_at}}</td>
                                 <td>{{$categoria->updated_at}}</td>
+                                <td style="text-align: center;">
+                                    <a href="{{ route('categorias.edit',$categoria->id)}}"
+                                       class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                       data-placement="top" title="Editar Categoria"><i
+                                            class="material-icons">mode_edit</i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

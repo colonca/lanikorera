@@ -79,9 +79,11 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clientes $clientes)
+    public function edit($id)
     {
-        //
+        $clientes =Clientes::findorfail($id);
+        $location = 'ventas';
+        return view('ventas.clientes.edit',compact('clientes','location'));
     }
 
     /**
@@ -91,9 +93,22 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clientes $clientes)
+    public function update(Request $request, $id)
     {
-        //
+        $cliente =  Clientes::findOrFail($id);
+        $cliente->identificacion = $request->identificacion;
+        $cliente->nombres = $request->nombres;
+        $cliente->apellidos = $request->apellidos;
+        $cliente->telefono = $request->telefono;
+        $cliente->email = $request->email;
+        $result = $cliente->save();
+        if($result){
+            flash("El Cliente <strong>" . $cliente->nombres . "</strong> fue actualizado de forma exitosa!")->success();
+            return  redirect()->route('clientes.index');
+        }else{
+            flash("El Cliente <strong>" . $cliente->nombres . "</strong> no fue actualizado de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

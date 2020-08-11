@@ -35,6 +35,7 @@
                                 <th>Descripción</th>
                                 <th>Creado</th>
                                 <th>Modificado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,12 @@
                                 <td>{{$embalajes->descripcion}}
                                 <td>{{$embalajes->created_at}}</td>
                                 <td>{{$embalajes->updated_at}}</td>
+                                <td style="text-align: center;">
+                                    <a href="{{ route('embalajes.edit',$embalajes->id)}}"
+                                       class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                       data-placement="top" title="Editar Embalaje"><i
+                                            class="material-icons">mode_edit</i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
