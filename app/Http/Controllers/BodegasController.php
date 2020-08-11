@@ -71,9 +71,11 @@ class BodegasController extends Controller
      * @param  \App\Bodegas  $bodegas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bodegas $bodegas)
+    public function edit($id)
     {
-        //
+        $bodega = Bodegas::findOrFail($id);
+        $location = 'almacen';
+        return view('almacen.bodegas.edit',compact('bodega','location'));
     }
 
     /**
@@ -83,9 +85,18 @@ class BodegasController extends Controller
      * @param  \App\Bodegas  $bodegas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bodegas $bodegas)
+    public function update(Request $request, $id)
     {
-        //
+        $bodega =  Bodegas::findOrFail($id);
+        $bodega->nombre = $request->nombre;
+        $result = $bodega->save();
+        if($result){
+            flash("La Bodega <strong>" . $bodega->nombre . "</strong> fue actualizada de forma exitosa!")->success();
+            return  redirect()->route('bodegas.index');
+        }else{
+            flash("La Bodega <strong>" . $bodega->nombre . "</strong> no fue actualizada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

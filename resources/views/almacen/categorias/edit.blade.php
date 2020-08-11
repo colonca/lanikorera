@@ -3,8 +3,8 @@
     <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
         <li><a href="{{route('inicio')}}">Inicio</a></li>
         <li><a href="{{route('admin.almacen')}}">Almacen</a></li>
-        <li class="active"><a href="{{route('categorias.index')}}">Categorías</a></li>
-        <li class="active"><a href="">Creando una nueva categoría</a></li>
+        <li class="active"><a href="{{route('categorias.index')}}">Categoría</a></li>
+        <li class="active"><a href="">Editado categoría {{$categoria->nombre}}</a></li>
     </ol>
 @endsection
 @section('style')
@@ -20,7 +20,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    CATEGORÍAS DE LOS PRODUCTOS - MÓDULO ALMACEN.
+                   Editando Categoría - MÓDULO ALMACEN DEL SISTEMA
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
@@ -41,23 +41,24 @@
                 <h1 class="card-inside-title">DATOS DE LA CATEGORÍA</h1>
                 <div class="row clearfix">
                     <div class="col-md-12">
-                        <form class="form-horizontal" method="POST" action="{{route('categorias.store')}}">
+                        <form class="form-horizontal" method="POST" action="{{route('categorias.update',$categoria->id)}}">
                             @csrf
+                            <input name="_method" type="hidden" value="PUT" />
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="form-line">
                                         <label for="exampleFormControlSelect1">Nombre</label>
-                                        <br/><input type="text" class="form-control" placeholder="Escriba el nombre de la categoria" name="nombre" required="required" />
+                                        <br/><input type="text" class="form-control" placeholder="Escriba el nombre de la categoria" value="{{$categoria->nombre}}" name="nombre" required />
                                     </div>
                                     <div class="form-line">
                                         <label for="exampleFormControlSelect1">Descripción</label>
-                                        <br/><input type="text" class="form-control" placeholder="Escriba la descripcion de la categoria" name="descripcion"/>
+                                        <br/><input type="text" class="form-control" placeholder="Escriba la descripcion de la categoria" value="{{$categoria->descripcion}}" name="descripcion"  />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <br/><br/><a href="{{route('categorias.index')}}" class="btn bg-red waves-effect">Cancelar</a>
                                     <button class="btn bg-indigo waves-effect" type="reset">Limpiar Formulario</button>
-                                    <button class="btn bg-green waves-effect" type="submit">Guardar</button>
+                                    <button class="btn bg-green waves-effect" type="submit">Actualizar</button>
                                 </div>
                             </div>
                         </form>
@@ -75,7 +76,7 @@
                 <h4 class="modal-title" id="defaultModalLabel">SOBRE LOS MÓDULOS</h4>
             </div>
             <div class="modal-body">
-                <strong>Agregue nuevas marcas,</strong>
+                <strong>Agregue nuevas categorías</strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">ACEPTAR</button>

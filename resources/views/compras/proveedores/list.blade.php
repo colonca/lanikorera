@@ -35,6 +35,7 @@
                                 <th>Nombre</th>
                                 <th>Creado</th>
                                 <th>Modificado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,12 @@
                                 <td>{{$proveedores->nombre}}
                                 <td>{{$proveedores->created_at}}</td>
                                 <td>{{$proveedores->updated_at}}</td>
+                                <td style="text-align: center;">
+                                    <a href="{{ route('proveedores.edit',$proveedores->id)}}"
+                                       class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                       data-placement="top" title="Editar Categoria"><i
+                                            class="material-icons">mode_edit</i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

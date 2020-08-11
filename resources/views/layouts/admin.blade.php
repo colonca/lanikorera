@@ -211,7 +211,7 @@
                 </d
                 iv>
                 <div class="version">
-                    <b>Desarrollado Por: </b> <a href="#">Alberto Rojas</a> & <a href="#">Camilo Colon</a>
+                    <b>Desarrollado Por: </b> <a href="#">SKAYNET</a>
                 </div>
             </div>
             <!-- #Footer -->

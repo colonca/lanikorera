@@ -57,9 +57,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'usuarios'], function () {
     Route::get('usuario/{id}/delete', 'UsuarioController@destroy')->name('usuario.delete');
     Route::post('operaciones', 'UsuarioController@operaciones')->name('usuario.operaciones');
     Route::post('usuario/contrasenia/cambiar/admin/finalizar', 'UsuarioController@cambiarPass')->name('usuario.cambiarPass');
-    //GRUPO DE RUTAS PARA ALMACEN
-
-});
+    });
+//GRUPO DE RUTAS PARA ALMACEN
 Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
     Route::resource('marcas','MarcasController');
     Route::resource('categorias','CategoriasController');
@@ -67,10 +66,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
     Route::resource('bodegas','BodegasController');
     Route::resource('productos','ProductoController');
 });
+//GRUPO DE RUTAS PARA COMPRAS
 Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::resource('proveedores','ProveedoresController');
 });
-
+//GRUPO DE RUTAS PARA VENTAS
 Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::resource('clientes','ClientesController');
 });
