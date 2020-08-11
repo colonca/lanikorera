@@ -4,7 +4,7 @@
         <li><a href="{{route('inicio')}}">Inicio</a></li>
         <li><a href="{{route('admin.almacen')}}">Almacen</a></li>
         <li class="active"><a href="{{route('productos.index')}}">Productos</a></li>
-        <li class="active"><a href="">Creando un nuevo producto</a></li>
+        <li class="active"><a href="">Editar el producto</a></li>
     </ol>
 @endsection
 @section('content')
@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="">Nombre *</label>
-                                            <br/><input type="text" id="nombre" class="form-control" placeholder="Escriba el nombre del producto" name="nombre" required />
+                                            <br/><input type="text" id="nombre" value="{{$producto->nombre}}" class="form-control" placeholder="Escriba el nombre del producto" name="nombre" required />
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="">Presentación *</label>
-                                            <br/><input type="text" id="presentacion" class="form-control" placeholder="Ejemplo:750ml,1lt" name="presentacion" required />
+                                            <br/><input type="text" id="presentacion" value="{{$producto->presentacion}}" class="form-control" placeholder="Ejemplo:750ml,1lt" name="presentacion" required />
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="">Stock minimo *</label>
-                                            <br/><input type="number" min="0" id="stock_minimo" class="form-control" placeholder="notificame para surtir cuando tenga esta cantidad en inventario" name="stock_minimo" required />
+                                            <br/><input type="number" min="0" id="stock_minimo"  value="{{$producto->stock_minimo}}" class="form-control" placeholder="notificame para surtir cuando tenga esta cantidad en inventario" name="stock_minimo" required />
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="">Stock maximo *</label>
-                                            <br/><input type="number" min="1" class="form-control" id="stock_maximo" placeholder="notificame para dejar de surtir cuando tenga esta cantidad en inventario" name="stock_maximo" required />
+                                            <br/><input type="number" min="1" class="form-control" id="stock_maximo" value="{{$producto->stock_maximo}}" placeholder="notificame para dejar de surtir cuando tenga esta cantidad en inventario" name="stock_maximo" required />
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +162,6 @@
 @endsection
 @section('script')
     <script>
-        let embalajes = [];
 
         codigo = document.getElementById('codigo_de_barras');
         codigo.addEventListener('keypress',(event)=>{
@@ -170,6 +169,43 @@
                 $('#unidades').focus();
             }
         });
+
+        let embalajes = [];
+
+        window.onload = () => {
+            $.ajax({
+                type: 'GET',
+                url: '{{url('almacen/producto/embalaje')}}/'+'{{$producto->id}}',
+            }).done(function (msg) {
+                if(msg.status == 'ok'){
+                    console.log(msg.embalajes);
+                    let data  = msg.embalajes;
+                    data.forEach((item)=>{
+                        let table = document.getElementById('embalajes');
+                        let tr = document.createElement('tr');
+                        tr.setAttribute('id',item.embalaje_id);
+                        tr.innerHTML = `<td">${item.embalaje_id}</td>
+                                    <td>${item.codigo_de_barras}</td>
+                                    <td>${item.unidades}</td>
+                                    <td>${item.precio_venta}</td>
+                                    <td style="text-align: center;">
+                                        <a href=""
+                                           class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                           data-placement="top" title="Eliminar"><i
+                                                class="material-icons" onclick="eliminar(event,${item.embalaje_id})">delete</i></a>
+                                     </td>
+                                   `;
+                        table.appendChild(tr);
+                        embalajes.push({
+                            'embalaje_id':item.embalaje_id,
+                            'codigo_de_barras': item.codigo_de_barras,
+                            'unidades': item.unidades,
+                            'precio_venta' : item.precio_venta,
+                        });
+                    });
+                }
+            });
+        }
 
         function addEmbalaje() {
             let codigo_de_barras,unidades,precio_venta,embalaje_id;
@@ -253,28 +289,24 @@
         }
 
         function guardar(event) {
-            event.preventDefault();
-            var formData = new FormData();
-            var x = $("form").serializeArray();
-            $.each(x, function(i, field){
-                formData.append(field.name, field.value);
-            });
-             var file = $('#foto')[0].files[0];
-             formData.append('file',file);
-             formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-             formData.append('embalajes', JSON.stringify(embalajes));
+             event.preventDefault();
              let valido = validarForm();
              if(valido){
                  $.ajax({
-                     type: 'POST',
-                     url: '{{route('productos.store')}}',
-                     data: formData,
-                     contentType: false,
-                     processData: false,
+                     type: 'PUT',
+                     url: '{{route('productos.update',$producto->id)}}',
+                     data: {
+                         '_token': $('meta[name="csrf-token"]').attr('content'),
+                         'form' : $("form").serialize(),
+                         'file': $('#foto')[0].files[0],
+                         'embalajes': JSON.stringify(embalajes),
+                     },
                  }).done(function (msg) {
                      if (msg.status  ==  'ok') {
                          notify('Atención', 'El producto.' + $("#nombre").val() +' fue creada con exito.!', 'success');
-                         limpiar()
+                         setTimeout(()=> {
+                             window.location.reload();
+                         },3000);
                      }else if(msg.status == 'error'){
                          notify('Atención', 'El producto.' + $("#nombre").val() + ' no pudo ser alamacenada.', 'error');
                      }else {

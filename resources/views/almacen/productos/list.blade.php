@@ -33,8 +33,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>
-                                <th>Creado</th>
-                                <th>Modificado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +41,12 @@
                             <tr>
                                 <td>{{$producto->id}}</td>
                                 <td>{{$producto->nombre.'x'.$producto->presentacion}}
-                                <td>{{$producto->created_at}}</td>
-                                <td>{{$producto->updated_at}}</td>
+                                <td style="text-align: center;">
+                                    <a href="{{ route('productos.edit',$producto->id)}}"
+                                       class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                       data-placement="top" title="Editar Producto"><i
+                                            class="material-icons">mode_edit</i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

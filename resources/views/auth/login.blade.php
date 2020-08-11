@@ -26,19 +26,26 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
     <!--===============================================================================================-->
+
+    <style>
+        .logo {
+            object-fit: cover;
+            width: 70%;
+        }
+    </style>
+
 </head>
 <body>
 
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-form-title" style="background-image:url({{asset('images/bg-01.jpg')}});">
+            <div class="login100-form-title" style="background-image:url({{asset('images/user-img-background.jpg')}});">
                 <img src="" alt="">
                 <span class="login100-form-title-1">
-						<img src="{{asset('images/logo.png')}}" alt="">
-					</span>
+						<img class="logo" src="{{asset('images/logo.png')}}" alt="">
+                </span>
             </div>
-
             @if(session()->has('flag'))
                 <div class="alert alert-info">
                     {{session('flag')}}
@@ -47,13 +54,11 @@
             <form class="login100-form validate-form" action="{{route('login')}}" method="POST">
                 @csrf
                 <div class="wrap-input100 validate-input m-b-26 {{$errors->has('identificacion') ? 'has-error' : '' }}" data-validate="Usuario requerido">
-                    <span class="label-input100">Identificación</span>
                     <input class="input100" type="text" name="identificacion" value="{{ old('identificacion') }}" placeholder="Ingresa tu Identificación">
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-18"  data-validate = "Clave requerida">
-                    <span class="label-input100">Clave</span>
                     <input class="input100" type="password" name="password" placeholder="Digite la clave">
                     <span class="focus-input100"></span>
                 </div>
@@ -64,21 +69,6 @@
                 <div class="{{$errors->has('password') ? 'alert alert-danger' : '' }}">
                     {!! $errors->first('password','<span class="help-block">:message</span>') !!}
                 </div>
-                <div class="flex-sb-m w-full p-b-30">
-                    <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                            Recuerdame
-                        </label>
-                    </div>
-
-                    <!--<div>
-                        <a class="btn btn-link" href="#">
-                            Forgot Your Password?
-                        </a>
-                    </div>-->
-                </div>
-
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" type="submit">
                         Iniciar Sesión

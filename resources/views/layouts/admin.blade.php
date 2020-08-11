@@ -25,6 +25,7 @@
     <link href="{{asset('plugins/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
     <!-- JQuery Nestable Css -->
     <link href="{{asset('css/plugins/nestable/jquery-nestable.css')}}" rel="stylesheet"/>
+
     @yield('style')
 </head>
 <body class="theme-teal">
