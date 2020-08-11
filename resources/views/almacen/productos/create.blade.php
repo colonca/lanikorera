@@ -287,11 +287,12 @@
             $('#presentacion').val('');
             $('#stock_minimo').val('');
             $('#stock_maximo').val('');
-            embalajes = [];
             $('#codigo_de_barras').val('');
             $('#unidades').val('');
             $('#precio_venta').val('');
             $('#foto').val('');
+            embalajes = [];
+            document.getElementById('embalajes').innerHTML = '';
         }
 
         function  validarForm() {

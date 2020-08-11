@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIAT</title>
+    <title>LANIKORERA</title>
     <link href='https://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,400italic,300italic,300|Raleway:300,400,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}"/>
@@ -18,7 +18,7 @@
             <div class="logo text-center">
                 <img src="{{asset('img/logo.png')}}" alt="logo" width="350">
                 <h2>Bienvenido!</h2>
-                <h3>LA NIKORERA-Liquor store</h3>
+                <h3>LA NIKORERA-LIQUOR STORE</h3>
             </div>
         </div>
     </div>
@@ -36,7 +36,7 @@
             <div class="row bort">
                 <div class="copyright">
                     © 2020 La Nikorera. Todos los Derechos Reservados.
-                    <div class="credits">Desarrollado por <a href="#">Alberto Rojas</a> & <a href="#">Camilo Colon</a>
+                    <div class="credits">Desarrollado por <a href="#">SKAYNET</a>
                     </div>
                 </div>
             </div>
