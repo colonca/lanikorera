@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'usuarios'], function () {
 Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
     Route::resource('marcas','MarcasController');
     Route::resource('categorias','CategoriasController');
+    Route::resource('subcategorias','SubcategoriaController');
     Route::resource('embalajes','EmbalajesController');
     Route::resource('bodegas','BodegasController');
     Route::resource('productos','ProductoController');
