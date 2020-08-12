@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Categorias;
 use App\Embalaje;
+use App\Marcas;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,8 +31,10 @@ class ProductoController extends Controller
     public function create()
     {
         $embalajes =  Embalaje::all();
+        $marcas = Marcas::all();
+        $categorias = Categorias::all();
         $location = 'almacen';
-        return view('almacen.productos.create',compact('embalajes','location'));
+        return view('almacen.productos.create',compact('embalajes','location','marcas','categorias'));
     }
 
     /**
@@ -47,6 +51,8 @@ class ProductoController extends Controller
             'presentacion' => 'required',
             'stock_minimo' => 'required|numeric',
             'stock_maximo' => 'required|numeric',
+            'marca_id' => 'required',
+            'subcategoria_id' => 'required'
         ]);
 
         $producto = Producto::where([
@@ -74,7 +80,6 @@ class ProductoController extends Controller
         $producto->sku = 'PRD-0000';
         $producto->imagen = '';
         $result = $producto->save();
-        $result = true;
         if($result){
             $producto->sku = 'PRD-'.$producto->id;
             $producto->save();
@@ -131,11 +136,15 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
+        $marcas = Marcas::all();
+        $categorias = Categorias::all();
         $embalajes =  Embalaje::all();
         return view('almacen.productos.edit')
                 ->with('producto',$producto)
+                ->with('marcas',$marcas)
+                ->with('categorias',$categorias)
                 ->with('location','almacen')
-               ->with('embalajes',$embalajes);
+                ->with('embalajes',$embalajes);
     }
 
     public function embalajes($id){
@@ -173,6 +182,8 @@ class ProductoController extends Controller
             'presentacion' => 'required',
             'stock_minimo' => 'required|numeric',
             'stock_maximo' => 'required|numeric',
+            'marca_id' => 'required',
+            'subcategoria_id' => 'required'
         ]);
 
         if($producto->nombre != $values['nombre'] || $producto->presentacion != $values['presentacion']){

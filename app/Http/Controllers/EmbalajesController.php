@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Embalajes;
+use App\Embalaje;
 use Illuminate\Http\Request;
 
 class EmbalajesController extends Controller
@@ -14,7 +14,7 @@ class EmbalajesController extends Controller
      */
     public function index()
     {
-        $embalajes  = embalajes::all();
+        $embalajes  = Embalaje::all();
         return view('almacen.embalajes.list')->with('embalajes',$embalajes)->with('location','almacen');
     }
 
@@ -41,7 +41,7 @@ class EmbalajesController extends Controller
             'descripcion' => 'required'
         ]);
 
-        $embalaje =  new Embalajes();
+        $embalaje =  new Embalaje();
         $embalaje->descripcion = $request->descripcion;
         $result = $embalaje->save();
 
@@ -60,7 +60,7 @@ class EmbalajesController extends Controller
      * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function show(embalajes $embalaje)
+    public function show(Embalaje $embalaje)
     {
         //
     }
@@ -73,7 +73,7 @@ class EmbalajesController extends Controller
      */
     public function edit($id)
     {
-        $embalaje = Embalajes::findOrFail($id);
+        $embalaje = Embalaje::findOrFail($id);
         $location = 'almacen';
         return view('almacen.embalajes.edit',compact('embalaje','location'));
     }
@@ -87,7 +87,7 @@ class EmbalajesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $embalaje =  Embalajes::findOrFail($id);
+        $embalaje =  Embalaje::findOrFail($id);
         $embalaje->descripcion = $request->descripcion;
         $result = $embalaje->save();
         if($result){
@@ -105,7 +105,7 @@ class EmbalajesController extends Controller
      * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function destroy(embalajes $embalaje)
+    public function destroy(Embalaje $embalaje)
     {
         //
     }
