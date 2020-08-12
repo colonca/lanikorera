@@ -37,7 +37,7 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_SUBCATEGORIAS'))
-                        <a href="{{route('subcategorias.index')}}" class="btn bg-deep-orange btn-lg  waves-effect">
+                        <a href="{{route('subcategorias.index')}}" class="btn bg-black btn-lg  waves-effect">
                             <div>
                                 <span><i class="far fa-caret-square-up"></i></span>
                                 <span>SUBCATEGORÍAS</span>
