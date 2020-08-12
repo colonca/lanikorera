@@ -69,6 +69,42 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="">Marca *</label>
+                                            <select class="select2 form-control" name="marca_id" id="marca_id">
+                                                @foreach($marcas as $marca)
+                                                    @if($producto->marca_id == $marca->id)
+                                                       <option value="{{$marca->id}}" selected>{{$marca->nombre}}</option>
+                                                    @else
+                                                        <option value="{{$marca->id}}" >{{$marca->nombre}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <label for="">Subcategoria *</label>
+                                            <select  class="select2 form-control" name="subcategoria_id" id="subcategoria_id">
+                                                @foreach($categorias as $categoria)
+                                                    <optgroup label="{{$categoria->nombre}}">
+                                                        @foreach($categoria->subcategorias as $subcategoria)
+                                                            @if($producto->subcategoria_id == $subcategoria->id)
+                                                                <option value="{{$subcategoria->id}}" selected>{{$subcategoria->nombre}}</option>
+                                                            @else
+                                                                <option value="{{$subcategoria->id}}">{{$subcategoria->nombre}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <div class="form-line">
