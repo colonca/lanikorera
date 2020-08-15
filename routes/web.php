@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('auditoria', 'MenuController@auditoria')->name('admin.auditoria');
     Route::get('compras', 'MenuController@compras')->name('admin.compras');
     Route::get('ventas', 'MenuController@ventas')->name('admin.ventas');
+    Route::get('configuracion', 'MenuController@configuracion')->name('admin.configuracion');
     //NOTIFICACIONES
     Route::resource('notificaciones', 'NotificacionController');
 });
@@ -84,5 +85,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
     Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
     Route::resource('mfacturas','MFacturaController');
+});
+//GRUPO DE RUTAS PARA CONFIGURACION
+Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {
+    Route::resource('series','SerieController');
 });
 
