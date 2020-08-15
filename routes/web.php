@@ -68,13 +68,21 @@ Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
     Route::resource('bodegas','BodegasController');
     Route::resource('productos','ProductoController');
     Route::get('producto/embalaje/{id}','ProductoController@embalajes');
+    Route::get('producto/search/{code}','ProductoController@search')->name('productos.search');
 });
 //GRUPO DE RUTAS PARA COMPRAS
 Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::resource('proveedores','ProveedoresController');
+    Route::post('proveedores/guardar','ProveedoresController@save')->name('proveedores.save');
+    Route::get('proveedores/get/json','ProveedoresController@json')->name('proveedores.json');
+    Route::resource('compras','CompraController');
 });
 //GRUPO DE RUTAS PARA VENTAS
 Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::resource('clientes','ClientesController');
+    Route::post('clientes/guardar','ClientesController@save')->name('clientes.save');
+    Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
+    Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
+    Route::resource('mfacturas','MFacturaController');
 });
 

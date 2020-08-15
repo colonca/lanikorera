@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clientes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClientesController extends Controller
 {
@@ -38,7 +39,7 @@ class ClientesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'identificacion' => 'required',
+            'identificacion' => 'required|unique:clientes',
             'nombres' => 'required',
             'apellidos' => 'required',
             'telefono' => 'required',
@@ -121,4 +122,47 @@ class ClientesController extends Controller
     {
         //
     }
+
+   public function save(Request $request){
+
+        $values = array();
+        parse_str($request->form, $values);
+        $validate = Validator::make($values,[
+            'identificacion' => 'required|unique:clientes',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'telefono' => 'required',
+            'email' => 'required'
+        ]);
+
+
+        if($validate->fails()){
+            return response()->json([
+                'status' => 'validate',
+                'message' => $validate->errors()
+            ]);
+        }
+
+        $cliente = new Clientes($values);
+        $result = $cliente->save();
+        if($result){
+            return response()->json([
+                'status' => 'ok',
+                'cliente' => $cliente
+            ]);
+        }else {
+            return response()->json([
+                'status' => 'error',
+            ]);
+        }
+    }
+
+    public function json(){
+        $clientes = Clientes::all();
+        return response()->json(
+            $clientes
+        );
+    }
+
+
 }

@@ -198,7 +198,7 @@
 @endsection
 @section('script')
     <script>
-
+        $('.select2').select2();
         codigo = document.getElementById('codigo_de_barras');
         codigo.addEventListener('keypress',(event)=>{
             if(event.keyCode == 13){
