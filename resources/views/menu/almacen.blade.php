@@ -15,9 +15,9 @@
                 </h2>
             </div>
             <div class="body">
-                <div class="alert bg-black alert-dismissible" role="alert">
+                <div class="alert bg-teal alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong>Detalles: </strong> Gestione las Marcas, Categorias, Embalajes de los productos como también las bodegas de la nikorera.
+                    <strong>Detalles: </strong> Gestione las Marcas, Categorias, Embalajes de los productos como también las bodegas de la empresa.
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_MARCAS'))
@@ -29,7 +29,7 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_CATEGORIAS'))
-                    <a href="{{route('categorias.index')}}" class="btn bg-black btn-lg  waves-effect">
+                    <a href="{{route('categorias.index')}}" class="btn bg-black  btn-lg  waves-effect">
                         <div>
                             <span><i class="material-icons">category</i></span>
                             <span>CATEGORÍAS</span>
@@ -37,7 +37,7 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_SUBCATEGORIAS'))
-                        <a href="{{route('subcategorias.index')}}" class="btn bg-black btn-lg  waves-effect">
+                        <a href="{{route('subcategorias.index')}}" class="btn bg-black  btn-lg  waves-effect">
                             <div>
                                 <span><i class="far fa-caret-square-up"></i></span>
                                 <span>SUBCATEGORÍAS</span>
@@ -45,7 +45,7 @@
                         </a>
                     @endif
                     @if(session()->exists('PAG_EMBALAJES'))
-                    <a href="{{route('embalajes.index')}}" class="btn bg-black btn-lg  waves-effect">
+                    <a href="{{route('embalajes.index')}}" class="btn bg-black  btn-lg  waves-effect">
                         <div>
                             <span><i class="material-icons">account_balance_wallet</i></span>
                             <span>EMBALAJES</span>
@@ -54,7 +54,7 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_BODEGAS'))
-                    <a href="{{route('bodegas.index')}}" class="btn bg-black btn-lg waves-effect">
+                    <a href="{{route('bodegas.index')}}" class="btn bg-black  btn-lg waves-effect">
                         <div>
                             <span><i class="material-icons">store</i></span>
                             <span>BODEGAS</span>
@@ -63,7 +63,7 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_PRODUCTOS'))
-                            <a href="{{route('productos.index')}}" class="btn bg-black btn-lg waves-effect">
+                            <a href="{{route('productos.index')}}" class="btn bg-black  btn-lg waves-effect">
                                 <div>
                                     <span><i class="fas fa-wine-bottle"></i></span>
                                     <span>PRODUCTOS</span>

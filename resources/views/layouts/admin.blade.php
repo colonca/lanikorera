@@ -62,7 +62,7 @@
         </div>-->
 <!-- #END# Search Bar -->
 <!-- Top Bar -->
-<nav class="navbar" style="background-color:rgb(0, 0, 0);">
+<nav class="navbar" style="background-color:rgb(9, 7, 7);">
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -192,6 +192,15 @@
                     @else
                         <li><a href="{{route('admin.ventas')}}"><i
                                     class="material-icons">import_contacts</i><span>Ventas</span></a></li>
+                    @endif
+                @endif
+                @if(session()->exists('MOD_CONFIGURACION'))
+                    @if($location=='configuracion')
+                        <li class="active"><a href="{{route('admin.configuracion')}}"><i
+                                    class="material-icons">settings</i><span>Configuracion</span></a></li>
+                    @else
+                        <li><a href="{{route('admin.configuracion')}}"><i
+                                    class="material-icons">settings</i><span>Configuracion</span></a></li>
                     @endif
                 @endif
                 <li>

@@ -105,7 +105,7 @@ class BodegasController extends Controller
      * @param  \App\Bodegas  $bodegas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bodegas $bodegas)
+    public function destroy($id)
     {
         //
     }
