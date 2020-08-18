@@ -73,7 +73,7 @@
                                 <div class="col-md-3" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Modalidad de Pago</label>
-                                        <select name="modalidad" class="select2 form-control" id="">
+                                        <select name="modalidad_pago" class="select2 form-control" id="">
                                             <option value="contado" selected>CONTADO</option>
                                             <option value="credito">CREDITO</option>
                                         </select>
@@ -82,16 +82,16 @@
                                 <div class="col-md-3" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Medio de pago</label>
-                                        <select name="modalidad" class="select2 form-control" id="">
-                                            <option value="efectivo" selected>Efectivo</option>
-                                            <option value="datafono">Datafono</option>
+                                        <select name="medio_pago" onchange="cambio(event)" class="select2 form-control" id="modalidad">
+                                            <option value="efectivo" selected>EFECTIVO</option>
+                                            <option value="datafono">DATAFONO</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-3" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Factura de Venta</label>
-                                        <input type="text" disabled class="form-control" value="NIK-0002">
+                                        <input type="text" disabled class="form-control" value="{{$serie->prefijo.'-'.$serie->actual}}">
                                     </div>
                                 </div>
                             </div>
@@ -124,6 +124,16 @@
                             </div>
                         </div>
                         <div class="row" style="width: 90%; margin: 0 auto;">
+                            <div class="col-md-12" style="display: flex; justify-content: flex-end; margin-bottom: 0;">
+                               <p><strong>Total:</strong> </p>
+                               <p id="f_total">$ 0</p>
+                            </div>
+                            <div class="col-md-12" style="display: flex; justify-content: flex-end; margin-bottom: 0;">
+                                <p><strong>Impuesto:</strong> </p>
+                                <p id="f_impuesto">$ 0</p>
+                            </div>
+                        </div>
+                        <div class="row" style="width: 90%; margin: 0 auto;">
                             <div class="col-md-12" style="display: flex; justify-content: flex-end;">
                                 <a href="{{route('admin.compras')}}" class="btn btn-danger" style="margin-right: 5px;">Cancelar</a>
                                 <button class="btn btn-success" onclick="guardar()">Guardar Compra</button>
@@ -146,7 +156,7 @@
                 <form action="" id="form-cliente">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <div class="form-line" >
+                            <div class="form-line">
                                 <label for="exampleFormControlSelect1">Identidicación</label>
                                 <br/><input type="number" id="identificacion" class="form-control" placeholder="Escriba la cedula del cliente" name="identificacion" required="required" />
                             </div>
@@ -213,7 +223,7 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <label for="">Nombre</label>
-                                    <input type="text" placeholder="Nombre del producto" class="form-control" name="nombre">
+                                    <input type="text" id="a_nombre" placeholder="Nombre del producto" class="form-control" name="nombre">
                                 </div>
                             </div>
                         </div>
@@ -237,7 +247,7 @@
                             <div class="form-group">
                                 <div class="form-line">
                                     <label for="">Descripción</label>
-                                    <input type="text" id="venta" class="form-control" name="descripcion" placeholder="A como lo piensas vender" >
+                                    <input type="text" id="descripcion" class="form-control" name="descripcion" placeholder="A como lo piensas vender" >
                                 </div>
                             </div>
                         </div>
@@ -255,6 +265,7 @@
 
 @section('script')
     <script src="{{asset('plugins/bootstrap/dataTables.select.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
     <script>
         $('.select2').select2();
         var productos = [];
@@ -262,6 +273,33 @@
         document.getElementById('precio_compra').addEventListener('focusout',function(event){
             $('#venta').val(event.target.value);
         });
+        function total(){
+            let total = 0;
+            productos.forEach((item)=>{
+                if(item.tipo == 'STOCK'){
+                    total += item.cantidad*item.precio;
+                }else{
+                    total += item.cantidad*item.precio_venta;
+                }
+            });
+        }
+        function cambio(event){
+            let total = 0;
+            productos.forEach((item)=>{
+                if(item.tipo == 'STOCK'){
+                    total += item.cantidad*item.precio;
+                }else{
+                    total += item.cantidad*item.precio_venta;
+                }
+            });
+            if($('#modalidad').val() == 'datafono'){
+                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
+                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
+            }else{
+                document.getElementById('f_total').innerHTML = '$ '+total;
+                document.getElementById('f_impuesto').innerHTML = '$ 0';
+            }
+        }
         function buscarProducto(event){
             if(event.keyCode == 13){
                 const  codigo = $('#cogigo').val();
@@ -288,8 +326,9 @@
                                 'id' : producto.unicode,
                                 'producto': producto.producto,
                                 'codigo_de_barras' : producto.codigo_de_barras,
-                                'cantidad' : 0,
-                                'precio' : producto.precio
+                                'cantidad' : 1,
+                                'precio' : producto.precio,
+                                'tipo': 'STOCK'
                             })
                             const tr = document.createElement('tr');
                             tr.setAttribute('id',producto.unicode);
@@ -299,10 +338,25 @@
                                <td>${producto.descripcion}x${producto.unidades} UND</td>
                                <td><input type="number"  class="cantidad" onchange="change_cantidad(event,${producto.unicode},${producto.existencia_embalaje},${producto.existencia})" value="1" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 60px;"></td>
                                <td><input type="number" disabled class="costo"  value="${producto.precio}" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 100px;"></td>
-                               <td class="total">$ ${producto.precio}</td>
+                               <td class="total" style="width: 100px;">$ ${producto.precio}</td>
                                <td><button class="btn btn-danger" onclick="eliminar_item(event,${producto.unicode})" > <i class="fas fa-times"></i></button></td>
                         `;
                             document.getElementById('productos').appendChild(tr);
+                        }
+                        let total = 0;
+                        productos.forEach((item)=>{
+                            if(item.tipo == 'STOCK'){
+                                total += item.cantidad*item.precio;
+                            }else{
+                                total += item.cantidad*item.precio_venta;
+                            }
+                        });
+                        if($('#modalidad').val() == 'datafono'){
+                            document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
+                            document.getElementById('f_total').innerHTML = '$ '+total*1.05;
+                        }else{
+                            document.getElementById('f_total').innerHTML = '$ '+total;
+                            document.getElementById('f_impuesto').innerHTML = '$ 0';
                         }
                         $('#cogigo').val('');
                     }else{
@@ -330,6 +384,50 @@
                     item.costo = costo
                 }
             });
+            total = 0;
+            productos.forEach((item)=>{
+                if(item.tipo == 'STOCK'){
+                    total += item.cantidad*item.precio;
+                }else{
+                    total += item.cantidad*item.precio_venta;
+                }
+            });
+            if($('#modalidad').val() == 'datafono'){
+                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
+                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
+            }else{
+                document.getElementById('f_total').innerHTML = '$ '+total;
+                document.getElementById('f_impuesto').innerHTML = '$ 0';
+            }
+
+        }
+        function change_cant(event,codigo){
+            cantidad =  event.target.value <= 0 ? 1 : event.target.value ;
+            event.target.value = cantidad;
+            let item = document.getElementById(`${codigo}`);
+            let precio = item.querySelector('.precio').value;
+            let total = cantidad*precio;
+            item.querySelector('.total').innerHTML = '$ '+total;
+            productos.forEach((item)=> {
+                if(item.id == codigo){
+                    item.cantidad = cantidad
+                }
+            });
+            total = 0;
+            productos.forEach((item)=>{
+                if(item.tipo == 'STOCK'){
+                    total += item.cantidad*item.precio;
+                }else{
+                    total += item.cantidad*item.precio_venta;
+                }
+            });
+            if($('#modalidad').val() == 'datafono'){
+                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
+                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
+            }else{
+                document.getElementById('f_total').innerHTML = '$ '+total;
+                document.getElementById('f_impuesto').innerHTML = '$ 0';
+            }
         }
         function eliminar_item(event,codigo) {
            document.getElementById(`${codigo}`).remove();
@@ -339,6 +437,21 @@
                }
            });
             $('#cogigo').focus();
+            let total = 0;
+            productos.forEach((item)=>{
+                if(item.tipo == 'STOCK'){
+                    total += item.cantidad*item.precio;
+                }else{
+                    total += item.cantidad*item.precio_venta;
+                }
+            });
+            if($('#modalidad').val() == 'datafono'){
+                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
+                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
+            }else{
+                document.getElementById('f_total').innerHTML = '$ '+total;
+                document.getElementById('f_impuesto').innerHTML = '$ 0';
+            }
         }
         function guardarCliente(event){
             event.preventDefault();
@@ -372,30 +485,52 @@
         }
         function guardarAdicional(event){
             event.preventDefault();
-            const form = $('#form-adicionales').serialize();
-            $.ajax({
-                header: {
-                    'X-CSRF-TOKEN': '{{csrf_token()}}'
-                },
-                type:'POST',
-                url: '{{route('adicional.save')}}',
-                data: {
-                    '_token' : '{{csrf_token()}}',
-                    'form': form
-                }
-            }).done((msg) => {
-                if (msg.status  ==  'ok') {
-                   alert('guardo');
-                }else if(msg.status == 'error'){
-                    notify('Atención', 'El adicional no pudo ser alamacenado.', 'error');
-                }else {
-                    let html = '';
-                    for(const prop in msg.message){
-                        html += `</br> <strong>${prop}</strong> : ${msg.message[prop]}`;
-                    }
-                    notify('Error', html);
+            const form = $('#form-adicionales').serializeArray();
+            if($('#a_nombre').val() == '' || $('#precio_compra').val() == '' || $('#venta').val() == ''){
+                notify('Atencion','Debe completar los campos requeridos');
+            }
+            let producto = {
+                'id': uuid.v4(),
+                'nombre' : $('#a_nombre').val(),
+                'precio_compra': $('#precio_compra').val(),
+                'precio_venta': $('#venta').val(),
+                'descripcion': $('#descripcion').val(),
+                'cantidad': 1,
+                'tipo': 'ADICIONAL'
+            };
+            productos.push(producto);
+            const tr = document.createElement('tr');
+            tr.setAttribute('id',producto.id);
+            tr.innerHTML = `
+                               <td>${producto.id}</td>
+                               <td>${producto.nombre}</td>
+                               <td>${''} UND</td>
+                               <td><input type="number"  class="cantidad" onchange="change_cant(event,'${producto.id}')"  value="1" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 60px;"></td>
+                               <td><input type="number" disabled class="precio"   value="${producto.precio_venta}" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 100px;"></td>
+                               <td class="total" style="width:100px;">$ ${producto.precio_venta}</td>
+                               <td><button class="btn btn-danger" onclick="eliminar_item(event,'${producto.id}')" > <i class="fas fa-times"></i></button></td>
+                        `;
+            document.getElementById('productos').appendChild(tr);
+            $('#MAdicional').modal('hide');
+            $('#a_nombre').val('');
+            $('#precio_compra').val('');
+            $('#venta').val('');
+            $('#descripcion').val('');
+            let total = 0;
+            productos.forEach((item)=>{
+                if(item.tipo == 'STOCK'){
+                    total += item.cantidad*item.precio;
+                }else{
+                    total += item.cantidad*item.precio_venta;
                 }
             });
+            if($('#modalidad').val() == 'datafono'){
+                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
+                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
+            }else{
+                document.getElementById('f_total').innerHTML = '$ '+total;
+                document.getElementById('f_impuesto').innerHTML = '$ 0';
+            }
         }
         function clientes(event){
             event.preventDefault();
@@ -441,29 +576,31 @@
             });
         }
         function guardar(){
+            if(productos.length <= 0){
+                notify('Atencion','Debe agregar al menos un producto para facturar.');
+                return;
+            }
             var formData = new FormData();
             var x = $("form").serializeArray();
             $.each(x, function(i, field){
                 formData.append(field.name, field.value);
             });
-            var file = $('#foto')[0].files[0];
-            formData.append('file',file);
             formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-            formData.append('embalajes', JSON.stringify(productos));
+            formData.append('productos', JSON.stringify(productos));
             $.ajax({
                 type: 'POST',
-                url: '{{route('compras.store')}}',
+                url: '{{route('mfacturas.store')}}',
                 data: formData,
                 contentType: false,
                 processData: false,
             }).done(function (msg) {
                 if (msg.status  ==  'ok') {
-                    notify('Atención', 'La compra fue almacenada con exito.!', 'success');
+                    notify('Atención', 'La factura fue almacenada con exito.!', 'success');
                     setTimeout(() => {
                         window.location.reload();
                     }, 3000);
                 }else if(msg.status == 'error'){
-                    notify('Atención', 'la compra no pudo ser alamacenada.', 'error');
+                    notify('Atención', 'la factuta no pudo ser alamacenada.', 'error');
                 }else {
                     let html = '';
                     for(const prop in msg.message){
@@ -473,8 +610,5 @@
                 }
             });
         }
-
-
-
      </script>
 @endsection

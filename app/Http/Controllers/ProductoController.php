@@ -257,7 +257,7 @@ class ProductoController extends Controller
 
     }
 
-
+    //5593685 - RAD -8488200002648650
     public function search($code){
 
         $producto =  DB::table('producto_embalaje')
@@ -268,26 +268,29 @@ class ProductoController extends Controller
                           ->first();
 
 
-         $existencias = DB::table('kardexes')
-                          ->select(DB::raw('sum(cantidad) as cantidad,tipo_movimiento'))
-                          ->where('producto_id',$producto->producto)
-                          ->groupBy('tipo_movimiento')
-                          ->get();
+      if($producto){
+          $existencias = DB::table('kardexes')
+              ->select(DB::raw('sum(cantidad) as cantidad,tipo_movimiento'))
+              ->where('producto_id',$producto->producto)
+              ->groupBy('tipo_movimiento')
+              ->get();
 
-         $existencia = 0;
-         foreach ($existencias as $item){
-             switch ($item->tipo_movimiento){
-                 case 'ENTRADA' :
-                                $existencia += $item->cantidad;
-                                break;
-                 case 'SALIDA' :
-                                 $existencia -= $item->cantidad;
-                                 break;
-             }
-         }
+          $existencia = 0;
+          foreach ($existencias as $item){
+              switch ($item->tipo_movimiento){
+                  case 'ENTRADA' :
+                      $existencia += $item->cantidad;
+                      break;
+                  case 'SALIDA' :
+                      $existencia -= $item->cantidad;
+                      break;
+              }
+          }
 
-        $producto->existencia_embalaje = intval($existencia / $producto->unidades);
-        $producto->existencia =  $existencia;
+              $producto->existencia_embalaje = intval($existencia / $producto->unidades);
+              $producto->existencia =  $existencia;
+          }
+
 
         return response()->json([
             'status' => $producto != null ? 'ok' : 'error',

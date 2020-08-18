@@ -36,6 +36,14 @@
                             <span class="ink animate"></span></div>
                     </a>
                     @endif
+                    @if(session()->exists('PAG_DEUDAS'))
+                        <a href="{{route('mfacturas.create')}}" class="btn bg-black btn-lg  waves-effect">
+                            <div>
+                                <span><i class="material-icons">pages</i></span>
+                                <span>DEUDAS</span>
+                                <span class="ink animate"></span></div>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
