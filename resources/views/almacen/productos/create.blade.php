@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-        <li><a href="{{route('inicio')}}">Inicio</a></li>
-        <li><a href="{{route('admin.almacen')}}">Almacen</a></li>
-        <li class="active"><a href="{{route('productos.index')}}">Productos</a></li>
-        <li class="active"><a href="">Creando un nuevo producto</a></li>
+    <ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+        <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+        <li><a style="color:white" href="{{route('admin.almacen')}}">Almacen</a></li>
+        <li class="active"><a style="color:white" href="{{route('productos.index')}}">Productos</a></li>
+        <li class="active"><a style="color:white" href="">Creando un nuevo producto</a></li>
     </ol>
 @endsection
 @section('content')

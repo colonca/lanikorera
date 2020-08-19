@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Embalaje;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class EmbalajesController extends Controller
@@ -105,8 +106,23 @@ class EmbalajesController extends Controller
      * @param  \App\embalajes  $embalaje
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Embalaje $embalaje)
+    public function destroy($id)
     {
-        //
+        $embalaje = Embalaje::findOrFail($id);
+        $productos = $embalaje->productos();
+        if($productos->count() == 0){
+            $result = $embalaje->delete();
+
+            if($result){
+                flash("El Embalaje fue eliminado Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("El Embalaje no fue eliminado Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar el embalaje ya que esta asociado con al menos productos")->error();
+            return  redirect()->back();
+        }
     }
 }

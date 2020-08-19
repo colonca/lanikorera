@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-        <li><a href="{{route('inicio')}}">Inicio</a></li>
-        <li><a href="{{route('admin.compras')}}">Compras</a></li>
-        <li class="active"><a href="{{route('compras.index')}}">Entradas de Almacen</a></li>
-        <li class="active"><a href="">Creando una nueva Entrada</a></li>
+    <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
+        <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+        <li><a style="color:white" href="{{route('admin.compras')}}">Compras</a></li>
+        <li class="active"><a style="color:white" href="{{route('compras.index')}}">Entradas de Almacen</a></li>
+        <li class="active"><a style="color:white" href="">Creando una nueva Entrada</a></li>
     </ol>
 @endsection
 @section('content')
@@ -13,7 +13,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    Entrada de Almacen.
+                    DATOS DE COMPRAS - ENTREDA DE ALMACEN.<small>Ingrese los datos, scanee el codigo de barras y haga click en el boton Guardar.</small>
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">

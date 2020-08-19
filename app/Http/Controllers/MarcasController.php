@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Marcas;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class MarcasController extends Controller
@@ -115,8 +116,23 @@ class MarcasController extends Controller
      * @param  \App\Marcas  $marcas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Marcas $marcas)
+    public function destroy($id)
     {
-        //
+        $marca = Marcas::findOrFail($id);
+        $exist = Producto::where('marca_id',$marca->id)->first();
+        if(!$exist){
+            $result = $marca->delete();
+
+            if($result){
+                flash("La Marca fue eliminada Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("La Marca no fue eliminada Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar la Marca ya que tiene productos asociados")->error();
+            return  redirect()->back();
+        }
     }
 }

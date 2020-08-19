@@ -69,11 +69,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
     Route::resource('bodegas','BodegasController');
     Route::resource('productos','ProductoController');
     Route::get('producto/embalaje/{id}','ProductoController@embalajes');
+    Route::get('marcas/{id}/delete', 'MarcasController@destroy')->name('marcas.delete');
+    Route::get('categorias/{id}/delete', 'CategoriasController@destroy')->name('categorias.delete');
+    Route::get('bodegas/{id}/delete', 'BodegasController@destroy')->name('bodegas.delete');
+    Route::get('subcategorias/{id}/delete', 'SubcategoriaController@destroy')->name('subcategorias.delete');
+    Route::get('embalajes/{id}/delete', 'EmbalajesController@destroy')->name('embalajes.delete');
+    Route::get('productos/{id}/delete', 'ProductoController@destroy')->name('productos.delete');
     Route::get('producto/search/{code}','ProductoController@search')->name('productos.search');
 });
 //GRUPO DE RUTAS PARA COMPRAS
 Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::resource('proveedores','ProveedoresController');
+    Route::get('proveedores/{id}/delete', 'ProveedoresController@destroy')->name('proveedores.delete');
     Route::post('proveedores/guardar','ProveedoresController@save')->name('proveedores.save');
     Route::get('proveedores/get/json','ProveedoresController@json')->name('proveedores.json');
     Route::resource('compras','CompraController');
@@ -85,9 +92,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
     Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
     Route::resource('mfacturas','MFacturaController');
+    Route::get('clientes/{id}/delete', 'ClientesController@destroy')->name('clientes.delete');
 });
 //GRUPO DE RUTAS PARA CONFIGURACION
 Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {
     Route::resource('series','SerieController');
+    Route::get('series/{id}/delete', 'SerieController@destroy')->name('series.delete');
 });
 

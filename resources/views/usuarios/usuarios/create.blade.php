@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-<ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-    <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li><a href="{{route('admin.usuarios')}}">Usuarios</a></li>
-    <li class="active"><a>Crear Usuario</a></li>
+<ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+    <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+    <li><a style="color:white" href="{{route('admin.usuarios')}}">Usuarios</a></li>
+    <li class="active"><a style="color:white">Crear Usuario</a></li>
 </ol>
 @endsection
 @section('content')
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn bg-brown btn-block waves-effect" disabled="disabled">Traer Persona</button>
+                            <button type="button" class="btn btn-block waves-effect" style="background-color: #38383A; color:white;" disabled="disabled">Traer Persona</button>
                         </div>
                     </div>
                     <div class="col-md-12">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proveedores;
+use App\Compras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -143,8 +144,23 @@ class ProveedoresController extends Controller
      * @param  \App\Proveedores  $proveedores
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedores $proveedores)
+    public function destroy($id)
     {
-        //
+        $proveedor= Proveedores::findOrFail($id);
+        $exist = Compras::where('proveedor_id',$proveedor->id)->first();
+        if(!$exist){
+            $result = $proveedor->delete();
+
+            if($result){
+                flash("El Proveedor fue eliminado Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("El Proveedor no fue eliminado Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar el Proveedor ya que tiene compras asociadas")->error();
+            return  redirect()->back();
+        }
     }
 }
