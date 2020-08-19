@@ -29,9 +29,9 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_ENTRADA-DE-ALMACEN'))
-                        <a href="{{route('compras.create')}}" class="btn bg-black btn-lg  waves-effect">
+                        <a href="{{route('compras.create')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
                             <div>
-                                <span><i class="material-icons">pages</i></span>
+                                <span><i class="material-icons">shopping_bag</i></span>
                                 <span>ENTRADA DE ALMACEN</span>
                                 <span class="ink animate"></span>
                             </div>

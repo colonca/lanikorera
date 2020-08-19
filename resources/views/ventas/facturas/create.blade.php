@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-        <li><a href="{{route('inicio')}}">Inicio</a></li>
-        <li><a href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a href="">Nueva Factura</a></li>
+    <ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+        <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+        <li><a style="color:white"  href="{{route('admin.ventas')}}">Ventas</a></li>
+        <li class="active"><a style="color:white" href="">Nueva Factura</a></li>
     </ol>
 @endsection
 @section('content')
@@ -12,18 +12,8 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    Factura de Venta
+                    DATOS DE VENTAS - FACTURA DE VENTA. <small>Ingrese los datos, scanee el codigo de barras y haga click en el boton Guardar.</small>
                 </h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a data-toggle="modal" data-target="#mdModal">Ayuda</a></li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="body">
                 <div class="col-md-12">
@@ -110,7 +100,7 @@
                         <div class="row" style="width: 90%; margin: 0 auto;">
                             <div class="col-md-12">
                                 <table class="table table-bordered">
-                                    <thead class="bg-info">
+                                    <thead class="bg-info" >
                                          <th>Codigo</th>
                                          <th>Producto</th>
                                          <th>Embalaje</th>
