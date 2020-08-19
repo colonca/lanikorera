@@ -73,82 +73,96 @@ class MFacturaController extends Controller
         }
 
         $serie = Serie::where('estado','ACTIVO')->first();
+        $status = 'ok';
 
-        $factura = new MFactura($request->all());
-        $factura->serie = $serie->prefijo;
-        $factura->n_venta = $serie->actual;
-        $factura->total = 0;
-        $result = $factura->save();
-        if($result){
-            $serie->actual = ++$serie->actual;
-            $serie->save();
-            $productos = json_decode($request->productos);
-            $total = 0;
-            foreach ($productos as $producto){
-                if($producto->tipo == 'STOCK'){
-                    $producto_embalaje = DB::table('producto_embalaje')
-                        ->where('producto_embalaje.codigo_de_barras','=',$producto->codigo_de_barras)
-                        ->get();
-                    $dfactura = new DFactura();
-                    $dfactura->precio = $producto->precio;
-                    $dfactura->cantidad = $producto->cantidad;
-                    $dfactura->producto_embalaje_id =  $producto_embalaje[0]->id;
-                    $dfactura->factura_id =  $factura->id;
-                    $dfactura->save();
-                    $total += $producto->cantidad * $producto->precio;
-                    $kardex = new Kardex();
-                    $kardex->producto_id = $producto->producto;
-                    $kardex->bodega_id = $request->bodega_id;
-                    $kardex->tipo_movimiento = 'SALIDA';
-                    $cantidad = $producto_embalaje[0]->unidades *  $producto->cantidad;
-                    $kardex->cantidad = $cantidad;
-                    $kardex->costo = Kardex::costo_promedio($producto->producto);
-                    $kardex->detalle = 'Venta F/'.$serie->prefijo.'-'.$serie->actual;
-                    $kardex->save();
-                }else{
-                    $adicional = new Adicional();
-                    $adicional->nombre =  $producto->nombre;
-                    $adicional->precio_compra = $producto->precio_compra;
-                    $adicional->precio_venta = $producto->precio_venta;
-                    $adicional->descripcion = $producto->descripcion;
-                    $adicional->factura_id = $factura->id;
-                    $adicional->cantidad = $producto->cantidad;
-                    $adicional->save();
-                    $total += $adicional->cantidad * $producto->precio_venta;
+        try {
+
+            DB::beginTransaction();
+            $factura = new MFactura($request->all());
+            $factura->serie = $serie->prefijo;
+            $factura->n_venta = $serie->actual;
+            $factura->total = 0;
+            $result = $factura->save();
+            if($result){
+                $serie->actual = ++$serie->actual;
+                $serie->save();
+                $productos = json_decode($request->productos);
+                $total = 0;
+                foreach ($productos as $producto){
+                    if($producto->tipo == 'STOCK'){
+                        $producto_embalaje = DB::table('producto_embalaje')
+                            ->where('producto_embalaje.codigo_de_barras','=',$producto->codigo_de_barras)
+                            ->get();
+                        $dfactura = new DFactura();
+                        $dfactura->precio = $producto->precio;
+                        $dfactura->cantidad = $producto->cantidad;
+                        $dfactura->producto_embalaje_id =  $producto_embalaje[0]->id;
+                        $dfactura->factura_id =  $factura->id;
+                        $dfactura->save();
+                        $total += $producto->cantidad * $producto->precio;
+                        $kardex = new Kardex();
+                        $kardex->producto_id = $producto->producto;
+                        $kardex->bodega_id = $request->bodega_id;
+                        $kardex->tipo_movimiento = 'SALIDA';
+                        $cantidad = $producto_embalaje[0]->unidades *  $producto->cantidad;
+                        $kardex->cantidad = $cantidad;
+                        $kardex->costo = Kardex::costo_promedio($producto->producto);
+                        $kardex->detalle = 'Venta F/'.$serie->prefijo.'-'.$serie->actual;
+                        $kardex->save();
+                    }else{
+                        $adicional = new Adicional();
+                        $adicional->nombre =  $producto->nombre;
+                        $adicional->precio_compra = $producto->precio_compra;
+                        $adicional->precio_venta = $producto->precio_venta;
+                        $adicional->descripcion = $producto->descripcion;
+                        $adicional->factura_id = $factura->id;
+                        $adicional->cantidad = $producto->cantidad;
+                        $adicional->save();
+                        $total += $adicional->cantidad * $producto->precio_venta;
+                    }
                 }
+
+                if($request->medio_pago == 'datafono'){
+                    $total = $total*1.05;
+                }
+                $factura->total = $total;
+                $factura->save();
+
+                if($request->modalidad_pago == 'credito'){
+                    $factura->estado = 'EN DEUDA';
+                    $factura->save();
+                    $deuda = new Deuda();
+                    $deuda->estado = 'EN DEUDA';
+                    $deuda->total = $total;
+                    $deuda->factura_id =  $factura->id;
+                    $deuda->abono = 0;
+                    $deuda->save();
+                }
+
+                $cliente =  Clientes::find($request->cliente_id);
+
+                $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
+                    ->setPaper('a4', 'landscape')
+                    ->output();
+
+                Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
+
+                $status = 'ok';
+
+            }else {
+                $status = 'error';
             }
-            if($request->medio_pago == 'datafono'){
-                $total = $total*1.05;
-            }
-            $factura->total = $total;
-            $factura->save();
 
-            if($request->modalidad_pago == 'credito'){
-              $deuda = new Deuda();
-              $deuda->estado = 'EN DEUDA';
-              $deuda->total = $total;
-              $deuda->factura_id =  $factura->id;
-              $deuda->abono = 0;
-              $deuda->save();
-            }
+            DB::commit();
 
-            $cliente =  Clientes::find($request->cliente_id);
-
-            $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
-                ->setPaper('a4', 'landscape')
-                ->output();
-
-            Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
-
-            return response()->json([
-                'status' => 'ok',
-            ]);
-
-        }else {
-            return response()->json([
-                'status' => 'error',
-            ]);
+        }catch (\Exception $e){
+            DB::rollBack();
         }
+
+        return response()->json([
+            'status' => $status
+        ]);
+
 
     }
 

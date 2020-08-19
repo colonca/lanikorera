@@ -12,4 +12,8 @@ class ProductoEmbalaje extends Model
     public function producto(){
         return $this->belongsTo(Producto::class,'producto_id','id');
     }
+
+    public function embalaje(){
+        return $this->belongsTo(Embalaje::class,'embalaje_id','id');
+    }
 }

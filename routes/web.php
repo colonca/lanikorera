@@ -93,6 +93,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
     Route::resource('mfacturas','MFacturaController');
     Route::get('clientes/{id}/delete', 'ClientesController@destroy')->name('clientes.delete');
+    Route::resource('descuentos','DescuentoController');
+    Route::get('descuentos/{id}/delete', 'DescuentoController@destroy')->name('descuentos.delete');
 });
 //GRUPO DE RUTAS PARA CONFIGURACION
 Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {
