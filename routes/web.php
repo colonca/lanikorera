@@ -85,6 +85,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
     Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
     Route::resource('mfacturas','MFacturaController');
+    Route::resource('deuda','DeudaController');
 });
 //GRUPO DE RUTAS PARA CONFIGURACION
 Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {

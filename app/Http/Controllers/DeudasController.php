@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Bodegas;
-use App\Clientes;
-use App\Deuda;
-use App\MFactura;
-use App\Serie;
 use Illuminate\Http\Request;
 
-class DeudaController extends Controller
+class DeudasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +13,7 @@ class DeudaController extends Controller
      */
     public function index()
     {
-
-        $deuda  = Clientes::Select('m_factura.n_venta','clientes.nombres','clientes.apellidos','abonos');
-        return view('ventas.deudas.list')->with('clientes',$deuda)->with('location','ventas');
+        //
     }
 
     /**
@@ -47,10 +40,10 @@ class DeudaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Deuda  $deuda
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Deuda $deuda)
+    public function show($id)
     {
         //
     }
@@ -58,10 +51,10 @@ class DeudaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Deuda  $deuda
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Deuda $deuda)
+    public function edit($id)
     {
         //
     }
@@ -70,10 +63,10 @@ class DeudaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Deuda  $deuda
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Deuda $deuda)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,10 +74,10 @@ class DeudaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Deuda  $deuda
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Deuda $deuda)
+    public function destroy($id)
     {
         //
     }
