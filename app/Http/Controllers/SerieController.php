@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Compra;
+use App\MFactura;
 use App\Serie;
 use Illuminate\Http\Request;
 
@@ -43,6 +45,10 @@ class SerieController extends Controller
             'final' => 'required'
         ]);
 
+        if ($request->final<$request->inicial){
+            flash("El numero inicial de la serie debe ser menor que el numero final ")->error();
+            return  redirect()->back();
+        }
         $series =Serie::where('prefijo',$request->prefijo)->get();
         if ($series->count()>0){
             foreach ($series as $serie){
@@ -110,9 +116,50 @@ class SerieController extends Controller
     public function update(Request $request, $id)
     {
         $serie =  Serie::findOrFail($id);
+
+        if($serie->inicial != $request->inicial  || $serie->final != $request->final){
+
+            $exist = Serie::where([
+                ['prefijo',$serie->prefijo],
+                ['inicial','<=',$request->inicial],
+                ['final','>=',$request->inicial],
+                ['id','!=',$serie->id]
+            ])->orWhere([
+                ['prefijo',$serie->prefijo],
+                ['inicial','<=',$request->final],
+                ['final','>=',$request->final],
+                ['id','!=',$serie->id]
+            ])->first();
+
+
+
+            if($exist){
+                flash('no','warning');
+                return redirect()->back();
+            }
+
+             if($serie->actual >= $request->inicial || $serie->actual > $request->final ){
+                 flash('','warning');
+                 return redirect()->back();
+             }
+        }
+
         $serie->prefijo = $request->prefijo;
         $serie->inicial = $request->inicial;
         $serie->final = $request->final;
+
+        if ($request->estado == 'ACTIVO'){
+            if($serie->actual >= $serie->final){
+                flash("La serie no fue actualizada de forma exitosa, ya que el rango de la serie ha sido completado")->success();
+                return  redirect()->route('series.index');
+            }else{
+                $series  = Serie::all();
+                foreach ($series as $serie){
+                    $serie->estado = 'INACTIVO';
+                    $serie->save();
+                }
+            }
+        }
         $serie->estado = $request->estado;
         $result = $serie->save();
         if($result){
@@ -130,8 +177,30 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Serie $serie)
+    public function destroy($id)
     {
-        //
+        $serie =Serie::where('id',$id)->first();
+        $exist = MFactura::where([
+            ['serie',$serie->prefijo],
+            ['n_venta','>=',$serie->inicial],
+            ['n_venta','<=',$serie->final]
+        ])->first();
+
+        if (!$exist) {
+
+            $result = $serie->delete();
+
+            if ($result) {
+                flash("La Serie fue eliminada de forma exitosa!")->success();
+                return redirect()->route('series.index');
+            } else {
+                flash("La Serie no fue eliminada de forma exitosa!")->error();
+                return redirect()->back();
+            }
+
+        }else{
+            flash("La Serie no se puede eliminar ya que tiene facturas relacionadas")->error();
+            return  redirect()->back();
+        }
     }
 }
