@@ -31,7 +31,7 @@
 </head>
 <body class="theme-teal">
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
+<div class="page-loader-wrapper"  >
     <div class="loader">
         <div class="preloader">
             <div class="spinner-layer pl-red">

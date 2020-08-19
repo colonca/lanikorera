@@ -39,7 +39,13 @@ class MFacturaController extends Controller
         $location = 'ventas';
         $bodegas = Bodegas::all();
         $serie = Serie::where('estado','ACTIVO')->first();
-        return view('ventas.facturas.create',compact('location','bodegas','serie'));
+        if($serie){
+           return view('ventas.facturas.create',compact('location','bodegas','serie'));
+        }else{
+            flash('No hay series disponibles para generar nuevas facturas, por favor revisar.','warning');
+            return redirect()->route('series.index');
+        }
+
     }
 
     /**
