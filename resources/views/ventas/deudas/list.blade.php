@@ -39,7 +39,7 @@
                                     <td>{{$clientes->abonos}}
                                     <td>{{$clientes->estado}}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{ route('abono.edit',$clientes->id)}}"
+                                        <a href="{{ route('deuda.edit',$clientes->id)}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Editar abono"><i
                                                 class="material-icons">mode_edit</i></a>
