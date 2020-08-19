@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-        <li><a href="{{route('inicio')}}">Inicio</a></li>
-        <li class="active"><a href="#">Cambiar Contraseña</a></li>
+    <ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+        <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+        <li class="active"><a style="color:white" href="#">Cambiar Contraseña</a></li>
     </ol>
 @endsection
 @section('content')
