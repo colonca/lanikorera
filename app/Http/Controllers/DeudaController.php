@@ -23,7 +23,7 @@ class DeudaController extends Controller
             ->select('total','factura_id',DB::raw('sum(abono) as abonos'))
             ->groupBy('total','factura_id');
 
-        $cliente = DB::table('clientes')->select('m_facturas.n_venta','clientes.nombres','clientes.apellidos','deudas.total','deudas.abonos','m_facturas.estado')
+        $cliente = DB::table('clientes')->select('m_facturas.id','m_facturas.n_venta','clientes.nombres','clientes.apellidos','deudas.total','deudas.abonos','m_facturas.estado')
             ->join('m_facturas','m_facturas.cliente_id','=','clientes.id')
             ->joinSub($deudas,'deudas',function($join){
                 $join->on('m_facturas.id','=','deudas.factura_id');
