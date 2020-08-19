@@ -128,7 +128,9 @@ class MFacturaController extends Controller
 
             $cliente =  Clientes::find($request->cliente_id);
 
-            $pdf = PDF::loadView('pdfs.factura',$factura)->output();
+            $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
+                ->setPaper('a4', 'landscape')
+                ->output();
 
             Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
 

@@ -32,6 +32,6 @@ class Factura extends Mailable
         return $this->view('emails.factura')
             ->attachData($this->pdf, 'factura.pdf', [
             'mime' => 'application/pdf',
-        ]);
+        ])->with('factura');
     }
 }

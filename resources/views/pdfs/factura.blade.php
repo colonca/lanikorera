@@ -57,60 +57,83 @@
        <tr>
            <td colspan="2" width="60%;" style="padding-bottom: 10px;">Factura a:</td>
            <td style="padding-bottom: 10px;">N° de factura</td>
-           <td style="padding-bottom: 10px;">NIK-0001</td>
+           <td style="padding-bottom: 10px;">{{$factura->serie.'-'.$factura->n_venta}}</td>
        </tr>
        <tr>
-           <td colspan="2" width="60%;" style="padding-bottom: 10px;">Camilo Andres Colon Cañizares</td>
+           <td colspan="2" width="60%;" style="padding-bottom: 10px;">{{$factura->cliente->nombres}}</td>
            <td style="padding-bottom: 10px;">Fecha</td>
-           <td>18-08-2020</td>
+           <td>{{$factura->fecha}}</td>
        </tr>
        <tr>
-           <td colspan="2" width="60%;">3017764758</td>
+           <td colspan="2" width="60%;">{{$factura->cliente->telefono}}</td>
            <td colspan="2"></td>
+       </tr>
+   </table>
+    <table style=" width: 80%; margin: 0 auto;">
+       <tr>
+           <td colspan="2" width="60%;" style="padding-bottom: 10px;">Medio de Pago: {{$factura->medio_pago}}</td>
+           <td style="padding-bottom: 10px;">Modalidad de pago: {{$factura->modalidad_pago}}</td>
        </tr>
    </table>
     <table style="width: 80%; margin: 20px auto; border-collapse: collapse">
         <tr style="background-color: #FFD700; color: black; font-weight: bold;">
-            <td style="border: 1px solid black; padding: 5px;">Descripcion</td>
-            <td  style="border: 1px solid black;  padding: 5px; text-align: center;" >Cantitdad</td>
-            <td  style="border: 1px solid black;  padding: 5px; text-align: center;">Precio</td>
-            <td  style="border: 1px solid black;  padding: 5px; text-align: center;">Total</td>
+            <td style=" padding: 5px;">Descripcion</td>
+            <td  style=" padding: 5px; text-align: center;" >Cantitdad</td>
+            <td  style=" padding: 5px; text-align: center;">Precio</td>
+            <td  style=" padding: 5px; text-align: center;">Total</td>
+        </tr>
+        {{$total = 0}}
+        @foreach($factura->dfactura as $detalle)
+            <tr>
+                <td style="margin-bottom: 10px;">{{$detalle->producto_embalaje->producto->nombre.'X'.$detalle->producto_embalaje->producto->presentacion}}</td>
+                <td style="text-align: center;">{{$detalle->cantidad}}</td>
+                <td style="text-align: center;">$ {{$detalle->precio}}</td>
+                <td style="text-align: center;">$ {{$detalle->cantidad*$detalle->precio}}</td>
+            </tr>
+            {{$total += $detalle->cantidad*$detalle->precio}}
+        @endforeach
+        @foreach($factura->adicionales as $adicional)
+            <tr>
+                <td style="margin-bottom: 10px;">{{$adicional->nombre}}</td>
+                <td style="text-align: center;">{{$adicional->cantidad}}</td>
+                <td style="text-align: center;">$ {{$adicional->precio_venta}}</td>
+                <td style="text-align: center;">$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
+                {{$total += $adicional->cantidad*$adicional->precio_venta}}
+            </tr>
+        @endforeach
+        <tr>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td style="margin-bottom: 10px;">Buchana's Master x 750ml</td>
-            <td style="text-align: center;">2</td>
-            <td style="text-align: center;">$ 150000</td>
-            <td style="text-align: center;">$ 300000</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td style="margin-bottom: 10px;">Buchana's Master x 750ml</td>
-            <td style="text-align: center;">2</td>
-            <td style="text-align: center;">$ 150000</td>
-            <td style="text-align: center;">$ 300000</td>
+            <td colspan="2"></td>
         </tr>
         <tr>
-            <td style="margin-bottom: 10px;">Buchana's Master x 750ml</td>
-            <td style="text-align: center;">2</td>
-            <td style="text-align: center; margin-bottom: 20px;">$ 150000</td>
-            <td style="text-align: center;">$ 300000</td>
+            <td colspan="2"></td>
         </tr>
-    </table>
-    <div style="width: 80%; margin: 0 auto;">
-        <table style="width: 20%;">
-             <tr>
-                 <td></td>
-                 <td style="width: 100%;">Impuesto: </td>
-                 <td>12000</td>
-             </tr>
-        </table>
-    </div>
-    <table style=" width: 80%; margin: 0 auto;">
-        <tr>
-            <td colspan="2" width="60%;" style="padding-bottom: 10px;">Metodo de pago: Efectivo</td>
-        </tr>
-        <tr>
-            <td colspan="2" width="60%;" style="padding-bottom: 10px;">Medio de pago: Contado</td>
-        </tr>
+        @if($factura->medio_pago == 'datafono')
+            <tr>
+                <td style="margin-bottom: 10px;"></td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: right; margin-bottom: 20px;">Impuesto:</td>
+                <td style="text-align: center;">$ {{$total*0.05}}</td>
+            </tr>
+            <tr>
+                <td style="margin-bottom: 10px;"></td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: right; margin-bottom: 20px;">Total:</td>
+                <td style="text-align: center;">$ {{$total*1.05}}</td>
+            </tr>
+        @else
+            <tr>
+                <td style="margin-bottom: 10px;"></td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: right; margin-bottom: 20px;">Total:</td>
+                <td style="text-align: center;">$ {{$total}}</td>
+            </tr>
+        @endif
     </table>
 </main>
 
