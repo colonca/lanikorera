@@ -31,7 +31,7 @@
 </head>
 <body class="theme-teal">
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
+<div class="page-loader-wrapper"  >
     <div class="loader">
         <div class="preloader">
             <div class="spinner-layer pl-red">
@@ -62,13 +62,13 @@
         </div>-->
 <!-- #END# Search Bar -->
 <!-- Top Bar -->
-<nav class="navbar" style="background-color:rgb(9, 7, 7);">
+<nav class="navbar" style="background-color: #38383A">
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
                data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="{{route('inicio')}}">{{ config('app.name') }} - LIQUOR STORE</a>
+            <a class="navbar-brand" href="{{route('inicio')}}">{{ config('app.name') }} - <em>Liquor Store</em></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">

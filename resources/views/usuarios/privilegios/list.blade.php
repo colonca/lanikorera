@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-<ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-    <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li><a href="{{route('admin.usuarios')}}">Usuarios</a></li>
-    <li class="active"><a>Privilegios a Páginas</a></li>
+<ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+    <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+    <li><a style="color:white" href="{{route('admin.usuarios')}}">Usuarios</a></li>
+    <li class="active"><a style="color:white">Privilegios a Páginas</a></li>
 </ol>
 @endsection
 @section('content')
@@ -47,7 +47,7 @@
                     <div class="col-md-5">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="body bg-red">
+                                <div class="body" style="background-color: #38383A; color:white;">
                                     PÁGINAS DEL SISTEMA
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                     <div class="col-md-5">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="body bg-red">
+                                <div class="body" style="background-color: #38383A; color:white;">
                                     PRIVILEGIOS DEL GRUPO
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <br/><button type="submit" id="btn-enviar" class="btn bg-teal waves-effect btn-block">Guardar los Cambios Para el Grupo Seleccionado</button>
+                                    <br/><button type="submit" id="btn-enviar" class="btn waves-effect btn-block" style="background-color: #38383A; color:white;">Guardar los Cambios Para el Grupo Seleccionado</button>
                                 </div>
                             </div>
                         </form>

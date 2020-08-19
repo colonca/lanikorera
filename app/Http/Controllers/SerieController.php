@@ -93,9 +93,11 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function edit(Serie $serie)
+    public function edit($id)
     {
-        //
+        $serie = Serie::findOrFail($id);
+        $location = 'configuracion';
+        return view('configuracion.series.edit',compact('serie','location'));
     }
 
     /**
@@ -105,9 +107,21 @@ class SerieController extends Controller
      * @param  \App\Serie  $serie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Serie $serie)
+    public function update(Request $request, $id)
     {
-        //
+        $serie =  Serie::findOrFail($id);
+        $serie->prefijo = $request->prefijo;
+        $serie->inicial = $request->inicial;
+        $serie->final = $request->final;
+        $serie->estado = $request->estado;
+        $result = $serie->save();
+        if($result){
+            flash("La Serie fue actualizada de forma exitosa!")->success();
+            return  redirect()->route('series.index');
+        }else{
+            flash("La serie no fue actualizada de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**

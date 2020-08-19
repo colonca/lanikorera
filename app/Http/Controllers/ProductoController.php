@@ -7,6 +7,7 @@ use App\Embalaje;
 use App\Kardex;
 use App\Marcas;
 use App\Producto;
+use App\Kardexes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -252,8 +253,24 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy($id)
     {
+        $producto= Producto::findOrFail($id);
+        $exist = Kardex::where('producto_id',$producto->id)->first();
+        if(!$exist){
+            $result = $producto->delete();
+
+            if($result){
+                flash("El Producto fue eliminado Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("El Producto no fue eliminado Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar el Producto ya que tiene transacciones asociadas")->error();
+            return  redirect()->back();
+        }
 
     }
 

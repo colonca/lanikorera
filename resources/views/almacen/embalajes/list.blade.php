@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-<ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-    <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li><a href="{{route('admin.almacen')}}">Almacen</a></li>
-    <li class="active"><a href="{{route('embalajes.index')}}">Embalaje</a></li>
+<ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+    <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+    <li><a style="color:white" href="{{route('admin.almacen')}}">Almacen</a></li>
+    <li class="active"><a style="color:white" href="{{route('embalajes.index')}}">Embalaje</a></li>
 </ol>
 @endsection
 @section('content')
@@ -12,7 +12,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    EMBALAJE - LISTADO DE EMBALAJES DE LOS PRODUCTOS EN EL SISTEMA.
+                    DATOS DEL ALMACEN - EMBALAJES DE LOS PRODUCTOS EN EL SISTEMA.<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
@@ -21,7 +21,6 @@
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="{{ route('embalajes.create') }}">Agregar Nuevo Embalaje</a></li>
-                            <li><a data-toggle="modal" data-target="#mdModal">Ayuda</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -31,25 +30,23 @@
                     <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Descripción</th>
-                                <th>Creado</th>
-                                <th>Modificado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($embalajes as $embalajes)
                             <tr>
-                                <td>{{$embalajes->id}}</td>
                                 <td>{{$embalajes->descripcion}}
-                                <td>{{$embalajes->created_at}}</td>
-                                <td>{{$embalajes->updated_at}}</td>
                                 <td style="text-align: center;">
                                     <a href="{{ route('embalajes.edit',$embalajes->id)}}"
                                        class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                        data-placement="top" title="Editar Embalaje"><i
                                             class="material-icons">mode_edit</i></a>
+                                    <a href="{{ route('embalajes.delete',$embalajes->id)}}"
+                                       class="btn bg-red waves-effect btn-xs" data-toggle="tooltip"
+                                       data-placement="top" title="Eliminar Embalaje"><i
+                                            class="material-icons">delete</i></a>
                                 </td>
                             </tr>
                             @endforeach

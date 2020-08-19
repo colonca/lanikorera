@@ -39,7 +39,13 @@ class MFacturaController extends Controller
         $location = 'ventas';
         $bodegas = Bodegas::all();
         $serie = Serie::where('estado','ACTIVO')->first();
-        return view('ventas.facturas.create',compact('location','bodegas','serie'));
+        if($serie){
+           return view('ventas.facturas.create',compact('location','bodegas','serie'));
+        }else{
+            flash('No hay series disponibles para generar nuevas facturas, por favor revisar.','warning');
+            return redirect()->route('series.index');
+        }
+
     }
 
     /**
@@ -128,7 +134,9 @@ class MFacturaController extends Controller
 
             $cliente =  Clientes::find($request->cliente_id);
 
-            $pdf = PDF::loadView('pdfs.factura',$factura)->output();
+            $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
+                ->setPaper('a4', 'landscape')
+                ->output();
 
             Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
 

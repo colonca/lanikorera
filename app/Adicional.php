@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Adicional extends Model
 {
     protected $table = 'adicionals';
-    protected $fillable = ['id','nombre','precio_compra','precio_venta'];
+    protected $fillable = ['id','nombre','precio_compra','precio_venta','factura_id','cantidad'];
 }

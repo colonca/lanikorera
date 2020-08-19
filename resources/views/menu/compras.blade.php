@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-<ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px; background-color: black">
-    <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li class="active"><a href="{{route('admin.compras')}}">Compras</a></li>
+<ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+    <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+    <li class="active"><a style="color:white" href="{{route('admin.compras')}}">Compras</a></li>
 </ol>
 @endsection
 @section('content')
@@ -11,17 +11,17 @@
         <div class="card">
             <div class="header">
                 <h2>
-                   DATO DE LAS COMPRAS<small>MENÚ</small>
+                   DATOS DE COMPRAS<small>MENÚ</small>
                 </h2>
             </div>
             <div class="body">
-                <div class="alert bg-black alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong>Detalles: </strong> Gestione los proveedores, y compras realizadas.
+                <div class="alert alert-dismissible" style="background-color: #FFD700;" role="alert">
+                    <button style="color: black" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <strong style="color: black">Detalles: </strong><span style="color: black">Gestione los proveedores, y compras realizadas.</span>
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_PROVEEDORES'))
-                    <a href="{{route('proveedores.index')}}" class="btn btn-lg bg-black  waves-effect">
+                    <a href="{{route('proveedores.index')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
                         <div>
                             <span><i class="material-icons">connect_without_contact</i></span>
                             <span>PROVEEDORES</span>
@@ -29,14 +29,15 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_ENTRADA-DE-ALMACEN'))
-                        <a href="{{route('compras.create')}}" class="btn bg-black btn-lg  waves-effect">
+                        <a href="{{route('compras.create')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
                             <div>
-                                <span><i class="material-icons">pages</i></span>
+                                <span><i class="material-icons">shopping_bag</i></span>
                                 <span>ENTRADA DE ALMACEN</span>
                                 <span class="ink animate"></span>
                             </div>
                         </a>
                     @endif
+                </div>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categorias;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
@@ -43,7 +44,6 @@ class CategoriasController extends Controller
 
         $categoria =  new Categorias();
         $categoria->nombre = $request->nombre;
-        $categoria->descripcion= $request->descripcion;
         $result = $categoria->save();
 
         if($result){
@@ -90,7 +90,6 @@ class CategoriasController extends Controller
     {
         $categoria =  Categorias::findOrFail($id);
         $categoria->nombre = $request->nombre;
-        $categoria->descripcion = $request->descripcion;
         $result = $categoria->save();
         if($result){
             flash("La Categoría <strong>" . $categoria->nombre . "</strong> fue actualizada de forma exitosa!")->success();
@@ -107,8 +106,23 @@ class CategoriasController extends Controller
      * @param  \App\Categorias  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorias $categoria)
+    public function destroy($id)
     {
-        //
+        $categoria = Categorias::findOrFail($id);
+        $exist = Producto::where('categoria_id',$categoria->id)->first();
+        if(!$exist){
+            $result = $categoria->delete();
+
+            if($result){
+                flash("La Categoria fue eliminada Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("La Categoria no fue eliminada Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar la Categoria ya que tine productos asociados")->error();
+            return  redirect()->back();
+        }
     }
 }

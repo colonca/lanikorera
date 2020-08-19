@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clientes;
+use App\MFactura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -118,9 +119,25 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clientes $clientes)
+    public function destroy($id)
     {
-        //
+        $cliente = Clientes::findOrFail($id);
+        $exist = MFactura::where('cliente_id',$cliente->id)->first();
+        if(!$exist){
+            $result = $cliente->delete();
+
+            if($result){
+                flash("El Cliente fue eliminado Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("El Cliente no fue eliminado Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar el Cliente ya que tiene facturas asociadas")->error();
+            return  redirect()->back();
+        }
+
     }
 
    public function save(Request $request){
