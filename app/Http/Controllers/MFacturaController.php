@@ -125,19 +125,19 @@ class MFacturaController extends Controller
                 if($request->medio_pago == 'datafono'){
                     $total = $total*1.05;
                 }
+
                 $factura->total = $total;
-                $factura->save();
 
                 if($request->modalidad_pago == 'credito'){
                     $factura->estado = 'EN DEUDA';
-                    $factura->save();
                     $deuda = new Deuda();
-                    $deuda->estado = 'EN DEUDA';
                     $deuda->total = $total;
                     $deuda->factura_id =  $factura->id;
                     $deuda->abono = 0;
                     $deuda->save();
                 }
+
+                $factura->save();
 
                 $cliente =  Clientes::find($request->cliente_id);
 

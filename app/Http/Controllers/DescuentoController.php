@@ -26,7 +26,8 @@ class DescuentoController extends Controller
      */
     public function create()
     {
-        //
+        $location = 'ventas';
+        return view('ventas.descuentos.create',compact('location'));
     }
 
     /**

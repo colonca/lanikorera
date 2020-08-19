@@ -30,16 +30,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($clientes as $clientes)
+                            @foreach($clientes as $cliente)
                                 <tr>
-                                    <td>{{$clientes->n_venta}}
-                                    <td>{{$clientes->nombres}}
-                                    <td>{{$clientes->apellidos}}
-                                    <td>{{$clientes->total}}
-                                    <td>{{$clientes->abonos}}
-                                    <td>{{$clientes->estado}}</td>
+                                    <td>{{$cliente->serie.'-'.$cliente->n_venta}}
+                                    <td>{{$cliente->nombres}}
+                                    <td>{{$cliente->apellidos}}
+                                    <td>{{$cliente->total}}
+                                    <td>{{$cliente->abonos}}
+                                    <td>{{$cliente->estado}}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{ route('abono.edit',$clientes->id)}}"
+                                        <a href="{{ route('deuda.edit',$cliente->id)}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Editar abono"><i
                                                 class="material-icons">mode_edit</i></a>

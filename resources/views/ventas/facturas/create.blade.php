@@ -429,7 +429,7 @@
         }
         function change_cantidad(event,codigo,existencia_embalaje,existencia,producto,unidades){
             aux =  event.target.value <= 0 ? 1 : event.target.value ;
-            total = 0;
+            let total = 0;
             productos.forEach((item)=> {
                 if(producto == item.producto){
                     total += item.unidades * item.cantidad;
@@ -449,7 +449,7 @@
             }
             let item = document.getElementById(`${codigo}`);
             let costo = item.querySelector('.costo').value;
-            let total = cantidad*costo;
+            total = cantidad*costo;
             item.querySelector('.total').innerHTML = '$ '+total;
             productos.forEach((item)=> {
                 if(item.id == codigo){

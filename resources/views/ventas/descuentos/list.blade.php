@@ -20,7 +20,7 @@
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ route('clientes.create') }}">Agregar Nuevo cliente</a></li>
+                            <li><a href="{{ route('descuentos.create') }}">Agregar Nuevo descuento</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -32,8 +32,9 @@
                             <tr>
                                 <th>Producto</th>
                                 <th>Embalaje</th>
-                                <th>Unidades Destinadas</th>
-                                <th>Unidades Vendidas</th>
+                                <th>Valor</th>
+                                <th>Und Des</th>
+                                <th>Und Vend</th>
                                 <th>Fecha Inicial</th>
                                 <th>Fecha Final</th>
                                 <th>Acciones</th>
@@ -44,6 +45,9 @@
                             <tr>
                                 <td>{{$descuento->producto_embalaje->producto->nombre.'x'.$descuento->producto_embalaje->producto->presentacion}}</td>
                                 <td>{{$descuento->producto_embalaje->embalaje->descripcion}}</td>
+                                <td>$ {{$descuento->valor}}</td>
+                                <td>{{$descuento->cantidad_destinada}}</td>
+                                <td>{{$descuento->cantidad_vendida}}</td>
                                 <td>{{$descuento->fecha_inicio}}</td>
                                 <td>{{$descuento->fecha_fin}}</td>
                                 <td style="text-align: center;">
