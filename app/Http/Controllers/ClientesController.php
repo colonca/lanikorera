@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clientes;
+use App\MFacturas;
 use Illuminate\Http\Request;
 
 class ClientesController extends Controller
@@ -117,8 +118,24 @@ class ClientesController extends Controller
      * @param  \App\Clientes  $clientes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clientes $clientes)
+    public function destroy($id)
     {
-        //
+        $cliente = Clientes::findOrFail($id);
+        $exist = MFacturas::where('cliente_id',$cliente->id)->first();
+        if(!exist){
+            $result = $cliente->delete();
+
+            if($result){
+                flash("El Cliente fue eliminado Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("El Cliente no fue eliminado Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar el Cliente ya que tiene facturas asociadas")->error();
+            return  redirect()->back();
+        }
+
     }
 }

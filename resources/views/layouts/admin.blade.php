@@ -62,7 +62,7 @@
         </div>-->
 <!-- #END# Search Bar -->
 <!-- Top Bar -->
-<nav class="navbar" style="background-color:rgb(9, 7, 7);">
+<nav class="navbar" style="background-color: #38383A">
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"

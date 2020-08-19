@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categorias;
 use App\Subcategoria;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class SubcategoriaController extends Controller
@@ -46,14 +47,13 @@ class SubcategoriaController extends Controller
         $subcategoria =  new Subcategoria();
         $subcategoria->categoria_id= $request->categoria_id;
         $subcategoria->nombre = $request->nombre;
-        $subcategoria->descripcion= $request->descripcion;
         $result = $subcategoria->save();
 
         if($result){
-            flash("LaSubcategorias <strong>" . $subcategoria->nombre . "</strong> fue almacenada de forma exitosa!")->success();
-            return  redirect()->route('categorias.index');
+            flash("La Subcategoria <strong>" . $subcategoria->nombre . "</strong> fue almacenada de forma exitosa!")->success();
+            return  redirect()->route('subcategorias.index');
         }else{
-            flash("LaSubategorias <strong>" . $subcategoria->nombre . "</strong> no fue almacenada de forma exitosa!")->error();
+            flash("La Subategoria <strong>" . $subcategoria->nombre . "</strong> no fue almacenada de forma exitosa!")->error();
             return  redirect()->back();
         }
     }
@@ -95,7 +95,6 @@ class SubcategoriaController extends Controller
         $subcategoria =  Subcategoria::findOrFail($id);
         $subcategoria->categoria_id=$request->categoria_id;
         $subcategoria->nombre = $request->nombre;
-        $subcategoria->descripcion = $request->descripcion;
         $result = $subcategoria->save();
         if($result){
             flash("La Subategoría <strong>" . $subcategoria->nombre . "</strong> fue actualizada de forma exitosa!")->success();
@@ -112,8 +111,23 @@ class SubcategoriaController extends Controller
      * @param  \App\Subcategoria  $subcategoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subcategoria $subcategoria)
+    public function destroy($id)
     {
-        //
+        $subcategoria = Subcategoria::findOrFail($id);
+        $productos = $subcategoria->productos();
+        if($productos->count() == 0){
+            $result = $subcategoria->delete();
+
+            if($result){
+                flash("La Subcategoria fue eliminada Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("La Subcategoria no fue eliminada Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar la Subcategoria ya que tine productos asociados")->error();
+            return  redirect()->back();
+        }
     }
 }

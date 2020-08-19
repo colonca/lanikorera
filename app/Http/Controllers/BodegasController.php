@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bodegas;
+use App\Kardexes;
 use Illuminate\Http\Request;
 
 class BodegasController extends Controller
@@ -107,6 +108,21 @@ class BodegasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bodega = Bodegas::findOrFail($id);
+        $exist = Kardexes::where('bodega_id',$bodega->id)->first();
+        if(!$exist){
+            $result = $bodega->delete();
+
+            if($result){
+                flash("La Bodega fue eliminada Correctamente")->success();
+                return  redirect()->back();
+            }else{
+                flash("La Bodega no fue eliminada Correctamente")->error();
+                return  redirect()->back();
+            }
+        }else{
+            flash("No se puede eliminar la Bodega ya que tine movimientos Kardex asociados")->error();
+            return  redirect()->back();
+        }
     }
 }

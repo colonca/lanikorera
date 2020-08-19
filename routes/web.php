@@ -69,17 +69,26 @@ Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
     Route::resource('bodegas','BodegasController');
     Route::resource('productos','ProductoController');
     Route::get('producto/embalaje/{id}','ProductoController@embalajes');
+    Route::get('marcas/{id}/delete', 'MarcasController@destroy')->name('marcas.delete');
+    Route::get('categorias/{id}/delete', 'CategoriasController@destroy')->name('categorias.delete');
+    Route::get('bodegas/{id}/delete', 'BodegasController@destroy')->name('bodegas.delete');
+    Route::get('subcategorias/{id}/delete', 'SubcategoriaController@destroy')->name('subcategorias.delete');
+    Route::get('embalajes/{id}/delete', 'EmbalajesController@destroy')->name('embalajes.delete');
+    Route::get('productos/{id}/delete', 'ProductoController@destroy')->name('productos.delete');
 });
 //GRUPO DE RUTAS PARA COMPRAS
 Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::resource('proveedores','ProveedoresController');
+    Route::get('proveedores/{id}/delete', 'ProveedoresController@destroy')->name('proveedores.delete');
 });
 //GRUPO DE RUTAS PARA VENTAS
 Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::resource('clientes','ClientesController');
+    Route::get('clientes/{id}/delete', 'ClientesController@destroy')->name('clientes.delete');
 });
 //GRUPO DE RUTAS PARA CONFIGURACION
 Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {
     Route::resource('series','SerieController');
+    Route::get('series/{id}/delete', 'SerieController@destroy')->name('series.delete');
 });
 

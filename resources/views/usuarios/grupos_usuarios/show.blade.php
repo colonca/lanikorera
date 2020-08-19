@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-<ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-    <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li><a href="{{route('admin.usuarios')}}">Usuarios</a></li>
-    <li><a href="{{route('grupousuario.index')}}">Grupos de Usuarios</a></li>
-    <li class="active"><a>Ver Grupo</a></li>
+<ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
+    <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+    <li><a style="color:white" href="{{route('admin.usuarios')}}">Usuarios</a></li>
+    <li><a style="color:white" href="{{route('grupousuario.index')}}">Grupos de Usuarios</a></li>
+    <li class="active"><a style="color:white" >Ver Grupo</a></li>
 </ol>
 @endsection
 @section('content')
@@ -53,8 +53,8 @@
                             </tbody>
                         </table>
                         <div class="list-group">
-                            <a class="list-group-item active">
-                                MÓDULOS A LOS QUE TIENE ACCESO EL GRUPO DE USUARIOS 
+                            <a style="background-color: #38383A; color:white;" class="list-group-item ">
+                                MÓDULOS A LOS QUE TIENE ACCESO EL GRUPO DE USUARIOS
                             </a>
                             @foreach($grupo->modulos as $modulo)
                             <span class="list-group-item">{{$modulo->nombre}} ==> {{$modulo->descripcion}}</span>

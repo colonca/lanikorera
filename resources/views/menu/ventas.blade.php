@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-<ol class="breadcrumb breadcrumb-bg-blue-grey" style="margin-bottom: 30px;">
-    <li><a href="{{route('inicio')}}">Inicio</a></li>
-    <li class="active"><a href="{{route('admin.ventas')}}">Ventas</a></li>
+<ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
+    <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
+    <li class="active"><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
 </ol>
 @endsection
 @section('content')
@@ -11,17 +11,17 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    DATOS DE LAS VENTAS REALIZADAS<small>MENÚ</small>
+                    DATOS DE VENTAS <small>MENÚ</small>
                 </h2>
             </div>
             <div class="body">
-                <div class="alert bg-teal alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong>Detalles: </strong> Gestione Clientes y las ventas realizadas.
+                <div class="alert alert-dismissible" style="background-color: #FFD700;" role="alert">
+                    <button  style="color: black" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <strong style="color: black">Detalles: </strong> <span style="color: black">Gestione Clientes y las ventas realizadas.</span>
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_CLIENTES'))
-                    <a href="{{route('clientes.index')}}" class="btn btn-primary btn-lg  waves-effect">
+                    <a href="{{route('clientes.index')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
                         <div>
                             <span><i class="material-icons">contacts</i></span>
                             <span>CLIENTES</span>
