@@ -28,31 +28,21 @@
                             <span class="ink animate"></span></div>
                     </a>
                     @endif
-                    @if(session()->exists('PAG_CATEGORIAS'))
-                    <a href="{{route('categorias.index')}}" class="btn bg-deep-orange btn-lg  waves-effect">
+                    @if(session()->exists('PAG_FACTURAR'))
+                    <a href="{{route('mfacturas.create')}}" class="btn bg-black btn-lg  waves-effect">
                         <div>
                             <span><i class="material-icons">pages</i></span>
-                            <span>CATEGORÍAS</span>
+                            <span>FACTURAR</span>
                             <span class="ink animate"></span></div>
                     </a>
                     @endif
-                    @if(session()->exists('PAG_EMBALAJES'))
-                    <a href="{{route('embalajes.index')}}" class="btn bg-green btn-lg  waves-effect">
-                        <div>
-                            <span><i class="material-icons">group</i></span>
-                            <span>EMBALAJES</span>
-                            <span class="ink animate"></span>
-                        </div>
-                    </a>
-                    @endif
-                    @if(session()->exists('PAG_BODEGAS'))
-                    <a href="{{route('bodegas.index')}}" class="btn bg-brown btn-lg waves-effect">
-                        <div>
-                            <span><i class="material-icons">group</i></span>
-                            <span>BODEGAS</span>
-                            <span class="ink animate"></span>
-                        </div>
-                    </a>
+                    @if(session()->exists('PAG_DEUDAS'))
+                        <a href="{{route('mfacturas.create')}}" class="btn bg-black btn-lg  waves-effect">
+                            <div>
+                                <span><i class="material-icons">pages</i></span>
+                                <span>DEUDAS</span>
+                                <span class="ink animate"></span></div>
+                        </a>
                     @endif
                 </div>
             </div>

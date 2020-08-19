@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Proveedores;
 use App\Compras;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProveedoresController extends Controller
 {
@@ -55,6 +56,43 @@ class ProveedoresController extends Controller
         }
     }
 
+
+    public function save(Request $request){
+
+        $values = array();
+        parse_str($request->form, $values);
+        $validate = Validator::make($values,[
+            'nombre' => 'required',
+            'nit' => 'required',
+        ]);
+
+        if($validate->fails()){
+            return response()->json([
+                'status' => 'validate',
+                'message' => $validate->errors()
+            ]);
+        }
+
+        $proveedor = new Proveedores($values);
+        $result = $proveedor->save();
+        if($result){
+            return response()->json([
+                'status' => 'ok',
+                'proveedor' => $proveedor
+            ]);
+        }else {
+            return response()->json([
+                'status' => 'error',
+            ]);
+        }
+    }
+
+    public function json(){
+        $proveedores = Proveedores::all();
+        return response()->json(
+           $proveedores
+        );
+    }
     /**
      * Display the specified resource.
      *
