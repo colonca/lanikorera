@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categorias;
 use App\Embalaje;
+use App\Kardex;
 use App\Marcas;
 use App\Producto;
 use App\Kardexes;
@@ -255,7 +256,7 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         $producto= Producto::findOrFail($id);
-        $exist = Kardexes::where('producto_id',$producto->id)->first();
+        $exist = Kardex::where('producto_id',$producto->id)->first();
         if(!$exist){
             $result = $producto->delete();
 
@@ -305,6 +306,7 @@ class ProductoController extends Controller
 
               $producto->existencia_embalaje = intval($existencia / $producto->unidades);
               $producto->existencia =  $existencia;
+              $producto->costo_promedio = number_format(Kardex::costo_promedio($producto->producto)*$producto->unidades,2);
           }
 
 

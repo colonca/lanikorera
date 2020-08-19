@@ -14,6 +14,7 @@ class Kardex extends Model
     public static function costo_promedio($producto){
         //tiempo en meses
         $time = 3;
+        $costo = 0;
         $entradas = Kardex::where([
             ['tipo_movimiento','ENTRADA'],
             ['producto_id',$producto]
@@ -24,7 +25,11 @@ class Kardex extends Model
            $total += $entrada->cantidad * $entrada->costo;
            $cantidad += $entrada->cantidad;
         }
-        $costo = $total / $cantidad;
+
+        if($cantidad != 0){
+            $costo = $total / $cantidad;
+        }
+
         return $costo;
     }
 }

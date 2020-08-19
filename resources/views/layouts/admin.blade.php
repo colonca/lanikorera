@@ -31,7 +31,7 @@
 </head>
 <body class="theme-teal">
 <!-- Page Loader -->
-<div class="page-loader-wrapper">
+<div class="page-loader-wrapper"  >
     <div class="loader">
         <div class="preloader">
             <div class="spinner-layer pl-red">
@@ -219,8 +219,7 @@
             <div class="copyright">
                 &copy; 2020 LA NIKORERA. Todos los Derechos Reservados. <a href="javascript:void(0);">AdminBSB - Material De
                     sign</a>.
-                </d
-                iv>
+                </div>
                 <div class="version">
                     <b>Desarrollado Por: </b> <a href="#">SKAYNET</a>
                 </div>

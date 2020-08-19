@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Bodegas;
+use App\Clientes;
 use App\Deuda;
+use App\MFactura;
+use App\Serie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeudaController extends Controller
 {
@@ -14,7 +19,18 @@ class DeudaController extends Controller
      */
     public function index()
     {
-        //
+        $deudas = DB::table('deudas')
+            ->select('total','factura_id',DB::raw('sum(abono) as abonos'))
+            ->groupBy('total','factura_id');
+
+        $cliente = DB::table('clientes')->select('m_facturas.id','m_facturas.n_venta','m_facturas.serie','clientes.nombres','clientes.apellidos','deudas.total','deudas.abonos','m_facturas.estado')
+            ->join('m_facturas','m_facturas.cliente_id','=','clientes.id')
+            ->joinSub($deudas,'deudas',function($join){
+                $join->on('m_facturas.id','=','deudas.factura_id');
+            })
+            ->where('m_facturas.estado','=','EN DEUDA')
+            ->get();
+        return view('ventas.deudas.list')->with('clientes',$cliente)->with('location','ventas');
     }
 
     /**

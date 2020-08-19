@@ -6,7 +6,74 @@
         <li class="active"><a style="color:white" href="">Nueva Factura</a></li>
     </ol>
 @endsection
+@section('style')
+    <style>
+        /* Center the loader */
+        #loader {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 100000;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from { bottom:-100px; opacity:0 }
+            to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom {
+            from{ bottom:-100px; opacity:0 }
+            to{ bottom:0; opacity:1 }
+        }
+
+        #myDiv {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            opacity: 0.8;
+            z-index: 1000;
+        }
+    </style>
+@endsection
 @section('content')
+<div id="loader"></div>
+<div id="myDiv"></div>
 <div class="row clearfix">
     <div class="col-md-12">
         <div class="card">
@@ -126,7 +193,7 @@
                         <div class="row" style="width: 90%; margin: 0 auto;">
                             <div class="col-md-12" style="display: flex; justify-content: flex-end;">
                                 <a href="{{route('admin.compras')}}" class="btn btn-danger" style="margin-right: 5px;">Cancelar</a>
-                                <button class="btn btn-success" onclick="guardar()">Guardar Compra</button>
+                                <button class="btn btn-success" onclick="guardar()">Facturar</button>
                             </div>
                         </div>
                     </div>
@@ -263,16 +330,7 @@
         document.getElementById('precio_compra').addEventListener('focusout',function(event){
             $('#venta').val(event.target.value);
         });
-        function total(){
-            let total = 0;
-            productos.forEach((item)=>{
-                if(item.tipo == 'STOCK'){
-                    total += item.cantidad*item.precio;
-                }else{
-                    total += item.cantidad*item.precio_venta;
-                }
-            });
-        }
+
         function cambio(event){
             let total = 0;
             productos.forEach((item)=>{
@@ -311,6 +369,18 @@
                             notify('Atencion','no hay stock en inventario');
                         }
 
+                        let total = 0;
+                        productos.forEach((item)=> {
+                            if(producto.producto == item.producto){
+                                total += item.unidades * item.cantidad;
+                            }
+                        });
+                        total += producto.unidades*1;
+                        if(total > producto.existencia){
+                            notify('Atencion','No hay existencia en stock');
+                            band = false;
+                        }
+
                         if(band && existencia){
                             productos.push({
                                 'id' : producto.unicode,
@@ -318,6 +388,7 @@
                                 'codigo_de_barras' : producto.codigo_de_barras,
                                 'cantidad' : 1,
                                 'precio' : producto.precio,
+                                'unidades' : producto.unidades,
                                 'tipo': 'STOCK'
                             })
                             const tr = document.createElement('tr');
@@ -326,14 +397,14 @@
                                <td>${producto.codigo_de_barras}</td>
                                <td>${producto.nombre}x${producto.presentacion}</td>
                                <td>${producto.descripcion}x${producto.unidades} UND</td>
-                               <td><input type="number"  class="cantidad" onchange="change_cantidad(event,${producto.unicode},${producto.existencia_embalaje},${producto.existencia})" value="1" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 60px;"></td>
+                               <td><input type="number"  class="cantidad" onchange="change_cantidad(event,${producto.unicode},${producto.existencia_embalaje},${producto.existencia},${producto.producto},${producto.unidades})" value="1" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 60px;"></td>
                                <td><input type="number" disabled class="costo"  value="${producto.precio}" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 100px;"></td>
                                <td class="total" style="width: 100px;">$ ${producto.precio}</td>
                                <td><button class="btn btn-danger" onclick="eliminar_item(event,${producto.unicode})" > <i class="fas fa-times"></i></button></td>
                         `;
                             document.getElementById('productos').appendChild(tr);
                         }
-                        let total = 0;
+                        total = 0;
                         productos.forEach((item)=>{
                             if(item.tipo == 'STOCK'){
                                 total += item.cantidad*item.precio;
@@ -356,8 +427,20 @@
                 });
             }
         }
-        function change_cantidad(event,codigo,existencia_embalaje,existencia){
-            cantidad =  event.target.value <= 0 ? 1 : event.target.value ;
+        function change_cantidad(event,codigo,existencia_embalaje,existencia,producto,unidades){
+            aux =  event.target.value <= 0 ? 1 : event.target.value ;
+            let total = 0;
+            productos.forEach((item)=> {
+                if(producto == item.producto){
+                    total += item.unidades * item.cantidad;
+                }
+            });
+            total += unidades*aux;
+            if(total > existencia){
+                notify('Atencion','No hay existencia en stock');
+                return;
+            }
+            cantidad = aux;
             event.target.value = cantidad;
             if(cantidad > existencia_embalaje) {
                 notify('Atención', `La cantidad selecionada no se encuentra disponible, en stock solo quedan ${existencia_embalaje} UND del embalaje selecionado y Unidades Individuales del producto quedan ${existencia}`, 'warning');
@@ -366,7 +449,7 @@
             }
             let item = document.getElementById(`${codigo}`);
             let costo = item.querySelector('.costo').value;
-            let total = cantidad*costo;
+            total = cantidad*costo;
             item.querySelector('.total').innerHTML = '$ '+total;
             productos.forEach((item)=> {
                 if(item.id == codigo){
@@ -577,6 +660,9 @@
             });
             formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
             formData.append('productos', JSON.stringify(productos));
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("myDiv").style.display = "block";
+            window.scroll(0,0);
             $.ajax({
                 type: 'POST',
                 url: '{{route('mfacturas.store')}}',
@@ -584,6 +670,8 @@
                 contentType: false,
                 processData: false,
             }).done(function (msg) {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("myDiv").style.display = "none";
                 if (msg.status  ==  'ok') {
                     notify('Atención', 'La factura fue almacenada con exito.!', 'success');
                     setTimeout(() => {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clientes;
-use App\MFacturas;
+use App\MFactura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -122,8 +122,8 @@ class ClientesController extends Controller
     public function destroy($id)
     {
         $cliente = Clientes::findOrFail($id);
-        $exist = MFacturas::where('cliente_id',$cliente->id)->first();
-        if(!exist){
+        $exist = MFactura::where('cliente_id',$cliente->id)->first();
+        if(!$exist){
             $result = $cliente->delete();
 
             if($result){
