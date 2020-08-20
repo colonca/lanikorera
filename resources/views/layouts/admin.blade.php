@@ -194,6 +194,15 @@
                                     class="material-icons">import_contacts</i><span>Ventas</span></a></li>
                     @endif
                 @endif
+                @if(session()->exists('MOD_REPORTES'))
+                    @if($location=='reportes')
+                        <li class="active"><a href="{{route('admin.reportes')}}"><i
+                                    class="material-icons">stacked_line_chart</i><span>Reportes</span></a></li>
+                    @else
+                        <li><a href="{{route('admin.reportes')}}"><i
+                                    class="material-icons">stacked_line_chart</i><span>Reportes</span></a></li>
+                    @endif
+                @endif
                 @if(session()->exists('MOD_CONFIGURACION'))
                     @if($location=='configuracion')
                         <li class="active"><a href="{{route('admin.configuracion')}}"><i

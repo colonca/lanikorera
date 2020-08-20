@@ -16,4 +16,7 @@ class ProductoEmbalaje extends Model
     public function embalaje(){
         return $this->belongsTo(Embalaje::class,'embalaje_id','id');
     }
+    public function  descuentos(){
+        return $this->hasMany(Descuento::class,'producto_embalaje_id');
+    }
 }

@@ -3,8 +3,8 @@
     <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color:white" href="{{route('clientes.index')}}">Clientes</a></li>
-        <li class="active"><a style="color:white" href="">Creando nuevo descuento</a></li>
+        <li class="active"><a style="color:white" href="{{route('descuentos.index')}}">Descuentos</a></li>
+        <li class="active"><a style="color:white" href="">Creando nuevo Descuento</a></li>
     </ol>
 @endsection
 @section('style')
@@ -20,7 +20,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    DATOS DE VENTAS - CLIENTES EN EL SISTEMA. <small>Ingrese los datos y haga click en el boton Guardar.</small>
+                    DATOS DE VENTAS - DESCUENTOS EN EL SISTEMA. <small>Ingrese los datos y haga click en el boton Guardar.</small>
                 </h2>
             </div>
             <div class="body">
@@ -36,13 +36,13 @@
                                 <div class="col-md-6" style="margin-bottom: 0">
                                     <div class="form-group">
                                             <label for="">Fecha Inicio</label>
-                                            <input type="date" id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
+                                            <input type="date" id="datePicker" name="fecha_inicio" class="form-control" value="{{date('Y-m-d')}}" required="required">
                                     </div>
                                 </div>
                                 <div class="col-md-6" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Fecha Final</label>
-                                        <input type="date" id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
+                                        <input type="date" id="datePicker" name="fecha_fin" class="form-control" value="{{date('Y-m-d')}}"required="required">
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                         <div class="form-line">
                                             <label for="">Codigo de Barras</label>
                                             <input type="hidden" name="producto_embalaje_id" id="producto_embalaje">
-                                            <input type="text" class="form-control" id="cogigo" onkeypress="buscarProducto(event)" placeholder="scanee o ingrese el codigo del producto">
+                                            <input type="text" class="form-control" id="codigo" onkeypress="buscarProducto(event)" placeholder="scanee o ingrese el codigo del producto" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="">Cantidad Destinda</label>
-                                            <br/><input id="cantidad" type="number" class="form-control" placeholder="Cantidad de la promoción" name="cantidad_destinada"/>
+                                            <br/><input id="cantidad" type="number" class="form-control" placeholder="Cantidad de la promoción" name="cantidad_destinada" required="required"/>
                                         </div>
                                     </div>
                                 </div>
@@ -69,18 +69,17 @@
                                     <div class="form-group">
                                         <div class="form-line">
                                             <label for="">Precio</label>
-                                            <br/><input type="text" id="costo_promedio" class="form-control" min="1" placeholder="precio de la promoción" name="valor"/>
+                                            <br/><input type="text" id="costo_promedio" class="form-control" min="1" placeholder="precio de la promoción" name="valor" required="required"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        <div class="row" style="width: 90%; margin: 0 auto;">
-                            <div class="col-md-12" style="display: flex; justify-content: flex-end;">
-                                <a href="{{route('admin.compras')}}" class="btn btn-danger" style="margin-right: 5px;">Cancelar</a>
-                                <button class="btn btn-success" type="submit">Guardar</button>
+                            <div class="form-group">
+                                <br/><br/><a href="{{route('descuentos.index')}}" class="btn bg-red waves-effect">Cancelar</a>
+                                <button class="btn bg-indigo waves-effect" type="reset">Limpiar Formulario</button>
+                                <button class="btn bg-green waves-effect" type="submit">Guardar</button>
                             </div>
-                        </div>
                         </form>
                     </div>
                 </div>
@@ -94,13 +93,13 @@
         function buscarProducto(event){
             if(event.keyCode == 13){
                 event.preventDefault();
-                const  codigo = $('#cogigo').val();
+                const  codigo = $('#codigo').val();
                 $.ajax({
                     type: 'GET',
                     url: '{{url('almacen/producto/search')}}/'+codigo,
                 }).done(function (msg) {
                     if(msg.status == 'ok'){
-                        $('#producto_embalaje').val(msg.producto.id);
+                        $('#producto_embalaje').val(msg.producto.unicode);
                         document.getElementById('costo_promedio').value = msg.producto.costo_promedio;
                         $('#cantidad').focus();
                     }else{

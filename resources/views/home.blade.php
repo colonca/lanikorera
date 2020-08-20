@@ -72,6 +72,19 @@
                     </div>
                 </div>
             @endif
+            @if(session()->exists('MOD_REPORTES'))
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box hover-zoom-effect hover-expand-effect" style="background-color: #38383A; color:white">
+                        <div class="icon">
+                            <a href="{{route('admin.configuracion')}}"><i class="material-icons">stacked_line_chart</i></a>
+                        </div>
+                        <div class="content">
+                            <div style="color:white" class="text">VISUALIZACIÓN DE</div>
+                            <div style="color:white" class="number">REPORTES</div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             @if(session()->exists('MOD_CONFIGURACION'))
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box hover-zoom-effect hover-expand-effect" style="background-color: #38383A; color:white">
@@ -85,7 +98,6 @@
                     </div>
                 </div>
             @endif
-
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <div class="info-box bg-red hover-zoom-effect hover-expand-effect">
                     <div class="icon">

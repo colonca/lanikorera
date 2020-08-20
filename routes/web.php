@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::get('compras', 'MenuController@compras')->name('admin.compras');
     Route::get('ventas', 'MenuController@ventas')->name('admin.ventas');
     Route::get('configuracion', 'MenuController@configuracion')->name('admin.configuracion');
+    Route::get('reportes', 'MenuController@reportes')->name('admin.reportes');
     //NOTIFICACIONES
     Route::resource('notificaciones', 'NotificacionController');
 });
@@ -104,4 +105,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () 
     Route::resource('series','SerieController');
     Route::get('series/{id}/delete', 'SerieController@destroy')->name('series.delete');
 });
-
+//GRUPO DE RUTAS PARA REPORTES
+    Route::group(['middleware' => 'auth', 'prefix' => 'reportes'], function () {
+        Route::get('stock', 'StockController@stock')->name('reporte.stock');
+});

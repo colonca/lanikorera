@@ -38,7 +38,40 @@ class DescuentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
+            'producto_embalaje_id' => 'required',
+            'cantidad_destinada' => 'required',
+            'valor' => 'required'
+        ]);
+
+        $descuento =  new Descuento();
+        $descuento->fecha_inicio= $request->fecha_inicio;
+        $descuento->fecha_fin = $request->fecha_fin;
+        $hoy= date('d-m-y');
+        if($request->fecha_inicio<$hoy||$request->fecha_fin<$hoy){
+            flash("El Descuento no puede aplicarse a una fecha en el pasado!")->error();
+            return  redirect()->back();
+        }
+        if($request->fecha_final<$request->fecha_inicio){
+            flash("Seleccione correctamente las fechas!")->error();
+            return  redirect()->back();
+        }
+
+        $descuento-> producto_embalaje_id= $request->producto_embalaje_id;
+        $descuento->cantidad_destinada = $request->cantidad_destinada;
+        $descuento->cantidad_vendida = 0;
+        $descuento->valor = $request->valor;
+        $result = $descuento->save();
+
+        if($result){
+            flash("El Descuento fue almacenado de forma exitosa!")->success();
+            return  redirect()->route('descuentos.index');
+        }else{
+            flash("El Descuento no fue almacenado de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**
@@ -58,9 +91,11 @@ class DescuentoController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Descuento $descuento)
+    public function edit($id)
     {
-        //
+        $descuento = Descuento::findOrFail($id);
+        $location = 'ventas';
+        return view('ventas.descuentos.edit',compact('descuento','location'));
     }
 
     /**
@@ -70,9 +105,31 @@ class DescuentoController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Descuento $descuento)
+    public function update(Request $request,$id)
     {
-        //
+        $descuento =  Descuento::findOrFail($id);
+        $descuento->fecha_inicio = $request->fecha_inicio;
+        $descuento->fecha_fin = $request->fecha_fin;
+        $hoy= date('d-m-y');
+        if($request->fecha_inicio<$hoy||$request->fecha_fin<$hoy){
+            flash("El Descuento no puede aplicarse a una fecha en el pasado!")->error();
+            return  redirect()->back();
+        }
+        if($request->fecha_final<$request->fecha_inicio){
+            flash("Seleccione correctamente las fechas!")->error();
+            return  redirect()->back();
+        }
+        $descuento->producto_embalaje_id = $request->producto_embalaje_id;
+        $descuento->cantidad_destinada= $request->cantidad_destinada;
+        $descuento->valor = $request->valor;
+        $result = $descuento->save();
+        if($result){
+            flash("El descuento fue actualizado de forma exitosa!")->success();
+            return  redirect()->route('descuentos.index');
+        }else{
+            flash("El descuento no fue actualizado de forma exitosa!")->error();
+            return  redirect()->back();
+        }
     }
 
     /**
@@ -81,8 +138,17 @@ class DescuentoController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Descuento $descuento)
+    public function destroy($id)
     {
-        //
+        $descuento = Descuento::findOrFail($id);
+        $result = $descuento->delete();
+
+        if($result){
+            flash("El Descuento fue eliminado Correctamente")->success();
+            return  redirect()->back();
+        }else{
+            flash("El Descuento no fue eliminado Correctamente")->error();
+            return  redirect()->back();
+        }
     }
 }
