@@ -72,7 +72,7 @@ class DeudaController extends Controller
     public function detalles($id){
         $factura = MFactura::findOrFail($id);
         $location = 'ventas';
-        return view('ventas.deudas.detalles',compact('location','ventas'));
+        return view('ventas.deudas.detalles',compact('location','factura'));
     }
 
     /**
