@@ -72,7 +72,7 @@ class DeudaController extends Controller
     public function detalles($id){
         $factura = MFactura::findOrFail($id);
         $location = 'ventas';
-        return view('ventas.deudas.detalles',compact('location','ventas'));
+        return view('ventas.deudas.detalles',compact('location','factura'));
     }
 
     /**
@@ -84,7 +84,17 @@ class DeudaController extends Controller
     public function edit($id)
     {
         $location = 'ventas';
-        return view('ventas.deudas.abonar',compact('location'));
+        $facturas = DB::table('m_facturas')
+            ->join('clientes','m_facturas.cliente_id','=','clientes.id')
+            ->select('m_facturas.serie','m_facturas.n_venta','clientes.nombres','clientes.apellidos','m_facturas.total')
+            ->where('m_facturas.id',$id)->get();
+        $abonos = DB::table('deudas')
+            ->select('deudas.abono','deudas.created_at')
+            ->where([
+                ['deudas.abono','>','0'],
+                ['deudas.factura_id',$id]
+            ])->get();
+        return view('ventas.deudas.abonar',compact('location','facturas','abonos'));
     }
 
     /**

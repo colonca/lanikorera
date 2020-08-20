@@ -17,7 +17,7 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
+                        <table class="table table-bordered">
                             <thead class="bg-info" >
                             <th>Codigo</th>
                             <th>Producto</th>
@@ -48,9 +48,7 @@
                                     <td>$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
                                 </tr>
                             @endforeach
-                            </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
