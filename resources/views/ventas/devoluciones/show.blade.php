@@ -28,28 +28,6 @@
                         @endcomponent
                     </div>
                     <div class="row clearfix">
-                        <form class="form-horizontal" style="width: 90%; margin: 0 auto;" method="GET" action="{{route('devoluciones.create')}}">
-                            @csrf
-                            <div class="col-md-12">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" name="serie"  class="form-control" placeholder="Escriba el numero de serie de la factura"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" name="n_venta"  class="form-control" placeholder="Escriba el numero de venta de la factura"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button type="submit" class="btn waves-effect btn-block" style="background-color: #38383A; color:white;">CONSULTAR USUARIO</button>
-                                </div>
-                            </div>
-                        </form>
                         @if(isset($factura))
                             <div class="row" style="width: 90%; margin: 0 auto;">
                                 <div class="col-md-6" style="margin-bottom: 0">
@@ -105,55 +83,46 @@
                                         <th>Total</th>
                                         </thead>
                                         <tbody id="productos">
-                                           <?php $total = 0?>
-                                            @foreach($factura->dfactura as $detalle)
-                                                <tr>
-                                                    <td>{{$detalle->producto_embalaje->codigo_de_barras}}</td>
-                                                    <td>{{$detalle->producto_embalaje->producto->nombre.'X'.$detalle->producto_embalaje->producto->presentacion}}</td>
-                                                    <td>{{$detalle->producto_embalaje->embalaje->descripcion}}</td>
-                                                    <td>{{$detalle->cantidad}}</td>
-                                                    <td>$ {{$detalle->precio}}</td>
-                                                    <td>$ {{$detalle->cantidad*$detalle->precio}}</td>
-                                                </tr>
-                                            @endforeach
-                                            @foreach($factura->adicionales as $adicional)
-                                                <tr>
-                                                    <td>{{$adicional->id}}</td>
-                                                    <td>{{$adicional->nombre}}</td>
-                                                    <td>{{$adicional->cantidad}}</td>
-                                                    <td>UNIDAD</td>
-                                                    <td>$ {{$adicional->precio_venta}}</td>
-                                                    <td>$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
-                                                </tr>
-                                            @endforeach
-                                           @if($factura->medio_pago == 'datafono')
-                                               <tr>
-                                                   <td colspan="5" style="text-align: right;">IMPUESTO:</td>
-                                                   <td>{{$factura->total*0.05}} </td>
-                                               </tr>
-                                               <tr>
-                                                   <td colspan="5" style="text-align: right;">TOTAL:</td>
-                                                   <td>{{$factura->total*1.05}} </td>
-                                               </tr>
-                                           @else
-                                               <tr>
-                                                   <td colspan="5" style="text-align: right;">TOTAL:</td>
-                                                   <td>{{$factura->total}} </td>
-                                               </tr>
-                                           @endif
+                                        <?php $total = 0?>
+                                        @foreach($factura->dfactura as $detalle)
+                                            <tr>
+                                                <td>{{$detalle->producto_embalaje->codigo_de_barras}}</td>
+                                                <td>{{$detalle->producto_embalaje->producto->nombre.'X'.$detalle->producto_embalaje->producto->presentacion}}</td>
+                                                <td>{{$detalle->producto_embalaje->embalaje->descripcion}}</td>
+                                                <td>{{$detalle->cantidad}}</td>
+                                                <td>$ {{$detalle->precio}}</td>
+                                                <td>$ {{$detalle->cantidad*$detalle->precio}}</td>
+                                            </tr>
+                                        @endforeach
+                                        @foreach($factura->adicionales as $adicional)
+                                            <tr>
+                                                <td>{{$adicional->id}}</td>
+                                                <td>{{$adicional->nombre}}</td>
+                                                <td>{{$adicional->cantidad}}</td>
+                                                <td>UNIDAD</td>
+                                                <td>$ {{$adicional->precio_venta}}</td>
+                                                <td>$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
+                                            </tr>
+                                        @endforeach
+                                        @if($factura->medio_pago == 'datafono')
+                                            <tr>
+                                                <td colspan="5" style="text-align: right;">IMPUESTO:</td>
+                                                <td>{{$factura->total*0.05}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align: right;">TOTAL:</td>
+                                                <td>{{$factura->total*1.05}} </td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td colspan="5" style="text-align: right;">TOTAL:</td>
+                                                <td>{{$factura->total}} </td>
+                                            </tr>
+                                        @endif
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <form class="form-horizontal" style="width: 90%; margin: 0 auto;" method="POST" action="{{route('devoluciones.store')}}">
-                                @csrf
-                                <input type="hidden" name="factura_id" value="{{$factura->id}}">
-                                <div class="row" style="width: 90%; margin: 0 auto;">
-                                    <div class="col-md-12" style="display: flex; justify-content: flex-end;">
-                                        <button type="submit" class="btn btn-success">Realizar Devolución ?</button>
-                                    </div>
-                                </div>
-                            </form>
                         @endif
                     </div>
                 </div>
