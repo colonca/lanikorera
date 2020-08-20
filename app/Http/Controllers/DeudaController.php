@@ -69,15 +69,22 @@ class DeudaController extends Controller
         return view('ventas.deudas.edit')->with('facturas',$factura)->with('location','ventas');
     }
 
+    public function detalles($id){
+        $factura = MFactura::findOrFail($id);
+        $location = 'ventas';
+        return view('ventas.deudas.detalles',compact('location','ventas'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function edit(Deuda $deuda)
+    public function edit($id)
     {
-        //
+        $location = 'ventas';
+        return view('ventas.deudas.abonar',compact('location'));
     }
 
     /**

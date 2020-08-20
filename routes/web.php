@@ -97,6 +97,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::resource('descuentos','DescuentoController');
     Route::get('descuentos/{id}/delete', 'DescuentoController@destroy')->name('descuentos.delete');
     Route::resource('devoluciones','MDevolucionController');
+    Route::get('deuda/detalles/{id}','DeudaController@detalles')->name('deuda.detalles');
 });
 //GRUPO DE RUTAS PARA CONFIGURACION
 Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {

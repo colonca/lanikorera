@@ -40,15 +40,15 @@
                                     <td>{{$factura->resta}}</td>
                                     <td style="text-align: center;">
 
-                                        <a href="{{ route('deuda.edit',$factura->id)}}"
+                                        <a href="{{ route('deuda.detalles',$factura->id)}}"
 
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Mostrar detalles"><i
                                                 class="material-icons">mode_edit</i></a>
 
-                                        <a href="{{ route('clientes.delete',$factura->id)}}"
+                                        <a href="{{ route('deuda.edit',$factura->id)}}"
                                            class="btn bg-red waves-effect btn-xs" data-toggle="tooltip"
-                                           data-placement="top" title="Eliminar Cliente"><i
+                                           data-placement="top" title="Abonar"><i
                                                 class="material-icons">delete</i></a>
                                     </td>
                                 </tr>
