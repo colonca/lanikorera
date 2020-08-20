@@ -1,9 +1,11 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb" style="margin-bottom: 30px;ackground-color: #38383A">
+    <ol class="breadcrumb " style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color:white" href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color: white"href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color: white" >Facturas en Deuda</a></li>
+        <li class="active"><a style="color:white" >Detalles</a></li>
     </ol>
 @endsection
 @section('content')
@@ -12,7 +14,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DEUDAS- LISTADO DE PRODUCTOS DE LA TIENDA.
+                        DETALLE DE LA FACTURA.
                     </h2>
                 </div>
                 <div class="body">

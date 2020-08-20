@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb " style="margin-bottom: 30px;ackground-color: #38383A">
+    <ol class="breadcrumb " style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color: white" href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color: white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color: white" href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color: white"href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color: white">Facturas en Deuda</a></li>
     </ol>
 @endsection
 @section('content')
@@ -12,7 +13,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DEUDAS- LISTADO DE DEUDAS POR CLIENTES.
+                        DATOS DE VENTAS - DEUDAS - LISTADO FACTURAS ADEUDADAS POR EL CLIENTE. <small>Visualice los detalles de las facturas adeudadas por el cliente y Realice abonos</small>
                     </h2>
                 </div>
                 <div class="body">
@@ -42,14 +43,14 @@
 
                                         <a href="{{ route('deuda.detalles',$factura->id)}}"
 
-                                           class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
-                                           data-placement="top" title="Mostrar detalles"><i
-                                                class="material-icons">mode_edit</i></a>
+                                           class="btn bg-green waves-effect btn-xs" data-toggle="tooltip"
+                                           data-placement="top" title="Ver detalles"><i
+                                                class="material-icons">remove_red_eye</i></a>
 
                                         <a href="{{ route('deuda.edit',$factura->id)}}"
-                                           class="btn bg-red waves-effect btn-xs" data-toggle="tooltip"
+                                           class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Abonar"><i
-                                                class="material-icons">delete</i></a>
+                                                class="material-icons">mode_edit</i></a>
                                     </td>
                                 </tr>
                             @endforeach

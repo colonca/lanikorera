@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DEUDAS- LISTADO DE DEUDAS.
+                        DATOS DE VENTAS - DEUDAS - LISTADO DE DEUDAS POR CLIENTE. <small>Haga click en el boton verde para ver las facturas que adeuda el cliente</small>
                     </h2>
                 </div>
                 <div class="body">
@@ -42,9 +42,9 @@
 
                                         <a href="{{ route('deuda.show',$cliente->id)}}"
 
-                                           class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
-                                           data-placement="top" title="Editar abono"><i
-                                                class="material-icons">mode_edit</i></a>
+                                           class="btn bg-green waves-effect btn-xs" data-toggle="tooltip"
+                                           data-placement="top" title="Ver Facturas"><i
+                                                class="material-icons">remove_red_eye</i></a>
                                     </td>
                                 </tr>
                             @endforeach
