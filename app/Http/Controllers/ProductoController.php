@@ -306,7 +306,7 @@ class ProductoController extends Controller
 
               $producto->existencia_embalaje = intval($existencia / $producto->unidades);
               $producto->existencia =  $existencia;
-              $producto->costo_promedio = number_format(Kardex::costo_promedio($producto->producto)*$producto->unidades,2);
+              $producto->costo_promedio = Kardex::costo_promedio($producto->producto)*$producto->unidades;
           }
 
 

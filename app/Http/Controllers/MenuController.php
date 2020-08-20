@@ -33,4 +33,8 @@ class MenuController extends Controller
     {
         return view('menu.configuracion')->with('location', 'configuracion');
     }
+    public function reportes()
+    {
+        return view('menu.reportes')->with('location', 'reportes');
+    }
 }

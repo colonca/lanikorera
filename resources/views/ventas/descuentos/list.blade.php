@@ -3,7 +3,7 @@
 <ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
     <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
     <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-    <li class="active"><a style="color:white" href="{{route('clientes.index')}}">Clientes</a></li>
+    <li class="active"><a style="color:white" href="{{route('descuentos.index')}}">Descuentos</a></li>
 </ol>
 @endsection
 @section('content')
@@ -12,7 +12,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    DATOS DE VENTAS - CLIENTES EN EL SISTEMA.<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
+                    DATOS DE VENTAS - DESCUENTOS EN EL SISTEMA.<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
@@ -53,11 +53,11 @@
                                 <td style="text-align: center;">
                                     <a href="{{ route('descuentos.edit',$descuento->id)}}"
                                        class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
-                                       data-placement="top" title="Editar Cliente"><i
+                                       data-placement="top" title="Editar Descuento"><i
                                             class="material-icons">mode_edit</i></a>
                                     <a href="{{ route('descuentos.delete',$descuento->id)}}"
                                        class="btn bg-red waves-effect btn-xs" data-toggle="tooltip"
-                                       data-placement="top" title="Eliminar Cliente"><i
+                                       data-placement="top" title="Eliminar Descuento"><i
                                             class="material-icons">delete</i></a>
                                 </td>
                             </tr>
