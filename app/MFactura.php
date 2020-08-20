@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class MFactura extends Model
 {
     protected $table = 'm_facturas';
-    protected  $fillable = ['id', 'created_at', 'updated_at', 'serie', 'n_venta', 'fecha', 'modalidad_pago', 'medio_pago', 'total', 'cliente_id'];
+    protected  $fillable = ['id', 'created_at', 'updated_at', 'serie', 'n_venta', 'fecha', 'modalidad_pago', 'medio_pago', 'total', 'estado','tipo','cliente_id'];
 
     public function cliente(){
         return $this->belongsTo(Clientes::class,'cliente_id');
@@ -21,5 +21,23 @@ class MFactura extends Model
     public function adicionales(){
         return $this->hasMany(Adicional::class,'factura_id','id');
     }
+
+    public function deudas(){
+        return $this->hasMany(Deuda::class,'factura_id','id');
+    }
+
+
+    public function scopeSerie($query, $serie){
+         if($serie)
+              $query->where('serie',$serie);
+    }
+
+    public function scopeNumeroVenta($query, $numero){
+        if($numero)
+            $query->where('n_venta',$numero);
+    }
+
+
+
 
 }
