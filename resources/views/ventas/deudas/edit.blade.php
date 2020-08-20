@@ -4,7 +4,6 @@
         <li><a href="{{route('inicio')}}">Inicio</a></li>
         <li><a href="{{route('admin.ventas')}}">Ventas</a></li>
         <li class="active"><a href="{{route('deuda.index')}}">Deudas</a></li>
-        <li class="active"><a href="{{route('deuda.edit')}}">Deudas por cliente</a></li>
     </ol>
 @endsection
 @section('content')
@@ -25,32 +24,32 @@
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
                                 <th>Total</th>
-                                <th>abonos</th>
+                                <th>Abonos</th>
                                 <th>Restante</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($clientes as $cliente)
+                            @foreach($facturas as $factura)
                                 <tr>
-                                    <td>{{$cliente->nombres}}
-                                    <td>{{$cliente->apellidos}}
-                                    <td>{{$cliente->total}}
-                                    <td>{{$cliente->abonos}}
-                                    <td>{{$cliente->estado}}</td>
+                                    <td>{{$factura->serie.'-'.$factura->n_venta}}</td>
+                                    <td>{{$factura->nombres}}</td>
+                                    <td>{{$factura->apellidos}}</td>
+                                    <td>{{$factura->total}}</td>
+                                    <td>{{$factura->abonos}}</td>
+                                    <td>{{$factura->resta}}</td>
                                     <td style="text-align: center;">
 
-                                        <a href="{{ route('deuda.edit',$cliente->id)}}"
+                                        <a href="{{ route('deuda.edit',$factura->id)}}"
 
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Mostrar detalles"><i
                                                 class="material-icons">mode_edit</i></a>
 
-                                        <a href="{{ route('deuda.edit',$cliente->id)}}"
-
-                                           class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
-                                           data-placement="top" title="Editar abono"><i
-                                                class="material-icons">mode_edit</i></a>
+                                        <a href="{{ route('clientes.delete',$factura->id)}}"
+                                           class="btn bg-red waves-effect btn-xs" data-toggle="tooltip"
+                                           data-placement="top" title="Eliminar Cliente"><i
+                                                class="material-icons">delete</i></a>
                                     </td>
                                 </tr>
                             @endforeach

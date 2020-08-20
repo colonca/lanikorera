@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DEUDAS- LISTADO DE DEUDAS POR CLIENTES.
+                        DEUDAS- LISTADO DE DEUDAS.
                     </h2>
                 </div>
                 <div class="body">
@@ -40,7 +40,7 @@
                                     <td>{{$cliente->resta}}</td>
                                     <td style="text-align: center;">
 
-                                        <a href="{{ route('deuda.edit',$cliente->nombres)}}"
+                                        <a href="{{ route('deuda.show',$cliente->id)}}"
 
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Editar abono"><i
