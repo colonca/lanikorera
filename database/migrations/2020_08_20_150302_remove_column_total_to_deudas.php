@@ -14,7 +14,7 @@ class RemoveColumnTotalToDeudas extends Migration
     public function up()
     {
         Schema::table('deudas', function (Blueprint $table) {
-            $table->removeColumn('total');
+            $table->dropColumn('total');
         });
     }
 

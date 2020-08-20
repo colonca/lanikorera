@@ -25,7 +25,8 @@ class MFacturaController extends Controller
      */
     public function index()
     {
-        //
+
+
     }
 
     /**
@@ -133,7 +134,6 @@ class MFacturaController extends Controller
                 if($request->modalidad_pago == 'credito'){
                     $factura->estado = 'EN DEUDA';
                     $deuda = new Deuda();
-                    $deuda->total = $total;
                     $deuda->factura_id =  $factura->id;
                     $deuda->abono = 0;
                     $deuda->save();

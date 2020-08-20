@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Clientes;
 use App\DFactura;
 use App\Kardex;
+use App\Mail\Factura;
 use App\MDevolucion;
 use App\MFactura;
 use App\ProductoEmbalaje;
@@ -17,20 +19,13 @@ class MDevolucionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        $factura = null;
-
-        if(isset($request->serie) && $request->n_venta){
-            $factura = MFactura::serie($request->serie)
-                ->numeroVenta($request->n_venta)
-                ->where('estado','<>','DEVUELTA')
-                ->first();
-        }
-
-        $location = 'ventas';
-        return view('ventas.devoluciones.devolucion',compact('location','factura'));
+          $facturas = MFactura::where([
+              ['tipo','DEVOLUCION']
+          ])->get();
+          $location = 'ventas';
+          return view('ventas.devoluciones.list',compact('location','facturas'));
     }
 
     /**
@@ -38,9 +33,27 @@ class MDevolucionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $factura = null;
+
+        if(isset($request->serie) && $request->n_venta){
+            $exist =  MFactura::serie($request->serie)
+                ->numeroVenta($request->n_venta)
+                ->where('estado','=','DEVUELTA')
+                ->first();
+            if(!$exist){
+                $factura = MFactura::serie($request->serie)
+                    ->numeroVenta($request->n_venta)
+                    ->where('estado','!=','DEVUELTA')
+                    ->first();
+            }else{
+                flash('<strong>Error: </strong> la factura que intenta buscar ya ha sido devuelta')->warning();
+            }
+        }
+
+        $location = 'ventas';
+        return view('ventas.devoluciones.devolucion',compact('location','factura'));
     }
 
     /**
@@ -100,9 +113,9 @@ class MDevolucionController extends Controller
 
             }
 
+            $factura->fecha = date('d-m-y');
             $factura->estado = 'DEVUELTA';
             $factura->save();
-
 
             DB::commit();
 
@@ -125,9 +138,11 @@ class MDevolucionController extends Controller
      * @param  \App\MDevolucion  $mDevolucion
      * @return \Illuminate\Http\Response
      */
-    public function show(MDevolucion $mDevolucion)
+    public function show($id)
     {
-        //
+        $factura = MFactura::findOrFail($id);
+        $location = 'ventas';
+        return view('ventas.devoluciones.show',compact('location','factura'));
     }
 
     /**
