@@ -20,26 +20,28 @@
                         <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>factura</th>
+                                <th>Identificacion</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
                                 <th>Total</th>
                                 <th>abonos</th>
-                                <th>estado</th>
+                                <th>Restante</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($clientes as $clientes)
+                            @foreach($clientes as $cliente)
                                 <tr>
-                                    <td>{{$clientes->n_venta}}
-                                    <td>{{$clientes->nombres}}
-                                    <td>{{$clientes->apellidos}}
-                                    <td>{{$clientes->total}}
-                                    <td>{{$clientes->abonos}}
-                                    <td>{{$clientes->estado}}</td>
+                                    <td>{{$cliente->identificacion}}</td>
+                                    <td>{{$cliente->nombres}}</td>
+                                    <td>{{$cliente->apellidos}}</td>
+                                    <td>{{$cliente->total}}</td>
+                                    <td>{{$cliente->abonos}}</td>
+                                    <td>{{$cliente->resta}}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{ route('deuda.edit',$clientes->id)}}"
+
+                                        <a href="{{ route('deuda.edit',$cliente->nombres)}}"
+
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Editar abono"><i
                                                 class="material-icons">mode_edit</i></a>

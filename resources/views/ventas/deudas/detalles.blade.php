@@ -5,6 +5,7 @@
         <li><a href="{{route('admin.ventas')}}">Ventas</a></li>
         <li class="active"><a href="{{route('deuda.index')}}">Deudas</a></li>
         <li class="active"><a href="{{route('deuda.edit')}}">Deudas por cliente</a></li>
+        <li class="active"><a href="{{route('deuda.edit')}}">Detalle factura</a></li>
     </ol>
 @endsection
 @section('content')
@@ -13,7 +14,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DEUDAS- LISTADO DE DEUDAS POR CLIENTES.
+                        DEUDAS- LISTADO DE PRODUCTOS.
                     </h2>
                 </div>
                 <div class="body">

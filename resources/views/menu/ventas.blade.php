@@ -36,6 +36,14 @@
                             <span class="ink animate"></span></div>
                     </a>
                     @endif
+                    @if(session()->exists('PAG_DESCUENTOS'))
+                        <a href="{{route('descuentos.index')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
+                            <div>
+                                <span><i class="fas fa-bomb"></i></span>
+                                <span>DESCUENTOS</span>
+                                <span class="ink animate"></span></div>
+                        </a>
+                    @endif
                     @if(session()->exists('PAG_DEUDAS'))
 
                         <a href="{{route('deuda.index')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
