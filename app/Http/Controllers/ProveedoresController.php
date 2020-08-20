@@ -158,9 +158,9 @@ class ProveedoresController extends Controller
                 flash("El Proveedor no fue eliminado Correctamente")->error();
                 return  redirect()->back();
             }
-        }else{
-            flash("No se puede eliminar el Proveedor ya que tiene compras asociadas")->error();
-            return  redirect()->back();
-        }
+    }else{
+        flash("No se puede eliminar el Proveedor ya que tiene compras asociadas")->error();
+        return  redirect()->back();
+    }
     }
 }

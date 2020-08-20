@@ -79,13 +79,15 @@ class MFacturaController extends Controller
 
             DB::beginTransaction();
             $factura = new MFactura($request->all());
+            $serie->actual = ++$serie->actual;
+            $serie->save();
             $factura->serie = $serie->prefijo;
             $factura->n_venta = $serie->actual;
+            $factura->bodega_id = $request->bodega_id;
             $factura->total = 0;
             $result = $factura->save();
             if($result){
-                $serie->actual = ++$serie->actual;
-                $serie->save();
+
                 $productos = json_decode($request->productos);
                 $total = 0;
                 foreach ($productos as $producto){

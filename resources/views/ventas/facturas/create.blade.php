@@ -15,8 +15,6 @@
             left: 50%;
             top: 50%;
             z-index: 100000;
-            width: 150px;
-            height: 150px;
             margin: -75px 0 0 -75px;
             border: 16px solid #f3f3f3;
             border-radius: 50%;
@@ -26,8 +24,6 @@
             -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
         }
-
-
 
         @-webkit-keyframes spin {
             0% { -webkit-transform: rotate(0deg); }
@@ -91,67 +87,67 @@
                     <div class="col-md-12" style="margin-bottom: 0;">
                         <form id="form" action="{{route('compras.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row" style="width: 90%; margin: 0 auto;">
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Fecha</label>
-                                        <input type="date" id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
+                                <div class="row" style="width: 90%; margin: 0 auto;">
+                                    <div class="col-md-3" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Fecha</label>
+                                            <input type="date" id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Cliente</label>
-                                        <div class="proveedor" style="display: flex; width: 100%">
-                                            <input type="hidden" name="cliente_id" id="cliente_id">
-                                            <input type="text" disabled class="form-control" id="c_identificacion" placeholder="ingrese la identificacion o nombre del cliente">
-                                            <button class="btn btn-success btn-circle" onclick="event.preventDefault()" data-toggle="modal" data-target="#Mcreate" style="margin-right: 5px;"><i class="fas fa-plus"></i></button>
-                                            <button class="btn btn-info btn-circle" onclick="clientes(event)"><i class="fas fa-search"></i></button>
+                                    <div class="col-md-6" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Cliente</label>
+                                            <div class="proveedor" style="display: flex; width: 100%">
+                                                <input type="hidden" name="cliente_id" id="cliente_id">
+                                                <input type="text" disabled class="form-control" id="c_identificacion" placeholder="ingrese la identificacion o nombre del cliente">
+                                                <button class="btn btn-success btn-circle" onclick="event.preventDefault()" data-toggle="modal" data-target="#Mcreate" style="margin-right: 5px;"><i class="fas fa-plus"></i></button>
+                                                <button class="btn btn-info btn-circle" onclick="clientes(event)"><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Nombre</label>
+                                            <input type="text"  disabled id="c_nombres" class="form-control" placeholder="JUANITO PROVEEDOR">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Nombre</label>
-                                        <input type="text"  disabled id="c_nombres" class="form-control" placeholder="JUANITO PROVEEDOR">
+                                <div class="row" style="width: 90%; margin: 0 auto;">
+                                    <div class="col-md-3" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Bodegas</label>
+                                            <select name="bodega_id" class="select2 form-control" name="bodega_id" id="">
+                                                 @foreach($bodegas as $bodega)
+                                                    <option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Modalidad de Pago</label>
+                                            <select name="modalidad_pago" class="select2 form-control" id="">
+                                                <option value="contado" selected>CONTADO</option>
+                                                <option value="credito">CREDITO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Medio de pago</label>
+                                            <select name="medio_pago" onchange="cambio(event)" class="select2 form-control" id="modalidad">
+                                                <option value="efectivo" selected>EFECTIVO</option>
+                                                <option value="datafono">DATAFONO</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="margin-bottom: 0">
+                                        <div class="form-group">
+                                            <label for="">Factura de Venta</label>
+                                            <input type="text" disabled class="form-control" value="{{$serie->prefijo.'-'.$serie->actual}}">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row" style="width: 90%; margin: 0 auto;">
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Bodegas</label>
-                                        <select name="bodega_id" class="select2 form-control" name="bodega_id" id="">
-                                             @foreach($bodegas as $bodega)
-                                                <option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Modalidad de Pago</label>
-                                        <select name="modalidad_pago" class="select2 form-control" id="">
-                                            <option value="contado" selected>CONTADO</option>
-                                            <option value="credito">CREDITO</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Medio de pago</label>
-                                        <select name="medio_pago" onchange="cambio(event)" class="select2 form-control" id="modalidad">
-                                            <option value="efectivo" selected>EFECTIVO</option>
-                                            <option value="datafono">DATAFONO</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">Factura de Venta</label>
-                                        <input type="text" disabled class="form-control" value="{{$serie->prefijo.'-'.$serie->actual}}">
-                                    </div>
-                                </div>
-                            </div>
                         </form>
                     </div>
                     <div class="col-md-12">
@@ -365,9 +361,6 @@
                             }
                         });
                         const existencia = producto.existencia_embalaje > 0;
-                        if(!existencia){
-                            notify('Atencion','no hay stock en inventario');
-                        }
 
                         let total = 0;
                         productos.forEach((item)=> {
@@ -376,8 +369,8 @@
                             }
                         });
                         total += producto.unidades*1;
-                        if(total > producto.existencia){
-                            notify('Atencion','No hay existencia en stock');
+                        if(total > producto.existencia || !existencia){
+                            notify('Atencion','no hay stock en inventario');
                             band = false;
                         }
 
@@ -412,6 +405,7 @@
                                 total += item.cantidad*item.precio_venta;
                             }
                         });
+
                         if($('#modalidad').val() == 'datafono'){
                             document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
                             document.getElementById('f_total').innerHTML = '$ '+total*1.05;
@@ -419,6 +413,7 @@
                             document.getElementById('f_total').innerHTML = '$ '+total;
                             document.getElementById('f_impuesto').innerHTML = '$ 0';
                         }
+
                         $('#cogigo').val('');
                     }else{
                         notify('Atención', 'El producto con el codigo ' + $('#cogigo').val() +' no ha sido registrado.!', 'warning');
@@ -436,10 +431,6 @@
                 }
             });
             total += unidades*aux;
-            if(total > existencia){
-                notify('Atencion','No hay existencia en stock');
-                return;
-            }
             cantidad = aux;
             event.target.value = cantidad;
             if(cantidad > existencia_embalaje) {
