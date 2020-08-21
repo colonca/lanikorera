@@ -107,24 +107,32 @@ class DeudaController extends Controller
     public function update(Request $request, $id_factura)
     {
         if($request->valor<0){
-
+            flash('La Cantidad ingresada no puede ser negativa')->warning();
+           return redirect()->back();
         }else{
             $deudas = DB::table('deudas')
                 ->select('factura_id',DB::raw('sum(abono) as abonos'))
                 ->where('factura_id',$id_factura)
-                ->groupBy('factura_id');
-            $factura = MFactura::where('id',$id_factura);
+                ->groupBy('factura_id')
+                ->first();
+            $factura = MFactura::where('id',$id_factura)->first();
             $total = $deudas->abonos + $request->valor;
             if ($total>$factura->total){
-
+                flash('La Cantidad ingresada supera el valor de la deuda por favor verifique')->warning();
+                return redirect()->back();
             }else{
                 $abono = new Deuda();
                 $abono->abono = $request->valor;
-                $abono->abono = $id_factura;
+                $abono->factura_id = $id_factura;
                 $abono->save();
                 if($total==$factura->total){
-                    $factura->estado = 'PAGADO';
+                    $factura->estado = 'PAGADA';
                     $factura->save();
+                    flash('La deuda fue cancelada totalmente')->success();
+                    return redirect()->back();
+                }else{
+                    flash('El Abono fue realizado correctamente')->success();
+                    return redirect()->back();
                 }
             }
         }

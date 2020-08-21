@@ -82,61 +82,69 @@ class CompraController extends Controller
             $total += $embalaje->cantidad * $embalaje->costo;
         }
 
-        $compra = new Compra($request->all());
-        $compra->total = $total;
-        $result = $compra->save();
+        $status = 'ok';
+        DB::beginTransaction();
 
-        if($result){
-            if($request->file('file') != null) {
-                $file = $request->file('file');
-                $extension = $file->getClientOriginalExtension();
-                if ($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg' || $extension == 'gif' || $extension == 'pdf') {
-                    $path = $file->store('compras');
-                    $compra->foto = $path;
-                    $compra->save();
-                } else {
-                    return response()->json([
-                        'status' => 'formato',
-                    ]);
+        try {
+
+            $compra = new Compra($request->all());
+            $compra->total = $total;
+            $result = $compra->save();
+
+            if($result){
+                if($request->file('file') != null) {
+                    $file = $request->file('file');
+                    $extension = $file->getClientOriginalExtension();
+                    if ($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg' || $extension == 'gif' || $extension == 'pdf') {
+                        $path = $file->store('compras');
+                        $compra->foto = $path;
+                        $compra->save();
+                    } else {
+                       $status = 'error';
+                    }
                 }
+
+                foreach ($embalajes as $embalaje){
+
+                    $Dcompra = new DCompra();
+                    $Dcompra->producto_embalaje_id = $embalaje->id;
+                    $Dcompra->cantidad = $embalaje->cantidad;
+                    $Dcompra->costo = $embalaje->costo;
+                    $Dcompra->compra_id = $compra->id;
+                    $Dcompra->save();
+
+                    $producto = Producto::find($embalaje->producto);
+                    $kardex = new Kardex();
+                    $kardex->producto_id = $producto->id;
+                    $kardex->bodega_id = $request->bodega_id;
+                    $kardex->tipo_movimiento = 'ENTRADA';
+
+                    $producto_embalaje = DB::table('producto_embalaje')
+                        ->where('producto_embalaje.id','=',$embalaje->id)
+                        ->get();
+
+                    $cantidad = $producto_embalaje[0]->unidades *  $embalaje->cantidad;
+                    $kardex->cantidad = $cantidad;
+                    $kardex->costo = $embalaje->costo / $producto_embalaje[0]->unidades;
+                    $kardex->detalle = 'Compra F/'.$request->serie.'-'.$request->numero_venta;
+                    $kardex->save();
+
+                }
+                $status = 'ok';
+                DB::commit();
+            }else{
+               $status = 'error';
+               DB::rollBack();
             }
 
-            foreach ($embalajes as $embalaje){
-
-                $Dcompra = new DCompra();
-                $Dcompra->producto_embalaje_id = $embalaje->id;
-                $Dcompra->cantidad = $embalaje->cantidad;
-                $Dcompra->costo = $embalaje->costo;
-                $Dcompra->compra_id = $compra->id;
-                $Dcompra->save();
-
-                $producto = Producto::find($embalaje->producto);
-                $kardex = new Kardex();
-                $kardex->producto_id = $producto->id;
-                $kardex->bodega_id = $request->bodega_id;
-                $kardex->tipo_movimiento = 'ENTRADA';
-
-                $producto_embalaje = DB::table('producto_embalaje')
-                                     ->where('producto_embalaje.id','=',$embalaje->id)
-                                     ->get();
-
-                $cantidad = $producto_embalaje[0]->unidades *  $embalaje->cantidad;
-                $kardex->cantidad = $cantidad;
-                $kardex->costo = $embalaje->costo / $producto_embalaje[0]->unidades;
-                $kardex->detalle = 'Compra F/'.$request->serie.'-'.$request->numero_venta;
-                $kardex->save();
-
-            }
-
-            return response()->json([
-                'status' => 'ok',
-            ]);
-
-        }else{
-            return response()->json([
-                'status' => 'error',
-            ]);
+        }catch (\Exception $e){
+            $status = 'error';
+            DB::rollBack();
         }
+
+        return response()->json([
+            'status' => $status
+        ]);
 
     }
 

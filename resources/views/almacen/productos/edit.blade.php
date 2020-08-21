@@ -220,20 +220,21 @@
                         let table = document.getElementById('embalajes');
                         let tr = document.createElement('tr');
                         tr.setAttribute('id',item.embalaje_id);
-                        tr.innerHTML = `<td">${item.embalaje_id}</td>
-                                    <td>${item.codigo_de_barras}</td>
-                                    <td>${item.unidades}</td>
-                                    <td>${item.precio_venta}</td>
-                                    <td style="text-align: center;">
-                                        <a href=""
-                                           class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
-                                           data-placement="top" title="Eliminar"><i
-                                                class="material-icons" onclick="eliminar(event,${item.embalaje_id})">delete</i></a>
-                                     </td>
-                                   `;
+                        tr.innerHTML =  `<td>${item.descripcion}</td>
+                                        <td>${item.codigo_de_barras}</td>
+                                        <td>${item.unidades}</td>
+                                        <td>${item.precio_venta}</td>
+                                        <td style="text-align: center;">
+                                            <a href=""
+                                               class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
+                                               data-placement="top" title="Eliminar"><i
+                                                    class="material-icons" onclick="eliminar(event,${item.embalaje_id})">delete</i></a>
+                                         </td>
+                                         `;
                         table.appendChild(tr);
                         embalajes.push({
                             'embalaje_id':item.embalaje_id,
+                            'embalaje' : item.descripcion,
                             'codigo_de_barras': item.codigo_de_barras,
                             'unidades': item.unidades,
                             'precio_venta' : item.precio_venta,
@@ -249,17 +250,20 @@
             unidades = $('#unidades').val();
             precio_venta = $('#precio_venta').val();
             embalaje_id = $('#embalaje_id').val();
+            let select = document.getElementById('embalaje_id');
+            let embalaje = select.options[select.selectedIndex].text;
             const validacion = validarDatos(codigo_de_barras,unidades,precio_venta,embalaje_id);
             if(validacion){
                 let exist =  false;
                 embalajes.forEach(value =>{
-                   if(value.embalaje_id == embalaje_id){
-                       value.embalaje_id = embalaje_id;
-                       value.codigo_de_barras = codigo_de_barras;
-                       value.unidades = unidades;
-                       value.precio_venta = precio_venta;
-                       exist = true;
-                       document.getElementById(`${embalaje_id}`).innerHTML = `<td>${embalaje_id}</td>
+                    if(value.embalaje_id == embalaje_id){
+                        value.embalaje_id = embalaje_id;
+                        value.embalaje = embalaje;
+                        value.codigo_de_barras = codigo_de_barras;
+                        value.unidades = unidades;
+                        value.precio_venta = precio_venta;
+                        exist = true;
+                        document.getElementById(`${embalaje_id}`).innerHTML = `<td>${embalaje}</td>
                                                                                 <td>${codigo_de_barras}</td>
                                                                                 <td>${unidades}</td>
                                                                                 <td>${precio_venta}</td>
@@ -270,13 +274,13 @@
                                                                                             class="material-icons" onclick="eliminar(event,${embalaje_id})">delete</i></a>
                                                                                  </td>
                                                                                  `;
-                   }
+                    }
                 });
                 if(!exist){
                     let table = document.getElementById('embalajes');
                     let tr = document.createElement('tr');
                     tr.setAttribute('id',embalaje_id);
-                    tr.innerHTML = `<td">${embalaje_id}</td>
+                    tr.innerHTML = `<td>${embalaje}</td>
                                     <td>${codigo_de_barras}</td>
                                     <td>${unidades}</td>
                                     <td>${precio_venta}</td>
@@ -286,10 +290,11 @@
                                            data-placement="top" title="Eliminar"><i
                                                 class="material-icons" onclick="eliminar(event,${embalaje_id})">delete</i></a>
                                      </td>
-                                   `;
+                                     `;
                     table.appendChild(tr);
                     embalajes.push({
                         embalaje_id,
+                        embalaje,
                         codigo_de_barras,
                         unidades,
                         precio_venta
