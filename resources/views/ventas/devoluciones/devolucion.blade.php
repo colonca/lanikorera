@@ -34,6 +34,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <div class="form-line">
+                                            <label for="exampleFormControlSelect1">Serie</label>
                                             <input type="text" name="serie"  class="form-control" placeholder="Escriba el numero de serie de la factura"/>
                                         </div>
                                     </div>
@@ -41,12 +42,13 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <div class="form-line">
+                                            <label for="exampleFormControlSelect1">Número de venta</label>
                                             <input type="text" name="n_venta"  class="form-control" placeholder="Escriba el numero de venta de la factura"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="submit" class="btn waves-effect btn-block" style="background-color: #38383A; color:white;">CONSULTAR USUARIO</button>
+                                    <button type="submit" class="btn waves-effect btn-block" style="background-color: #38383A; color:white;">CONSULTAR</button>
                                 </div>
                             </div>
                         </form>

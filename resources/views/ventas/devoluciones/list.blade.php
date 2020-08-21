@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb " style="margin-bottom: 30px;ackground-color: #38383A">
+    <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white"  href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color:white" href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color:white" href="{{route('devoluciones.index')}}">Devoluciones</a></li>
     </ol>
 @endsection
 @section('content')

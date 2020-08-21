@@ -1,8 +1,11 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb" style="margin-bottom: 30px;ackground-color: #38383A">
+    <ol class="breadcrumb " style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
+        <li class="active"><a style="color: white"href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color: white" >Facturas en Deuda</a></li>
+        <li class="active"><a style="color: white" >Abonar</a></li>
     </ol>
 @endsection
 @section('content')
@@ -16,11 +19,12 @@
                    </div>
                    <div class="body">
                        <div class="table-responsive">
-                           <form class="" method="POST" >
+                           @foreach($facturas as $factura)
+                           <form class="" method="POST" action="{{route('deuda.update', $factura->id)}}">
                                @csrf
                                <input name="_method" type="hidden" value="PUT" />
                                <div class="col-md-12">
-                                   @foreach($facturas as $factura)
+
                                        <div class="form-group">
                                            <div class="form-line" >
                                                <label for="exampleFormControlSelect1">Id factura</label>
@@ -43,12 +47,13 @@
                                                <br/><input type="number" class="form-control" placeholder="0.00"  name="valor" required="required" />
                                            </div>
                                        </div>
-                                   @endforeach
+
                                    <div class="form-group">
                                        <button class="btn bg-green waves-effect" type="submit">Actualizar</button>
                                    </div>
                                </div>
                            </form>
+                           @endforeach
                        </div>
                    </div>
                </div>
