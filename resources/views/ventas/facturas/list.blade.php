@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DATOS DE VENTAS - CLIENTES EN EL SISTEMA.<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
+                        DATOS DE VENTAS - FACTURAS EN EL SISTEMA.<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
