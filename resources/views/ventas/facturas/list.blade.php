@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <ol class="breadcrumb " style="margin-bottom: 30px;ackground-color: #38383A">
+    <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white"  href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
         <li class="active"><a style="color:white" href="{{route('deuda.index')}}">Deudas</a></li>
@@ -20,7 +20,7 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{{ route('devoluciones.create') }}">Devolver Factura</a></li>
+                                <li><a href="{{ route('mfacturas.create') }}">Crear nueva Factura</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -41,13 +41,13 @@
                             @foreach($facturas as $factura)
                                 <tr>
                                     <td>{{$factura->serie.'-'.$factura->n_venta}}</td>
-                                    <td>{{$factura->cliente->nombres.''.$factura->cliente->apellidos}}</td>
+                                    <td>{{$factura->nombres.''.$factura->apellidos}}</td>
                                     <td>{{$factura->fecha}}</td>
                                     <td>{{$factura->total}}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{route('devoluciones.show',$factura->id)}}"
+                                        <a href="{{route('devoluciones.create')."?serie=$factura->serie&n_venta=$factura->n_venta"}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
-                                           data-placement="top" title="Editar abono"><i class="fas fa-eye"></i></a>
+                                           data-placement="top" title="Ver Detalle"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

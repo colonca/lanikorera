@@ -25,15 +25,24 @@ class MFacturaController extends Controller
      */
     public function index()
     {
+        $series = DB::table('m_facturas')
+             ->select('serie','n_venta','total','cliente_id',DB::raw('count(*)'))
+            ->groupBy('serie','n_venta','total','cliente_id')
+            ->having(DB::raw('count(*)'),'=','1');
+
         $facturas = DB::table('m_facturas')
-             ->select('id','serie','n_venta','total','cliente_id',DB::raw('count(*)'))
-            ->groupBy('id','serie','n_venta','total','cliente_id')
-            ->having(DB::raw('count(*)'),'=','1')
+             ->joinSub($series,'seires',function($join){
+                 $join->on('m_facturas.serie','=','seires.serie')
+                      ->on('m_facturas.n_venta','=','seires.n_venta');
+             })
+            ->join('clientes','clientes.id','=','m_facturas.cliente_id')
+            ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta',
+                'm_facturas.fecha','m_facturas.modalidad_pago','m_facturas.medio_pago','m_facturas.total',
+                'clientes.nombres','clientes.apellidos')
             ->get();
 
-        dd($facturas);
         $location = 'ventas';
-        return view('ventas.devoluciones.list',compact('location','facturas'));
+        return view('ventas.facturas.list',compact('location','facturas'));
     }
 
     /**
