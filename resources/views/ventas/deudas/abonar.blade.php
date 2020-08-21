@@ -19,11 +19,12 @@
                    </div>
                    <div class="body">
                        <div class="table-responsive">
-                           <form class="" method="POST" >
+                           @foreach($facturas as $factura)
+                           <form class="" method="POST" action="{{route('deuda.update', $factura->id)}}">
                                @csrf
                                <input name="_method" type="hidden" value="PUT" />
                                <div class="col-md-12">
-                                   @foreach($facturas as $factura)
+
                                        <div class="form-group">
                                            <div class="form-line" >
                                                <label for="exampleFormControlSelect1">Id factura</label>
@@ -46,12 +47,13 @@
                                                <br/><input type="number" class="form-control" placeholder="0.00"  name="valor" required="required" />
                                            </div>
                                        </div>
-                                   @endforeach
+
                                    <div class="form-group">
                                        <button class="btn bg-green waves-effect" type="submit">Actualizar</button>
                                    </div>
                                </div>
                            </form>
+                           @endforeach
                        </div>
                    </div>
                </div>

@@ -86,7 +86,7 @@ class DeudaController extends Controller
         $location = 'ventas';
         $facturas = DB::table('m_facturas')
             ->join('clientes','m_facturas.cliente_id','=','clientes.id')
-            ->select('m_facturas.serie','m_facturas.n_venta','clientes.nombres','clientes.apellidos','m_facturas.total')
+            ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta','clientes.nombres','clientes.apellidos','m_facturas.total')
             ->where('m_facturas.id',$id)->get();
         $abonos = DB::table('deudas')
             ->select('deudas.abono','deudas.created_at')
@@ -104,9 +104,30 @@ class DeudaController extends Controller
      * @param  \App\Deuda  $deuda
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Deuda $deuda)
+    public function update(Request $request, $id_factura)
     {
-        //
+        if($request->valor<0){
+
+        }else{
+            $deudas = DB::table('deudas')
+                ->select('factura_id',DB::raw('sum(abono) as abonos'))
+                ->where('factura_id',$id_factura)
+                ->groupBy('factura_id');
+            $factura = MFactura::where('id',$id_factura);
+            $total = $deudas->abonos + $request->valor;
+            if ($total>$factura->total){
+
+            }else{
+                $abono = new Deuda();
+                $abono->abono = $request->valor;
+                $abono->abono = $id_factura;
+                $abono->save();
+                if($total==$factura->total){
+                    $factura->estado = 'PAGADO';
+                    $factura->save();
+                }
+            }
+        }
     }
 
     /**
