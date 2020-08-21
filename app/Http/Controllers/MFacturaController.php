@@ -25,8 +25,15 @@ class MFacturaController extends Controller
      */
     public function index()
     {
+        $facturas = DB::table('m_facturas')
+             ->select('id','serie','n_venta','total','cliente_id',DB::raw('count(*)'))
+            ->groupBy('id','serie','n_venta','total','cliente_id')
+            ->having(DB::raw('count(*)'),'=','1')
+            ->get();
 
-
+        dd($facturas);
+        $location = 'ventas';
+        return view('ventas.devoluciones.list',compact('location','facturas'));
     }
 
     /**

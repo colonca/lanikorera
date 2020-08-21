@@ -24,7 +24,7 @@ class StockController extends Controller
             if($stock->count() > 0){
                 $item = new \stdClass();
                 $item->producto = $stock[0]->nombre.'x'.$stock[0]->presentacion;
-                $item->stock = $stock[1]->cantidad ?? 0 -  $stock[0]->cantidad ?? 0;
+                $item->stock = ($stock[0]->cantidad??0) - ($stock[1]->cantidad ?? 0);
                 $item->stock_minimo = $stock[0]->stock_minimo;
                 $item->stock_maximo = $stock[0]->stock_maximo;
                 $item->costo_promedio = Kardex::costo_promedio($producto->id);

@@ -29,7 +29,7 @@
                     </a>
                     @endif
                     @if(session()->exists('PAG_FACTURAR'))
-                    <a href="{{route('mfacturas.create')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
+                    <a href="{{route('mfacturas.index')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
                         <div>
                             <span><i class="material-icons">fact_check</i></span>
                             <span>FACTURAR</span>
