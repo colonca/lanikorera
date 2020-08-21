@@ -124,11 +124,13 @@ class MDevolucionController extends Controller
             $result = false;
         }
 
-        if(!$result)
-             flash('Error','error');
-        else
-            flash('Devolución','success');
-        return redirect()->back();
+        if(!$result){
+            flash('Error, No pudo almacenarce la devolución correctamente.','error');
+            return redirect()->route('devoluciones.index');
+        }else{
+            flash('La Factura ha sido devuelta correctamente.','success');
+            return redirect()->route('devoluciones.index');
+        }
 
     }
 

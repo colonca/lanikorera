@@ -98,8 +98,8 @@
                                             <tr>
                                                 <td>{{$adicional->id}}</td>
                                                 <td>{{$adicional->nombre}}</td>
-                                                <td>{{$adicional->cantidad}}</td>
                                                 <td>UNIDAD</td>
+                                                <td>{{$adicional->cantidad}}</td>
                                                 <td>$ {{$adicional->precio_venta}}</td>
                                                 <td>$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
                                             </tr>

@@ -155,6 +155,7 @@ class ProductoController extends Controller
         $embalajes = [];
         foreach ($producto->embalajes as $embalaje){
             $embalajes[] =  [
+                 'descripcion' => $embalaje->descripcion,
                  'embalaje_id' => $embalaje->pivot->embalaje_id,
                  'codigo_de_barras' => $embalaje->pivot->codigo_de_barras,
                  'unidades' => $embalaje->pivot->unidades,
