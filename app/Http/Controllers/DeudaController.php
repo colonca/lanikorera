@@ -129,7 +129,7 @@ class DeudaController extends Controller
                     $factura->estado = 'PAGADA';
                     $factura->save();
                     flash('La deuda fue cancelada totalmente')->success();
-                    return redirect()->back();
+                    return redirect()->route('deuda.show', $id_factura);
                 }else{
                     flash('El Abono fue realizado correctamente')->success();
                     return redirect()->back();
