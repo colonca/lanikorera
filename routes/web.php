@@ -108,4 +108,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () 
 //GRUPO DE RUTAS PARA REPORTES
     Route::group(['middleware' => 'auth', 'prefix' => 'reportes'], function () {
         Route::get('stock', 'StockController@stock')->name('reporte.stock');
+        Route::get('ventas', 'ReporteController@index')->name('reporte.ventas');
 });

@@ -37,7 +37,7 @@ class MFacturaController extends Controller
              })
             ->join('clientes','clientes.id','=','m_facturas.cliente_id')
             ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta',
-                'm_facturas.fecha','m_facturas.modalidad_pago','m_facturas.medio_pago','m_facturas.total',
+                'm_facturas.fecha','m_facturas.estado','m_facturas.modalidad_pago','m_facturas.medio_pago','m_facturas.total',
                 'clientes.nombres','clientes.apellidos')
             ->get();
 
@@ -52,7 +52,6 @@ class MFacturaController extends Controller
      */
     public function create()
     {
-        date_default_timezone_set('America/Bogota');
         $location = 'ventas';
         $bodegas = Bodegas::all();
         $serie = Serie::where('estado','ACTIVO')->first();
@@ -77,7 +76,6 @@ class MFacturaController extends Controller
         $validate = Validator::make($request->all(),[
             'cliente_id' => 'required',
             'bodega_id' => 'required',
-            'fecha' => 'required|date',
             'modalidad_pago' => 'required',
             'medio_pago' => 'required'
         ]);
@@ -96,6 +94,7 @@ class MFacturaController extends Controller
 
             DB::beginTransaction();
             $factura = new MFactura($request->all());
+            $factura->fecha = date('y-m-d');
             $serie->actual = ++$serie->actual;
             $serie->save();
             $factura->serie = $serie->prefijo;
@@ -103,8 +102,8 @@ class MFacturaController extends Controller
             $factura->bodega_id = $request->bodega_id;
             $factura->total = 0;
             $result = $factura->save();
+            $adicionales = [];
             if($result){
-
                 $productos = json_decode($request->productos);
                 $total = 0;
                 foreach ($productos as $producto){
@@ -121,6 +120,7 @@ class MFacturaController extends Controller
                         $total += $producto->cantidad * $producto->precio;
                         $kardex = new Kardex();
                         $kardex->producto_id = $producto->producto;
+                        $kardex->fecha = date('y-m-d');
                         $kardex->bodega_id = $request->bodega_id;
                         $kardex->tipo_movimiento = 'SALIDA';
                         $cantidad = $producto_embalaje[0]->unidades *  $producto->cantidad;
@@ -129,23 +129,17 @@ class MFacturaController extends Controller
                         $kardex->detalle = 'Venta F/'.$serie->prefijo.'-'.$serie->actual;
                         $kardex->save();
                     }else{
-                        $adicional = new Adicional();
+                        $adicional = new \stdClass();
+                        $adicional->id = $producto->id;
                         $adicional->nombre =  $producto->nombre;
                         $adicional->precio_compra = $producto->precio_compra;
                         $adicional->precio_venta = $producto->precio_venta;
                         $adicional->descripcion = $producto->descripcion;
-                        $adicional->factura_id = $factura->id;
                         $adicional->cantidad = $producto->cantidad;
-                        $adicional->save();
+                        $adicionales[] = $adicional;
                         $total += $adicional->cantidad * $producto->precio_venta;
                     }
                 }
-
-                if($request->medio_pago == 'datafono'){
-                    $total = $total*1.05;
-                }
-
-                $factura->total = $total;
 
                 if($request->modalidad_pago == 'credito'){
                     $factura->estado = 'EN DEUDA';
@@ -155,15 +149,20 @@ class MFacturaController extends Controller
                     $deuda->save();
                 }
 
+                if($request->medio_pago == 'datafono'){
+                    $total = $total*1.05;
+                }
+                $factura->adicionales = json_encode($adicionales);
+                $factura->total = $total;
                 $factura->save();
 
                 $cliente =  Clientes::find($request->cliente_id);
 
-                $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
+                /*$pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
                     ->setPaper('a4', 'landscape')
                     ->output();
 
-                Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
+                Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));*/
 
                 $status = 'ok';
 
