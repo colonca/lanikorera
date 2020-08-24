@@ -84,17 +84,17 @@ class DeudaController extends Controller
     public function edit($id)
     {
         $location = 'ventas';
-        $facturas = DB::table('m_facturas')
+        $factura = DB::table('m_facturas')
             ->join('clientes','m_facturas.cliente_id','=','clientes.id')
             ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta','clientes.nombres','clientes.apellidos','m_facturas.total')
-            ->where('m_facturas.id',$id)->get();
+            ->where('m_facturas.id',$id)->first();
         $abonos = DB::table('deudas')
-            ->select('deudas.abono','deudas.created_at')
+            ->select('deudas.abono','deudas.medio_pago','deudas.created_at')
             ->where([
                 ['deudas.abono','>','0'],
                 ['deudas.factura_id',$id]
             ])->get();
-        return view('ventas.deudas.abonar',compact('location','facturas','abonos'));
+        return view('ventas.deudas.abonar',compact('location','factura','abonos'));
     }
 
     /**
@@ -122,8 +122,10 @@ class DeudaController extends Controller
                 return redirect()->back();
             }else{
                 $abono = new Deuda();
-                $abono->abono = $request->valor;
+                $abono->abono = $request->medio_pago == 'datafono'? $request->valor*0.95 : $request->valor;
                 $abono->factura_id = $id_factura;
+                $abono->medio_pago = $request->medio_pago;
+                $abono->fecha = date('y-m-d');
                 $abono->save();
                 if($total==$factura->total){
                     $factura->estado = 'PAGADA';

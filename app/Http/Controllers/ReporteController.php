@@ -17,12 +17,14 @@ class ReporteController extends Controller
         $reporte['ganancia'] = 0;
         $reporte['margen_ganancia'] = 0;
         $reporte['medios_pago'] = [];
+        $reporte['abonos'] = [];
         if(isset($request->fecha_inicial) and isset($request->fecha_final)){
             $reporte['total_vendido'] = $this->total_vendido($request->fecha_inicial,$request->fecha_final);
             $reporte['numero_ventas'] = $this->numero_ventas($request->fecha_inicial,$request->fecha_final);
             $reporte['ganancia'] = $this->ganancia($request->fecha_inicial,$request->fecha_final,$reporte['total_vendido']);
             $reporte['margen_ganancia'] = $this->margen_ganancia($reporte['total_vendido'],$reporte['ganancia']);
             $reporte['medios_pago'] = $this->medios_pago($request->fecha_inicial,$request->fecha_final);
+            $reporte['abonos'] = $this->abonos($request->fecha_inicial,$request->fecha_final);
         }
 
         $location = 'reportes';
@@ -130,6 +132,21 @@ class ReporteController extends Controller
         $medios_pago = $medios_pago->concat([$total]);
 
         return $medios_pago;
+    }
+
+    function abonos($fecha_incial,$fecha_final){
+        /*SELECT medio_pago,sum(abono) FROM `deudas`
+          WHERE fecha BETWEEN '2020-08-01' and '2020-08-23'
+          GROUP BY medio_pago
+        */
+        $abonos = DB::table('deudas')
+            ->select('medio_pago',DB::raw('sum(abono) as total'))
+            ->whereBetween('fecha',[$fecha_incial,$fecha_final])
+            ->groupBy('medio_pago')
+            ->get();
+
+        return $abonos;
+
     }
 
 }

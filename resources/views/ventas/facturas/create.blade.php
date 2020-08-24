@@ -463,7 +463,6 @@
                 document.getElementById('f_total').innerHTML = '$ '+total;
                 document.getElementById('f_impuesto').innerHTML = '$ 0';
             }
-
         }
         function change_cant(event,codigo){
             cantidad =  event.target.value <= 0 ? 1 : event.target.value ;

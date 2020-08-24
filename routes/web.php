@@ -29,6 +29,7 @@ Route::post('usuarios/contrasenia/cambiar/admin/finalizar', 'UsuarioController@c
 //TODOS LOS MENUS
 //GRUPO DE RUTAS PARA LA ADMINISTRACIÓN
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+    date_default_timezone_set('America/Bogota');
     Route::get('usuarios', 'MenuController@usuarios')->name('admin.usuarios');
     Route::post('acceso', 'HomeController@confirmaRol')->name('rol');
     Route::get('inicio', 'HomeController@inicio')->name('inicio');
@@ -44,6 +45,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
 //GRUPO DE RUTAS PARA LA ADMINISTRACIÓN DE USUARIOS
 Route::group(['middleware' => 'auth', 'prefix' => 'usuarios'], function () {
+    date_default_timezone_set('America/Bogota');
     //MODULOS
     Route::resource('modulo', 'ModuloController');
     //PAGINAS O ITEMS DE LOS MODULOS
@@ -63,6 +65,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'usuarios'], function () {
 
 //GRUPO DE RUTAS PARA ALMACEN
 Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
+    date_default_timezone_set('America/Bogota');
     Route::resource('marcas','MarcasController');
     Route::resource('categorias','CategoriasController');
     Route::resource('subcategorias','SubcategoriaController');
@@ -80,6 +83,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'almacen'], function () {
 });
 //GRUPO DE RUTAS PARA COMPRAS
 Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
+    date_default_timezone_set('America/Bogota');
     Route::resource('proveedores','ProveedoresController');
     Route::get('proveedores/{id}/delete', 'ProveedoresController@destroy')->name('proveedores.delete');
     Route::post('proveedores/guardar','ProveedoresController@save')->name('proveedores.save');
@@ -88,6 +92,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
 });
 //GRUPO DE RUTAS PARA VENTAS
 Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
+    date_default_timezone_set('America/Bogota');
     Route::resource('clientes','ClientesController');
     Route::post('clientes/guardar','ClientesController@save')->name('clientes.save');
     Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
@@ -102,11 +107,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
 });
 //GRUPO DE RUTAS PARA CONFIGURACION
 Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () {
+    date_default_timezone_set('America/Bogota');
     Route::resource('series','SerieController');
     Route::get('series/{id}/delete', 'SerieController@destroy')->name('series.delete');
 });
 //GRUPO DE RUTAS PARA REPORTES
     Route::group(['middleware' => 'auth', 'prefix' => 'reportes'], function () {
+        date_default_timezone_set('America/Bogota');
         Route::get('stock', 'StockController@stock')->name('reporte.stock');
         Route::get('ventas', 'ReporteController@index')->name('reporte.ventas');
 });
