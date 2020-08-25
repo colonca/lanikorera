@@ -40,10 +40,12 @@ class ProveedoresController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'nit' => 'required',
             'nombre' => 'required'
         ]);
 
         $proveedor =  new Proveedores();
+        $proveedor->nit = $request->nit;
         $proveedor->nombre = $request->nombre;
         $result = $proveedor->save();
 
@@ -127,6 +129,7 @@ class ProveedoresController extends Controller
     public function update(Request $request, $id)
     {
         $proveedor =  Proveedores::findOrFail($id);
+        $proveedor->nit = $request->nit;
         $proveedor->nombre = $request->nombre;
         $result = $proveedor->save();
         if($result){

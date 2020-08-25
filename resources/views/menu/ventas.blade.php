@@ -17,7 +17,7 @@
             <div class="body">
                 <div class="alert alert-dismissible" style="background-color: #FFD700;" role="alert">
                     <button  style="color: black" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <strong style="color: black">Detalles: </strong> <span style="color: black">Gestione Clientes y las ventas realizadas.</span>
+                    <strong style="color: black">Detalles: </strong> <span style="color: black">Gestione Clientes, Facturas, Devoluciones, Descuentos y Deudas.</span>
                 </div>
                 <div class="button-demo">
                     @if(session()->exists('PAG_CLIENTES'))

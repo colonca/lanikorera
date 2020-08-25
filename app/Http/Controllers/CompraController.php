@@ -50,7 +50,6 @@ class CompraController extends Controller
 
         $validate = Validator::make($request->all(),[
             'proveedor_id' => 'required',
-            'serie' => 'required',
             'numero_venta' => 'required|numeric',
             'bodega_id' => 'required',
             'fecha' => 'required|date',
