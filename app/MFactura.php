@@ -18,10 +18,6 @@ class MFactura extends Model
         return $this->hasMany(DFactura::class,'factura_id','id');
     }
 
-    public function adicionales(){
-        return $this->hasMany(Adicional::class,'factura_id','id');
-    }
-
     public function deudas(){
         return $this->hasMany(Deuda::class,'factura_id','id');
     }

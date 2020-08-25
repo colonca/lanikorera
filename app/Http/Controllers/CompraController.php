@@ -125,6 +125,7 @@ class CompraController extends Controller
 
                     $cantidad = $producto_embalaje[0]->unidades *  $embalaje->cantidad;
                     $kardex->cantidad = $cantidad;
+                    $kardex->fecha = date('y-m-d');
                     $kardex->costo = $embalaje->costo / $producto_embalaje[0]->unidades;
                     $kardex->detalle = 'Compra F/'.$request->serie.'-'.$request->numero_venta;
                     $kardex->save();

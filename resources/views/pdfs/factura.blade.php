@@ -92,7 +92,7 @@
             </tr>
             {{$total += $detalle->cantidad*$detalle->precio}}
         @endforeach
-        @foreach($factura->adicionales as $adicional)
+        @foreach(json_decode($factura->adicionales) as $adicional)
             <tr>
                 <td style="margin-bottom: 10px;">{{$adicional->nombre}}</td>
                 <td style="text-align: center;">{{$adicional->cantidad}}</td>

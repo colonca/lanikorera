@@ -91,7 +91,7 @@
                                     <div class="col-md-3" style="margin-bottom: 0">
                                         <div class="form-group">
                                             <label for="">Fecha</label>
-                                            <input type="date" id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
+                                            <input type="date" disabled id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="margin-bottom: 0">
@@ -463,7 +463,6 @@
                 document.getElementById('f_total').innerHTML = '$ '+total;
                 document.getElementById('f_impuesto').innerHTML = '$ 0';
             }
-
         }
         function change_cant(event,codigo){
             cantidad =  event.target.value <= 0 ? 1 : event.target.value ;

@@ -78,6 +78,7 @@ class MDevolucionController extends Controller
                     $devolucion->$key = $value;
                 }
             }
+            $devolucion->fecha = date('y-m-d');
             $devolucion->tipo = 'DEVOLUCION';
             $devolucion->save();
 
@@ -102,6 +103,7 @@ class MDevolucionController extends Controller
 
                 $kardex = new Kardex();
                 $kardex->producto_id = $producto_embalaje->producto_id;
+                $kardex->fecha = date('y-m-d');
                 $kardex->bodega_id = $before->bodega_id;
                 $kardex->tipo_movimiento = 'SALIDA';
                 $cantidad = $producto_embalaje->unidades *  $detalle->cantidad;
@@ -113,7 +115,7 @@ class MDevolucionController extends Controller
 
             }
 
-            $factura->fecha = date('d-m-y');
+            $factura->fecha = date('y-m-d');
             $factura->estado = 'DEVUELTA';
             $factura->save();
 
