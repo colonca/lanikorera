@@ -56,24 +56,18 @@
                                 <div class="col-md-3" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Nombre</label>
-                                        <input type="text"  disabled id="v_razon_social" class="form-control" placeholder="JUANITO PROVEEDOR">
+                                        <input type="text"  disabled id="v_razon_social" class="form-control" placeholder="Nombre del proveedor">
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="width: 90%; margin: 0 auto;">
-                                <div class="col-md-3" style="margin-bottom: 0">
+                                <div class="col-md-4" style="margin-bottom: 0">
                                     <div class="form-group">
-                                        <label for="">Serie</label>
-                                        <input type="text" name="serie" class="form-control" placeholder="serie de la factura de compra">
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
-                                    <div class="form-group">
-                                        <label for="">N° de venta</label>
+                                        <label for="">N° de factura</label>
                                         <input type="text" name="numero_venta" class="form-control" placeholder="numero de venta">
                                     </div>
                                 </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
+                                <div class="col-md-4" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Bodegas</label>
                                         <select name="bodega_id" class="select2 form-control" name="bodega_id" id="">
@@ -83,7 +77,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3" style="margin-bottom: 0">
+                                <div class="col-md-4" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Evidencia</label>
                                         <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg, documento/pdf" name="foto" class="form-control" placeholder="numero de venta">

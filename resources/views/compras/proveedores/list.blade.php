@@ -30,6 +30,7 @@
                     <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Nit</th>
                                 <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
@@ -37,6 +38,7 @@
                         <tbody>
                             @foreach($proveedores as $proveedores)
                             <tr>
+                                <td>{{$proveedores->nit}}
                                 <td>{{$proveedores->nombre}}
                                 <td style="text-align: center;">
                                     <a href="{{ route('proveedores.edit',$proveedores->id)}}"

@@ -29,6 +29,10 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <label for="exampleFormControlSelect1">Nit</label>
+                                        <br/><input type="text" class="form-control" placeholder="Escriba el nit del proveedor" name="nit" required="required" />
+                                    </div>
+                                    <div class="form-line">
                                         <label for="exampleFormControlSelect1">Nombre</label>
                                         <br/><input type="text" class="form-control" placeholder="Escriba el nombre del proveedor" name="nombre" required="required" />
                                     </div>

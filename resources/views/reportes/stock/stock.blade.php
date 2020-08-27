@@ -12,7 +12,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    STOCK
+                    REPORTES - STOCK
                 </h2>
             </div>
             <div class="body">

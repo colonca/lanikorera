@@ -3,7 +3,7 @@
     <ol class="breadcrumb" style="margin-bottom: 30px; background-color: #38383A">
         <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.reportes')}}">Reportes</a></li>
-        <li class="active"><a style="color:white" >Stock</a></li>
+        <li class="active"><a style="color:white" > Reporte_Ventas</a></li>
     </ol>
 @endsection
 @section('content')
@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DATOS DE FACTURA - DEVOLUCIÓN <small>Ingrese los datos y haga click en el boton Consultar, para visualizar la factura a devolver.</small>
+                        REPORTES - VENTAS <small>Seleccione las fechas a consultar y visualice las ventas totales, Número de ventas, Ganacias, margen de utilidad promedio, las ventas en dinero en efectivo, datafono, deudas y lo abonos realizados.</small>
                     </h2>
                 </div>
                 <div class="body">
@@ -54,7 +54,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-pink hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">playlist_add_check</i>
+                    <i class="fas fa-cash-register"></i>
                 </div>
                 <div class="content">
                     <div class="text">Ventas Totales</div>
@@ -67,7 +67,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-cyan hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">help</i>
+                    <i class="fas fa-sort-numeric-up-alt"></i>
                 </div>
                 <div class="content">
                     <div class="text">Numero de Ventas</div>
@@ -78,7 +78,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-light-green hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">forum</i>
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
                 <div class="content">
                     <div class="text">Ganancia</div>
@@ -90,7 +90,7 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box bg-orange hover-expand-effect">
                 <div class="icon">
-                    <i class="material-icons">person_add</i>
+                    <i class="fas fa-percent"></i>
                 </div>
                 <div class="content">
                     <div class="text">Margen de Ganancia</div>
