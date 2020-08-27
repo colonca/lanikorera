@@ -285,7 +285,6 @@ class ProductoController extends Controller
                           ->select(DB::raw('producto_embalaje.precio_venta as precio,unidades,nombre,presentacion,descripcion, producto_embalaje.id as unicode,codigo_de_barras, productos.id as producto'))
                           ->first();
 
-
       if($producto){
           $existencias = DB::table('kardexes')
               ->select(DB::raw('sum(cantidad) as cantidad,tipo_movimiento'))
@@ -304,12 +303,10 @@ class ProductoController extends Controller
                       break;
               }
           }
-
               $producto->existencia_embalaje = intval($existencia / $producto->unidades);
               $producto->existencia =  $existencia;
               $producto->costo_promedio = Kardex::costo_promedio($producto->producto)*$producto->unidades;
           }
-
 
         return response()->json([
             'status' => $producto != null ? 'ok' : 'error',

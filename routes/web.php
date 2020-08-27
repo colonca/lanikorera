@@ -98,6 +98,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
     Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
     Route::resource('mfacturas','MFacturaController');
+    Route::view('facturar','ventas.facturas.create',['location'=>'ventas']);
     Route::resource('deuda','DeudaController');
     Route::get('clientes/{id}/delete', 'ClientesController@destroy')->name('clientes.delete');
     Route::resource('descuentos','DescuentoController');

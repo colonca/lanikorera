@@ -26,7 +26,7 @@
     <script src="https://kit.fontawesome.com/33bf1ad68d.js" crossorigin="anonymous"></script>
     <!-- JQuery Nestable Css -->
     <link href="{{asset('css/plugins/nestable/jquery-nestable.css')}}" rel="stylesheet"/>
-
+    <livewire:styles />
     @yield('style')
 </head>
 <body class="theme-teal">
@@ -50,7 +50,7 @@
 <!-- Overlay For Sidebars -->
 <div class="overlay"></div>
 <!-- #END# Overlay For Sidebars -->
-<!--         Search Bar
+<!--Search Bar
         <div class="search-bar">
             <div class="search-icon">
                 <i class="material-icons">search</i>
@@ -303,6 +303,7 @@
         });
     }
 </script>
+<livewire:scripts />
 @yield('script')
 </body>
 </html>
