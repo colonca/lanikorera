@@ -10,7 +10,7 @@
     <style>
         /* Center the loader */
         #loader {
-            display: none;
+            display: block;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -23,6 +23,18 @@
             height: 120px;
             -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
+        }
+
+        #myDiv {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            opacity: 0.8;
+            z-index: 1000;
         }
 
         @-webkit-keyframes spin {
@@ -54,22 +66,11 @@
             to{ bottom:0; opacity:1 }
         }
 
-        #myDiv {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: black;
-            opacity: 0.8;
-            z-index: 1000;
-        }
+
     </style>
 @endsection
 @section('content')
-<div id="loader"></div>
-<div id="myDiv"></div>
+
 <livewire:facturas.factura/>
 <!-- Modal -->
 <div class="modal fade" id="Mcreate" role="dialog">

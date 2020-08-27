@@ -48,7 +48,7 @@ class Factura extends Component
 
         $this->validate([
             'cliente_id' => 'required',
-            'bodega_id' => 'required',
+            'bodega' => 'required',
             'modalidad_pago' => 'required',
             'medio_pago' => 'required'
         ]);
@@ -71,6 +71,7 @@ class Factura extends Component
             $factura->serie = $serie->prefijo;
             $factura->n_venta = $serie->actual;
             $result = $factura->save();
+
             $adicionales = [];
             if($result){
 
@@ -125,6 +126,10 @@ class Factura extends Component
             ]);
         }catch (\Exception $e){
             DB::rollBack();
+            $this->emit('message',[
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
         }
 
     }
@@ -168,6 +173,7 @@ class Factura extends Component
 
                 if(!$this->existProducto($producto->codigo_de_barras) && $this->hasStock($producto->producto,$producto->unidades,uniqid())){
                     $descuento = $this->InOffSale($producto->unicode);
+                    $producto->descuento = 'NO';
                     if($descuento){
                         $producto->precio = $descuento->cantidad > 0 ? $descuento->precio : $producto->precio;
                         $producto->descuento =  $descuento->cantidad > 0 ? 'SI' : 'NO';
@@ -175,7 +181,7 @@ class Factura extends Component
                     $this->productos[] = [
                         'unicode' => uniqid(),
                         'cantidad' => 1,
-                        'precio' => $this->medio_pago = 'datafono' ?  $producto->precio*1.05 : $producto->precio,
+                        'precio' => $this->medio_pago == 'datafono' ?  $producto->precio*1.05 : $producto->precio,
                         'total' => number_format($producto->precio),
                         'precio_show' => number_format($producto->precio),
                         'codigo_de_barras' => $producto->codigo_de_barras,
@@ -332,7 +338,7 @@ class Factura extends Component
 
     public function addAdicional($adicional){
 
-        if($this->medio_pago = 'datafono'){
+        if($this->medio_pago == 'datafono'){
             $adicional['precio'] *= 1.05;
             $adicional['total'] = number_format($adicional['precio']);
         }
