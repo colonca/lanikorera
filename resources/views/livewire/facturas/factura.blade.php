@@ -71,6 +71,7 @@
                                             <select wire:model="medio_pago" wire:click="change()" class="form-control" >
                                                 <option value="efectivo" selected>EFECTIVO</option>
                                                 <option value="datafono">DATAFONO</option>
+                                                <option value="transferencia">TRANSFERENCIA</option>
                                             </select>
                                         </div>
                                     </div>

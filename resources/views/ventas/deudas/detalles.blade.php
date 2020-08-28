@@ -40,14 +40,14 @@
                                     <td>$ {{$detalle->cantidad*$detalle->precio}}</td>
                                 </tr>
                             @endforeach
-                            @foreach($factura->adicionales as $adicional)
+                            @foreach(json_decode($factura->adicionales) as $adicional)
                                 <tr>
-                                    <td>{{$adicional->id}}</td>
+                                    <td>{{$adicional->unicode}}</td>
                                     <td>{{$adicional->nombre}}</td>
                                     <td>{{$adicional->cantidad}}</td>
                                     <td>UNIDAD</td>
-                                    <td>$ {{$adicional->precio_venta}}</td>
-                                    <td>$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
+                                    <td>$ {{$adicional->precio_show}}</td>
+                                    <td>$ {{number_format($adicional->total)}}</td>
                                 </tr>
                             @endforeach
                         </table>
