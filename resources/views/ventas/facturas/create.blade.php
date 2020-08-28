@@ -211,8 +211,8 @@
                 if (msg.status  ==  'ok') {
                     $('#Mcreate').modal('hide');
                     $('#cliente_id').val(msg.cliente.id);
-                    $("#c_identificacion").val(msg.cliente.identificacion);
-                    $("#c_nombres").val(msg.cliente.nombres);
+                    $("#c_identificacion").val(msg.cliente.nombres);
+                    $("#c_nombres").val(msg.cliente.apellidos);
                     window.livewire.emit('selectCustomer',msg.cliente.id);
                 }else if(msg.status == 'error'){
                     notify('Atención', 'El cliente no pudo ser alamacenada.', 'error');
@@ -268,8 +268,8 @@
                          html += `
                                   <tr>
                                        <td>${item.id}</td>
-                                       <td>${item.identificacion}</td>
                                        <td>${item.nombres}</td>
+                                       <td>${item.apellidos}</td>
                                        <td>${item.telefono}</td>
                                        <td>${item.email}</td>
                                   </tr>
