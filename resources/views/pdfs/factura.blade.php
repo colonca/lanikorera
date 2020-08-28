@@ -82,7 +82,6 @@
             <td  style=" padding: 5px; text-align: center;">Precio</td>
             <td  style=" padding: 5px; text-align: center;">Total</td>
         </tr>
-        {{$total = 0}}
         @foreach($factura->dfactura as $detalle)
             <tr>
                 <td style="margin-bottom: 10px;">{{$detalle->producto_embalaje->producto->nombre.'X'.$detalle->producto_embalaje->producto->presentacion}}</td>
@@ -90,50 +89,19 @@
                 <td style="text-align: center;">$ {{$detalle->precio}}</td>
                 <td style="text-align: center;">$ {{$detalle->cantidad*$detalle->precio}}</td>
             </tr>
-            {{$total += $detalle->cantidad*$detalle->precio}}
         @endforeach
         @foreach(json_decode($factura->adicionales) as $adicional)
             <tr>
                 <td style="margin-bottom: 10px;">{{$adicional->nombre}}</td>
                 <td style="text-align: center;">{{$adicional->cantidad}}</td>
-                <td style="text-align: center;">$ {{$adicional->precio_venta}}</td>
-                <td style="text-align: center;">$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
-                {{$total += $adicional->cantidad*$adicional->precio_venta}}
+                <td style="text-align: center;">$ {{$adicional->precio_show}}</td>
+                <td style="text-align: center;">$ {{$adicional->total}}</td>
             </tr>
         @endforeach
         <tr>
-            <td colspan="2"></td>
+            <td colspan="3" style="text-align: right;">Total</td>
+            <td >{{$factura->total}}</td>
         </tr>
-        <tr>
-            <td colspan="2"></td>
-        </tr>
-        <tr>
-            <td colspan="2"></td>
-        </tr>
-        <tr>
-            <td colspan="2"></td>
-        </tr>
-        @if($factura->medio_pago == 'datafono')
-            <tr>
-                <td style="margin-bottom: 10px;"></td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: right; margin-bottom: 20px;">Impuesto:</td>
-                <td style="text-align: center;">$ {{$total*0.05}}</td>
-            </tr>
-            <tr>
-                <td style="margin-bottom: 10px;"></td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: right; margin-bottom: 20px;">Total:</td>
-                <td style="text-align: center;">$ {{$total*1.05}}</td>
-            </tr>
-        @else
-            <tr>
-                <td style="margin-bottom: 10px;"></td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: right; margin-bottom: 20px;">Total:</td>
-                <td style="text-align: center;">$ {{$total}}</td>
-            </tr>
-        @endif
     </table>
 </main>
 

@@ -49,12 +49,12 @@ class DescuentoController extends Controller
         $descuento =  new Descuento();
         $descuento->fecha_inicio= $request->fecha_inicio;
         $descuento->fecha_fin = $request->fecha_fin;
-        $hoy= date('d-m-y');
+        $hoy= date('y-m-d');
         if($request->fecha_inicio<$hoy||$request->fecha_fin<$hoy){
             flash("El Descuento no puede aplicarse a una fecha en el pasado!")->error();
             return  redirect()->back();
         }
-        if($request->fecha_final<$request->fecha_inicio){
+        if($request->fecha_fin<$request->fecha_inicio){
             flash("Seleccione correctamente las fechas!")->error();
             return  redirect()->back();
         }

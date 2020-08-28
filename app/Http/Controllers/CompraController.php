@@ -112,6 +112,8 @@ class CompraController extends Controller
                     $Dcompra->compra_id = $compra->id;
                     $Dcompra->save();
 
+
+
                     $producto = Producto::find($embalaje->producto);
                     $kardex = new Kardex();
                     $kardex->producto_id = $producto->id;
@@ -126,9 +128,8 @@ class CompraController extends Controller
                     $kardex->cantidad = $cantidad;
                     $kardex->fecha = date('y-m-d');
                     $kardex->costo = $embalaje->costo / $producto_embalaje[0]->unidades;
-                    $kardex->detalle = 'Compra F/'.$request->serie.'-'.$request->numero_venta;
+                    $kardex->detalle = 'Compra F/'.$request->serie;
                     $kardex->save();
-
                 }
                 $status = 'ok';
                 DB::commit();
@@ -138,6 +139,7 @@ class CompraController extends Controller
             }
 
         }catch (\Exception $e){
+            dd($e);
             $status = 'error';
             DB::rollBack();
         }

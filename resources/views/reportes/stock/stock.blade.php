@@ -32,7 +32,7 @@
                                 <td>{{$item->producto}}
                                 <td>{{$item->stock_minimo}}
                                 <td>{{$item->stock}}
-                                <td>{{$item->costo_promedio}}</td>
+                                <td>$ {{number_format($item->costo_promedio)}}</td>
                             </tr>
                         @endforeach
                         </tbody>

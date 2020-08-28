@@ -10,7 +10,7 @@
     <style>
         /* Center the loader */
         #loader {
-            display: none;
+            display: block;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -23,6 +23,18 @@
             height: 120px;
             -webkit-animation: spin 2s linear infinite;
             animation: spin 2s linear infinite;
+        }
+
+        #myDiv {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            opacity: 0.8;
+            z-index: 1000;
         }
 
         @-webkit-keyframes spin {
@@ -54,156 +66,18 @@
             to{ bottom:0; opacity:1 }
         }
 
-        #myDiv {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: black;
-            opacity: 0.8;
-            z-index: 1000;
-        }
+
     </style>
 @endsection
 @section('content')
-<div id="loader"></div>
-<div id="myDiv"></div>
-<div class="row clearfix">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                    DATOS DE VENTAS - FACTURA DE VENTA. <small>Ingrese los datos, scanee el codigo de barras y haga click en el boton Guardar.</small>
-                </h2>
-            </div>
-            <div class="body">
-                <div class="col-md-12">
-                    @component('layouts.errors')
-                    @endcomponent
-                </div>
-                <div class="row clearfix">
-                    <div class="col-md-12" style="margin-bottom: 0;">
-                        <form id="form" action="{{route('compras.store')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                                <div class="row" style="width: 90%; margin: 0 auto;">
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Fecha</label>
-                                            <input type="date" disabled id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Cliente</label>
-                                            <div class="proveedor" style="display: flex; width: 100%">
-                                                <input type="hidden" name="cliente_id" id="cliente_id">
-                                                <input type="text" disabled class="form-control" id="c_identificacion" placeholder="ingrese la identificacion o nombre del cliente">
-                                                <button class="btn btn-success btn-circle" onclick="event.preventDefault()" data-toggle="modal" data-target="#Mcreate" style="margin-right: 5px;"><i class="fas fa-plus"></i></button>
-                                                <button class="btn btn-info btn-circle" onclick="clientes(event)"><i class="fas fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Nombre</label>
-                                            <input type="text"  disabled id="c_nombres" class="form-control" placeholder="JUANITO PROVEEDOR">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="width: 90%; margin: 0 auto;">
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Bodegas</label>
-                                            <select name="bodega_id" class="select2 form-control" name="bodega_id" id="">
-                                                 @foreach($bodegas as $bodega)
-                                                    <option value="{{$bodega->id}}">{{$bodega->nombre}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Modalidad de Pago</label>
-                                            <select name="modalidad_pago" class="select2 form-control" id="">
-                                                <option value="contado" selected>CONTADO</option>
-                                                <option value="credito">CREDITO</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Medio de pago</label>
-                                            <select name="medio_pago" onchange="cambio(event)" class="select2 form-control" id="modalidad">
-                                                <option value="efectivo" selected>EFECTIVO</option>
-                                                <option value="datafono">DATAFONO</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Factura de Venta</label>
-                                            <input type="text" disabled class="form-control" value="{{$serie->prefijo.'-'.$serie->actual}}">
-                                        </div>
-                                    </div>
-                                </div>
-                        </form>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row" style="width: 90%; margin: 0 auto;">
-                             <div class="col-md-6" style="display: flex">
-                                 <input type="text" class="form-control" id="cogigo" onkeypress="buscarProducto(event)" placeholder="scanee o ingrese el codigo del producto">
-                                 <button class="btn btn-info">Enter para agregar</button>
-                             </div>
-                            <div class="col-md-6" style="display: flex; justify-content: flex-end;">
-                                <button class="btn btn-warning btn-circle" data-toggle="modal" data-target="#MAdicional"><i class="fab fa-amilia"></i></button>
-                            </div>
-                        </div>
-                        <div class="row" style="width: 90%; margin: 0 auto;">
-                            <div class="col-md-12">
-                                <table class="table table-bordered">
-                                    <thead class="bg-info" >
-                                         <th>Codigo</th>
-                                         <th>Producto</th>
-                                         <th>Embalaje</th>
-                                         <th>Cantidad</th>
-                                         <th>Precio</th>
-                                         <th>Total</th>
-                                    </thead>
-                                    <tbody id="productos">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row" style="width: 90%; margin: 0 auto;">
-                            <div class="col-md-12" style="display: flex; justify-content: flex-end; margin-bottom: 0;">
-                               <p><strong>Total:</strong> </p>
-                               <p id="f_total">$ 0</p>
-                            </div>
-                            <div class="col-md-12" style="display: flex; justify-content: flex-end; margin-bottom: 0;">
-                                <p><strong>Impuesto:</strong> </p>
-                                <p id="f_impuesto">$ 0</p>
-                            </div>
-                        </div>
-                        <div class="row" style="width: 90%; margin: 0 auto;">
-                            <div class="col-md-12" style="display: flex; justify-content: flex-end;">
-                                <a href="{{route('admin.compras')}}" class="btn btn-danger" style="margin-right: 5px;">Cancelar</a>
-                                <button class="btn btn-success" onclick="guardar()">Facturar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<livewire:facturas.factura/>
 <!-- Modal -->
 <div class="modal fade" id="Mcreate" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="defaultModalLabel">Nuevo Proveedor</h4>
+                <h4 class="modal-title" id="defaultModalLabel">Nuevo Cliente</h4>
             </div>
             <div class="modal-body">
                 <form action="" id="form-cliente">
@@ -320,202 +194,10 @@
     <script src="{{asset('plugins/bootstrap/dataTables.select.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
     <script>
-        $('.select2').select2();
-        var productos = [];
         let table = $('#list-clientes').DataTable();
         document.getElementById('precio_compra').addEventListener('focusout',function(event){
             $('#venta').val(event.target.value);
         });
-
-        function cambio(event){
-            let total = 0;
-            productos.forEach((item)=>{
-                if(item.tipo == 'STOCK'){
-                    total += item.cantidad*item.precio;
-                }else{
-                    total += item.cantidad*item.precio_venta;
-                }
-            });
-            if($('#modalidad').val() == 'datafono'){
-                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
-                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
-            }else{
-                document.getElementById('f_total').innerHTML = '$ '+total;
-                document.getElementById('f_impuesto').innerHTML = '$ 0';
-            }
-        }
-        function buscarProducto(event){
-            if(event.keyCode == 13){
-                const  codigo = $('#cogigo').val();
-                $.ajax({
-                    type: 'GET',
-                    url: '{{url('almacen/producto/search')}}/'+codigo,
-                }).done(function (msg) {
-
-                    if(msg.status == 'ok'){
-                        const producto = msg.producto;
-                        let band = true;
-                        productos.forEach((item)=>{
-                            if(item.id == producto.unicode){
-                                band = false;
-                            }
-                        });
-                        const existencia = producto.existencia_embalaje > 0;
-
-                        let total = 0;
-                        productos.forEach((item)=> {
-                            if(producto.producto == item.producto){
-                                total += item.unidades * item.cantidad;
-                            }
-                        });
-                        total += producto.unidades*1;
-                        if(total > producto.existencia || !existencia){
-                            notify('Atencion','no hay stock en inventario');
-                            band = false;
-                        }
-
-                        if(band && existencia){
-                            productos.push({
-                                'id' : producto.unicode,
-                                'producto': producto.producto,
-                                'codigo_de_barras' : producto.codigo_de_barras,
-                                'cantidad' : 1,
-                                'precio' : producto.precio,
-                                'unidades' : producto.unidades,
-                                'tipo': 'STOCK'
-                            })
-                            const tr = document.createElement('tr');
-                            tr.setAttribute('id',producto.unicode);
-                            tr.innerHTML = `
-                               <td>${producto.codigo_de_barras}</td>
-                               <td>${producto.nombre}x${producto.presentacion}</td>
-                               <td>${producto.descripcion}x${producto.unidades} UND</td>
-                               <td><input type="number"  class="cantidad" onchange="change_cantidad(event,${producto.unicode},${producto.existencia_embalaje},${producto.existencia},${producto.producto},${producto.unidades})" value="1" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 60px;"></td>
-                               <td><input type="number" disabled class="costo"  value="${producto.precio}" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 100px;"></td>
-                               <td class="total" style="width: 100px;">$ ${producto.precio}</td>
-                               <td><button class="btn btn-danger" onclick="eliminar_item(event,${producto.unicode})" > <i class="fas fa-times"></i></button></td>
-                        `;
-                            document.getElementById('productos').appendChild(tr);
-                        }
-                        total = 0;
-                        productos.forEach((item)=>{
-                            if(item.tipo == 'STOCK'){
-                                total += item.cantidad*item.precio;
-                            }else{
-                                total += item.cantidad*item.precio_venta;
-                            }
-                        });
-
-                        if($('#modalidad').val() == 'datafono'){
-                            document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
-                            document.getElementById('f_total').innerHTML = '$ '+total*1.05;
-                        }else{
-                            document.getElementById('f_total').innerHTML = '$ '+total;
-                            document.getElementById('f_impuesto').innerHTML = '$ 0';
-                        }
-
-                        $('#cogigo').val('');
-                    }else{
-                        notify('Atención', 'El producto con el codigo ' + $('#cogigo').val() +' no ha sido registrado.!', 'warning');
-                        $('#cogigo').val('');
-                    }
-                });
-            }
-        }
-        function change_cantidad(event,codigo,existencia_embalaje,existencia,producto,unidades){
-            aux =  event.target.value <= 0 ? 1 : event.target.value ;
-            let total = 0;
-            productos.forEach((item)=> {
-                if(producto == item.producto){
-                    total += item.unidades * item.cantidad;
-                }
-            });
-            total += unidades*aux;
-            cantidad = aux;
-            event.target.value = cantidad;
-            if(cantidad > existencia_embalaje) {
-                notify('Atención', `La cantidad selecionada no se encuentra disponible, en stock solo quedan ${existencia_embalaje} UND del embalaje selecionado y Unidades Individuales del producto quedan ${existencia}`, 'warning');
-                cantidad = existencia_embalaje;
-                event.target.value = cantidad;
-            }
-            let item = document.getElementById(`${codigo}`);
-            let costo = item.querySelector('.costo').value;
-            total = cantidad*costo;
-            item.querySelector('.total').innerHTML = '$ '+total;
-            productos.forEach((item)=> {
-                if(item.id == codigo){
-                    item.cantidad = cantidad,
-                    item.costo = costo
-                }
-            });
-            total = 0;
-            productos.forEach((item)=>{
-                if(item.tipo == 'STOCK'){
-                    total += item.cantidad*item.precio;
-                }else{
-                    total += item.cantidad*item.precio_venta;
-                }
-            });
-            if($('#modalidad').val() == 'datafono'){
-                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
-                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
-            }else{
-                document.getElementById('f_total').innerHTML = '$ '+total;
-                document.getElementById('f_impuesto').innerHTML = '$ 0';
-            }
-        }
-        function change_cant(event,codigo){
-            cantidad =  event.target.value <= 0 ? 1 : event.target.value ;
-            event.target.value = cantidad;
-            let item = document.getElementById(`${codigo}`);
-            let precio = item.querySelector('.precio').value;
-            let total = cantidad*precio;
-            item.querySelector('.total').innerHTML = '$ '+total;
-            productos.forEach((item)=> {
-                if(item.id == codigo){
-                    item.cantidad = cantidad
-                }
-            });
-            total = 0;
-            productos.forEach((item)=>{
-                if(item.tipo == 'STOCK'){
-                    total += item.cantidad*item.precio;
-                }else{
-                    total += item.cantidad*item.precio_venta;
-                }
-            });
-            if($('#modalidad').val() == 'datafono'){
-                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
-                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
-            }else{
-                document.getElementById('f_total').innerHTML = '$ '+total;
-                document.getElementById('f_impuesto').innerHTML = '$ 0';
-            }
-        }
-        function eliminar_item(event,codigo) {
-           document.getElementById(`${codigo}`).remove();
-           productos.forEach((item,index) => {
-               if(item.id == codigo){
-                   productos.splice(index,1);
-               }
-           });
-            $('#cogigo').focus();
-            let total = 0;
-            productos.forEach((item)=>{
-                if(item.tipo == 'STOCK'){
-                    total += item.cantidad*item.precio;
-                }else{
-                    total += item.cantidad*item.precio_venta;
-                }
-            });
-            if($('#modalidad').val() == 'datafono'){
-                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
-                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
-            }else{
-                document.getElementById('f_total').innerHTML = '$ '+total;
-                document.getElementById('f_impuesto').innerHTML = '$ 0';
-            }
-        }
         function guardarCliente(event){
             event.preventDefault();
             const form = $('#form-cliente').serialize();
@@ -535,6 +217,7 @@
                     $('#cliente_id').val(msg.cliente.id);
                     $("#c_identificacion").val(msg.cliente.identificacion);
                     $("#c_nombres").val(msg.cliente.nombres);
+                    window.livewire.emit('selectCustomer',msg.cliente.id);
                 }else if(msg.status == 'error'){
                     notify('Atención', 'El cliente no pudo ser alamacenada.', 'error');
                 }else {
@@ -553,47 +236,22 @@
                 notify('Atencion','Debe completar los campos requeridos');
             }
             let producto = {
-                'id': uuid.v4(),
+                'unicode': uuid.v4(),
                 'nombre' : $('#a_nombre').val(),
-                'precio_compra': $('#precio_compra').val(),
-                'precio_venta': $('#venta').val(),
+                'costo': $('#precio_compra').val(),
+                'precio': $('#venta').val(),
+                'precio_show': $('#venta').val(),
+                'total': $('#venta').val(),
+                'precio_promedio': $('#venta').val(),
                 'descripcion': $('#descripcion').val(),
                 'cantidad': 1,
-                'tipo': 'ADICIONAL'
             };
-            productos.push(producto);
-            const tr = document.createElement('tr');
-            tr.setAttribute('id',producto.id);
-            tr.innerHTML = `
-                               <td>${producto.id}</td>
-                               <td>${producto.nombre}</td>
-                               <td>${''} UND</td>
-                               <td><input type="number"  class="cantidad" onchange="change_cant(event,'${producto.id}')"  value="1" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 60px;"></td>
-                               <td><input type="number" disabled class="precio"   value="${producto.precio_venta}" style="padding:6px;border: 1px solid grey; border-radius: 20px; width: 100px;"></td>
-                               <td class="total" style="width:100px;">$ ${producto.precio_venta}</td>
-                               <td><button class="btn btn-danger" onclick="eliminar_item(event,'${producto.id}')" > <i class="fas fa-times"></i></button></td>
-                        `;
-            document.getElementById('productos').appendChild(tr);
+            window.livewire.emit('addAdicional',producto);
             $('#MAdicional').modal('hide');
             $('#a_nombre').val('');
             $('#precio_compra').val('');
             $('#venta').val('');
             $('#descripcion').val('');
-            let total = 0;
-            productos.forEach((item)=>{
-                if(item.tipo == 'STOCK'){
-                    total += item.cantidad*item.precio;
-                }else{
-                    total += item.cantidad*item.precio_venta;
-                }
-            });
-            if($('#modalidad').val() == 'datafono'){
-                document.getElementById('f_impuesto').innerHTML = '$ '+total*0.05;
-                document.getElementById('f_total').innerHTML = '$ '+total*1.05;
-            }else{
-                document.getElementById('f_total').innerHTML = '$ '+total;
-                document.getElementById('f_impuesto').innerHTML = '$ 0';
-            }
         }
         function clientes(event){
             event.preventDefault();
@@ -634,6 +292,7 @@
                            $('#c_identificacion').val(row[1]);
                            $('#c_nombres').val(row[2]);
                            $('#Msearch').modal('hide');
+                           window.livewire.emit('selectCustomer',row[0]);
                    });
                }
             });
@@ -679,4 +338,20 @@
             });
         }
      </script>
+    <script>
+          window.livewire.on('message',(resp)=> {
+              if(resp.status == 'ok'){
+                  notify('Atencion',resp.message,'success');
+              }else {
+                  if(resp.status == 'error'){
+                   notify('Error',resp.message,'error');
+                  }
+              }
+          });
+
+          window.livewire.on('changeCount',(resp)=> {
+              $('#'+resp.id).val(resp.value);
+          });
+
+    </script>
 @endsection
