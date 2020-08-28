@@ -14,7 +14,10 @@ class RemoveColumnIdentificacionToClientes extends Migration
     public function up()
     {
         Schema::table('clientes', function (Blueprint $table) {
-            //
+            $table->dropColumn('identificacion');
+        });
+        Schema::table('clientes', function (Blueprint $table) {
+            $table->string('identificacion',12)->default('');
         });
     }
 

@@ -40,7 +40,6 @@ class ClientesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'identificacion' => 'required|unique:clientes',
             'nombres' => 'required',
             'apellidos' => 'required',
             'telefono' => 'required',
@@ -48,7 +47,6 @@ class ClientesController extends Controller
         ]);
 
         $clientes =  new Clientes();
-        $clientes->identificacion = $request->identificacion;
         $clientes->nombres = $request->nombres;
         $clientes->apellidos = $request->apellidos;
         $clientes->telefono = $request->telefono;
@@ -145,13 +143,11 @@ class ClientesController extends Controller
         $values = array();
         parse_str($request->form, $values);
         $validate = Validator::make($values,[
-            'identificacion' => 'required|unique:clientes',
             'nombres' => 'required',
             'apellidos' => 'required',
             'telefono' => 'required',
             'email' => 'required'
         ]);
-
 
         if($validate->fails()){
             return response()->json([
@@ -172,6 +168,7 @@ class ClientesController extends Controller
                 'status' => 'error',
             ]);
         }
+
     }
 
     public function json(){
