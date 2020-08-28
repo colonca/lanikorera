@@ -62,7 +62,7 @@ class CompraController extends Controller
             ]);
         }
 
-        $exist = Compra::where([
+        /*$exist = Compra::where([
             ['serie',$request->serie],
         ])->first();
 
@@ -73,7 +73,7 @@ class CompraController extends Controller
                     'compra' => 'El numero de serie y numero de venta ya se encuentra registrado anteriorme.'
                 ]
             ]);
-        }
+        }*/
 
         $embalajes = json_decode($request->embalajes);
         $total = 0;
