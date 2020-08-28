@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'asset_url'  =>  '/lanikorera/public',
+    'asset_url'  =>  '/lanikorera/lanikorera/public',
 
     /*
     |--------------------------------------------------------------------------
