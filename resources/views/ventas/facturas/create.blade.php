@@ -84,10 +84,6 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="form-line">
-                                <label for="exampleFormControlSelect1">Identidicación</label>
-                                <br/><input type="number" id="identificacion" class="form-control" placeholder="Escriba la cedula del cliente" name="identificacion" required="required" />
-                            </div>
-                            <div class="form-line">
                                 <label for="exampleFormControlSelect1">Nombres</label>
                                 <br/><input type="text" id="nombres" class="form-control" placeholder="Escriba nombre del cliente" name="nombres"required="required"/>
                             </div>
@@ -297,46 +293,7 @@
                }
             });
         }
-        function guardar(){
-            if(productos.length <= 0){
-                notify('Atencion','Debe agregar al menos un producto para facturar.');
-                return;
-            }
-            var formData = new FormData();
-            var x = $("form").serializeArray();
-            $.each(x, function(i, field){
-                formData.append(field.name, field.value);
-            });
-            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
-            formData.append('productos', JSON.stringify(productos));
-            document.getElementById("loader").style.display = "block";
-            document.getElementById("myDiv").style.display = "block";
-            window.scroll(0,0);
-            $.ajax({
-                type: 'POST',
-                url: '{{route('mfacturas.store')}}',
-                data: formData,
-                contentType: false,
-                processData: false,
-            }).done(function (msg) {
-                document.getElementById("loader").style.display = "none";
-                document.getElementById("myDiv").style.display = "none";
-                if (msg.status  ==  'ok') {
-                    notify('Atención', 'La factura fue almacenada con exito.!', 'success');
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 3000);
-                }else if(msg.status == 'error'){
-                    notify('Atención', 'la factuta no pudo ser alamacenada.', 'error');
-                }else {
-                    let html = '';
-                    for(const prop in msg.message){
-                        html += `</br> <strong>${prop}</strong> : ${msg.message[prop]}`;
-                    }
-                    notify('Error', html);
-                }
-            });
-        }
+
      </script>
     <script>
           window.livewire.on('message',(resp)=> {
