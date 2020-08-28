@@ -4,13 +4,16 @@ namespace App\Http\Livewire\Facturas;
 
 use App\Bodegas;
 use App\Clientes;
+use App\Descuento;
 use App\Deuda;
 use App\DFactura;
 use App\Kardex;
 use App\MFactura;
 use App\ProductoEmbalaje;
 use App\Serie;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Factura extends Component
@@ -30,15 +33,12 @@ class Factura extends Component
 
     protected $listeners = ['selectCustomer','searchProduct','addAdicional'];
 
-    public function mount(){
-       $this->fecha = date('y-m-d');
-       $this->serie = Serie::where('estado','ACTIVO')->first();
-       $this->venta = $this->serie->prefijo.'-'.++$this->serie->actual;
-    }
-
     public function render()
     {
         $bodegas = Bodegas::all();
+        $this->serie = Serie::where('estado','ACTIVO')->first();
+        $this->venta = $this->serie->prefijo.'-'.++$this->serie->actual;
+        $this->fecha = date('y-m-d');
         return view('livewire.facturas.factura',[
             'bodegas' => $bodegas,
          ]);
@@ -46,36 +46,39 @@ class Factura extends Component
 
     public function guardar(){
 
-        $this->validate([
-            'cliente_id' => 'required',
-            'bodega' => 'required',
-            'modalidad_pago' => 'required',
-            'medio_pago' => 'required'
-        ]);
+        if(count($this->productos) > 0 || count($this->adicionales) > 0){
 
-        $serie = Serie::where('estado','ACTIVO')->first();
-        $status = 'ok';
+            $this->validate([
+                'cliente_id' => 'required',
+                'bodega' => 'required',
+                'modalidad_pago' => 'required',
+                'medio_pago' => 'required'
+            ]);
 
-        try {
+            $serie = Serie::where('estado','ACTIVO')->first();
+            $status = 'ok';
 
-            DB::beginTransaction();
-            $factura = new MFactura();
-            $factura->cliente_id = $this->cliente_id;
-            $factura->bodega_id = $this->bodega;
-            $factura->modalidad_pago = $this->modalidad_pago;
-            $factura->medio_pago = $this->medio_pago;
-            $factura->total = $this->total;
-            $factura->fecha = date('y-m-d');
-            $serie->actual = ++$serie->actual;
-            $serie->save();
-            $factura->serie = $serie->prefijo;
-            $factura->n_venta = $serie->actual;
-            $result = $factura->save();
+            try {
 
-            $adicionales = [];
-            if($result){
+                DB::beginTransaction();
+                $factura = new MFactura();
+                $factura->cliente_id = $this->cliente_id;
+                $factura->bodega_id = $this->bodega;
+                $factura->modalidad_pago = $this->modalidad_pago;
+                $factura->medio_pago = $this->medio_pago;
+                $factura->total = $this->total;
+                $factura->fecha = date('y-m-d');
+                $serie->actual = ++$serie->actual;
+                $serie->save();
+                $factura->serie = $serie->prefijo;
+                $factura->n_venta = $serie->actual;
+                $result = $factura->save();
 
-                foreach ($this->productos as $producto){
+                $adicionales = [];
+
+                if($result){
+
+                    foreach ($this->productos as $producto){
 
                         $dfactura = new DFactura();
                         $dfactura->precio = $producto['precio'];
@@ -83,6 +86,13 @@ class Factura extends Component
                         $dfactura->producto_embalaje_id =  $producto['embalaje_id'];
                         $dfactura->factura_id =  $factura->id;
                         $dfactura->save();
+
+                        if($producto['descuento'] == 'SI'){
+                          $descuento = Descuento::find($producto['descuento_id']);
+                          $descuento->cantidad_vendida =  $descuento->cantidad_vendida + $producto['cantidad'];
+                          $descuento->save();
+                        }
+
                         $kardex = new Kardex();
                         $kardex->producto_id = $producto['producto'];
                         $kardex->fecha = date('y-m-d');
@@ -93,44 +103,72 @@ class Factura extends Component
                         $kardex->costo = Kardex::costo_promedio($producto['producto']);
                         $kardex->detalle = 'Venta F/'.$serie->prefijo.'-'.$serie->actual;
                         $kardex->save();
+                    }
+
+                    if($this->modalidad_pago == 'credito'){
+                        $factura->estado = 'EN DEUDA';
+                        $deuda = new Deuda();
+                        $deuda->factura_id =  $factura->id;
+                        $deuda->abono = 0;
+                        $deuda->save();
+                    }
+
+                    $factura->adicionales = json_encode($this->adicionales);
+                    $factura->save();
+                    $cliente =  Clientes::find($this->cliente_id);
+
+                    $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
+                        ->setPaper('a4', 'landscape')
+                        ->output();
+
+                    Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
+
+                    $status = 'ok';
+
+                }else {
+                    $status = 'error';
                 }
 
-                if($this->modalidad_pago == 'credito'){
-                    $factura->estado = 'EN DEUDA';
-                    $deuda = new Deuda();
-                    $deuda->factura_id =  $factura->id;
-                    $deuda->abono = 0;
-                    $deuda->save();
-                }
+                DB::commit();
 
-                $factura->adicionales = json_encode($this->adicionales);
-                $factura->save();
-                $cliente =  Clientes::find($this->cliente_id);
-
-                /*$pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
-                    ->setPaper('a4', 'landscape')
-                    ->output();
-
-                Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));*/
-
-                $status = 'ok';
-
-            }else {
+            }catch (\Exception $e){
+                DB::rollBack();
                 $status = 'error';
+                $error = $e->getMessage();
             }
 
-            DB::commit();
-            $this->emit('message',[
-                'status' => 'ok',
-                'message' => 'Factura guardada con exito'
-            ]);
-        }catch (\Exception $e){
-            DB::rollBack();
+            if($status == 'ok'){
+                $this->emit('message',[
+                    'status' => $status,
+                    'message' => 'La factura ha sido guardada correctamente.'
+                ]);
+
+                $this->fecha = '';
+                $this->cliente_id = '';
+                $this->bodega = '1';
+                $this->modalidad_pago = 'contado';
+                $this->medio_pago = 'efectivo';
+                $this->venta = '';
+                $this->search = '';
+                $this->productos = [];
+                $this->adicionales = [];
+                $this->total = 0;
+
+            }else{
+                $this->emit('message',[
+                    'status' => $status,
+                    'message' => 'La factura no se ha podido almacenar correctamente, por favor intente nuevamente.'.$error
+                ]);
+            }
+
+        }else{
             $this->emit('message',[
                 'status' => 'error',
-                'message' => $e->getMessage()
+                'message' => 'Debe registrar al menos un producto para continuar con la factura.'
             ]);
         }
+
+
 
     }
 
@@ -171,10 +209,19 @@ class Factura extends Component
 
                 $producto->costo_promedio = Kardex::costo_promedio($producto->producto)*$producto->unidades;
 
+                if(!$this->hasStock($producto->producto,$producto->unidades,uniqid())){
+                    $this->emit('message',[
+                        'status' => 'error',
+                        'message' => 'EL producto no tiene stock'
+                    ]);
+                }
+
                 if(!$this->existProducto($producto->codigo_de_barras) && $this->hasStock($producto->producto,$producto->unidades,uniqid())){
                     $descuento = $this->InOffSale($producto->unicode);
                     $producto->descuento = 'NO';
+                    $producto->descuento_id = 0;
                     if($descuento){
+                        $producto->descuento_id = $descuento->id;
                         $producto->precio = $descuento->cantidad > 0 ? $descuento->precio : $producto->precio;
                         $producto->descuento =  $descuento->cantidad > 0 ? 'SI' : 'NO';
                      }
@@ -193,16 +240,11 @@ class Factura extends Component
                         'unidades' => $producto->unidades,
                         'producto' => $producto->producto,
                         'descuento' => $producto->descuento,
+                        'descuento_id' => $producto->descuento_id,
                     ];
                     $this->total();
                 }
 
-                if(!$this->hasStock($producto->producto,$producto->unidades,uniqid())){
-                    $this->emit('message',[
-                        'status' => 'error',
-                        'message' => 'EL producto no tiene stock'
-                    ]);
-                }
                 $this->search = '';
             }else {
                 $this->emit('message',[
@@ -211,13 +253,14 @@ class Factura extends Component
                 ]);
             }
         }
+
     }
 
     public function InOffSale($embalaje){
         /*SELECT (cantidad_destinada - cantidad_vendida) as cantidad FROM `descuentos`
         WHERE `fecha_inicio` <=  now() AND `fecha_fin`>= now() AND `producto_embalaje_id` = 22*/
         $descuento = DB::table('descuentos')
-             ->select(DB::raw('(cantidad_destinada - cantidad_vendida) as cantidad, valor as precio'))
+             ->select(DB::raw('id,(cantidad_destinada - cantidad_vendida) as cantidad, valor as precio'))
              ->where([
                 ['fecha_inicio','<=',date('y-m-d')],
                 ['fecha_fin','>=',date('y-m-d')],
@@ -289,7 +332,6 @@ class Factura extends Component
        }
        $value = $value <= 0 ? 1 : $value;
        $producto = $this->producto($codigo);
-
        $stock = $this->countInStock($producto['producto']) - $this->countInSale($producto['producto'],$producto['unicode']);
        $cantidad = $stock - $producto['unidades']*$value;
        $posible = intval($stock / $producto['unidades']);
@@ -305,6 +347,7 @@ class Factura extends Component
            ]);
        }
        $productos = [];
+
        foreach ($this->productos as $producto){
            if($producto['unicode'] == $codigo){
                $producto['cantidad'] = $value;
@@ -318,6 +361,7 @@ class Factura extends Component
                        $copyProduct['precio'] = $this->medio_pago == 'datafono' ? $producto_embalaje->precio_venta*1.05 : $producto_embalaje->precio_venta;
                        $copyProduct['precio_show'] = number_format($copyProduct['precio']);
                        $copyProduct['costo_promedio'] = $copyProduct['precio'];
+                       $copyProduct['descuneto'] = 'NO';
                        $copyProduct['total'] =  number_format($copyProduct['precio']*$copyProduct['cantidad']) ;
                        $producto['cantidad'] = $descuento->cantidad;
                        $this->emit('changeCount',[
