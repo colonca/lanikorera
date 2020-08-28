@@ -139,7 +139,6 @@ class CompraController extends Controller
             }
 
         }catch (\Exception $e){
-            dd($e);
             $status = 'error';
             DB::rollBack();
         }
