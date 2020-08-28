@@ -64,7 +64,7 @@
                                 <div class="col-md-4" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">N° de factura</label>
-                                        <input type="text" name="numero_venta" class="form-control" placeholder="numero de venta">
+                                        <input type="text" name="serie" class="form-control" placeholder="factura de compra">
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="margin-bottom: 0">

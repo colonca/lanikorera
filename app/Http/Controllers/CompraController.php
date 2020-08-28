@@ -50,10 +50,11 @@ class CompraController extends Controller
 
         $validate = Validator::make($request->all(),[
             'proveedor_id' => 'required',
-            'numero_venta' => 'required|numeric',
+            'serie' => 'required',
             'bodega_id' => 'required',
             'fecha' => 'required|date',
         ]);
+
         if($validate->fails()){
             return response()->json([
                 'status' => 'validate',
@@ -63,7 +64,6 @@ class CompraController extends Controller
 
         $exist = Compra::where([
             ['serie',$request->serie],
-            ['numero_venta',$request->numero_venta]
         ])->first();
 
         if($exist){
