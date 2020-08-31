@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Producto;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Location;
 
 class ReporteController extends Controller
 {
@@ -147,6 +149,11 @@ class ReporteController extends Controller
 
         return $abonos;
 
+    }
+    function lista(){
+        $location = 'reportes';
+        $productos = Producto::all();
+            return view('reportes.lista.lista',compact('productos','location'));
     }
 
 }

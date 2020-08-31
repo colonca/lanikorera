@@ -48,9 +48,9 @@
 <main>
     <table style=" width: 80%; margin: 0 auto;">
         <tr>
-            <td colspan="2" width="60%;" style="padding-bottom: 10px;">Razon social: La Nikorera</td>
+            <td colspan="2" width="60%;" style="padding-bottom: 10px;">La Nikorera</td>
             <td style="padding-bottom: 10px;">NIT</td>
-            <td style="padding-bottom: 10px;">10645260-0</td>
+            <td style="padding-bottom: 10px;">12645260-0</td>
         </tr>
     </table>
     <table style=" width: 80%; margin: 0 auto;">

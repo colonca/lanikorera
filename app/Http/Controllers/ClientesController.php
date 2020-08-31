@@ -42,7 +42,7 @@ class ClientesController extends Controller
         $request->validate([
             'nombres' => 'required',
             'apellidos' => 'required',
-            'telefono' => 'required',
+            'telefono' => 'required|unique:clientes',
             'email' => 'required'
         ]);
 

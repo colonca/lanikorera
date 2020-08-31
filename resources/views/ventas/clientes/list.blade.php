@@ -30,7 +30,6 @@
                     <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
                                 <th>telefono</th>
@@ -43,7 +42,6 @@
                         <tbody>
                             @foreach($clientes as $clientes)
                             <tr>
-                                <td>{{$clientes->identificacion}}
                                 <td>{{$clientes->nombres}}
                                 <td>{{$clientes->apellidos}}
                                 <td>{{$clientes->telefono}}

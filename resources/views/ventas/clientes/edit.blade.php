@@ -36,10 +36,6 @@
                             <input name="_method" type="hidden" value="PUT" />
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <div class="form-line" >
-                                        <label for="exampleFormControlSelect1">Identidicación</label>
-                                        <br/><input type="number" class="form-control" placeholder="Escriba la cedula del cliente" value="{{$clientes->identificacion}}" name="identificacion" required="required" />
-                                    </div>
                                     <div class="form-line">
                                         <label for="exampleFormControlSelect1">Nombres</label>
                                         <br/><input type="text" class="form-control" placeholder="Escriba nombre del cliente" value="{{$clientes->nombres}}" name="nombres"required="required"/>

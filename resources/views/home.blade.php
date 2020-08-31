@@ -76,7 +76,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box hover-zoom-effect hover-expand-effect" style="background-color: #38383A; color:white">
                         <div class="icon">
-                            <a href="{{route('admin.configuracion')}}"><i class="material-icons">stacked_line_chart</i></a>
+                            <a href="{{route('admin.reportes')}}"><i class="material-icons">stacked_line_chart</i></a>
                         </div>
                         <div class="content">
                             <div style="color:white" class="text">VISUALIZACIÓN DE</div>

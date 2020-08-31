@@ -36,6 +36,14 @@
                                 <span class="ink animate"></span></div>
                         </a>
                     @endif
+                        @if(session()->exists('PAG_REPORTE-LISTA'))
+                            <a href="{{route('reporte.lista_precios')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
+                                <div>
+                                    <i class="fas fa-comment-dollar"></i>
+                                    <span>LISTA DE PRECIOS</span>
+                                    <span class="ink animate"></span></div>
+                            </a>
+                        @endif
                 </div>
             </div>
         </div>

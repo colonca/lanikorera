@@ -11,9 +11,24 @@
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h2>
-                    REPORTES - STOCK
-                </h2>
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
+                        REPORTES - STOCK
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-sm-6 col-xs-6">
+                        <div class="info-box bg-cyan hover-expand-effect">
+                            <div class="icon">
+                                <i class="fas fa-search-dollar"></i>
+                            </div>
+                            <div class="content">
+                                <div class="text">Valor del Stock</div>
+                                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="body">
                 <div class="table-responsive">

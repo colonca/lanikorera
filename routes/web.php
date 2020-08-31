@@ -117,4 +117,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () 
         date_default_timezone_set('America/Bogota');
         Route::get('stock', 'StockController@stock')->name('reporte.stock');
         Route::get('ventas', 'ReporteController@index')->name('reporte.ventas');
+        Route::get('lista', 'ReporteController@lista')->name('reporte.lista_precios');
 });
