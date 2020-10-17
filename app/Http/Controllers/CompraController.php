@@ -21,7 +21,8 @@ class CompraController extends Controller
      */
     public function index()
     {
-        //
+        $entradas  = Compra::all();
+        return view('compras.entradas.list')->with('entradas',$entradas)->with('location','compras');
     }
 
     /**

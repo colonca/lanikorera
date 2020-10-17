@@ -2,8 +2,8 @@
 @section('breadcrumb')
     <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white"  href="{{route('inicio')}}">Inicio</a></li>
-        <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color:white" href="">Facturas</a></li>
+        <li><a style="color:white" href="{{route('admin.compras')}}">Compras</a></li>
+        <li class="active"><a style="color:white" href=""></a>Entradas</li>
     </ol>
 @endsection
 @section('content')
@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        DATOS DE VENTAS - FACTURAS EN EL SISTEMA.<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
+                        DATOS DE COMPRAS - ENTRADAS DE ALMACEN <small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
@@ -20,7 +20,7 @@
                                 <i class="material-icons">more_vert</i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="{{ route('mfacturas.create') }}">Crear nueva Factura</a></li>
+                                <li><a href="{{ route('compras.create') }}">Crear Nueva Entrada de Almacen </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -30,22 +30,24 @@
                         <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>factura</th>
-                                <th>Cliente</th>
+                                <th>Bodega</th>
+                                <th>Factura de compra</th>
+                                <th>Proveedor</th>
                                 <th>Fecha</th>
                                 <th>Total</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($facturas as $factura)
+                            @foreach($entradas as $entrada)
                                 <tr>
-                                    <td>{{$factura->serie.'-'.$factura->n_venta}}</td>
-                                    <td>{{$factura->nombres.''.$factura->apellidos}}</td>
-                                    <td>{{$factura->fecha}}</td>
-                                    <td>{{$factura->total}}</td>
+                                    <td>{{$entrada->bodega->nombre}}</td>
+                                    <td>{{$entrada->serie}}</td>
+                                    <td>{{$entrada->proveedor->nombre}}</td>
+                                    <td>{{$entrada->created_at}}</td>
+                                    <td>{{$entrada->total}}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{route('devoluciones.create')."?serie=$factura->serie&n_venta=$factura->n_venta"}}"
+                                        <a href="{{route('compras.detalles', $entrada->id)}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Ver Detalle"><i class="fas fa-eye"></i></a>
                                     </td>

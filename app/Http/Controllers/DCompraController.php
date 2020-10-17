@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Compra;
 use App\DCompra;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,12 @@ class DCompraController extends Controller
      * @param  \App\DCompra  $dCompra
      * @return \Illuminate\Http\Response
      */
-    public function show(DCompra $dCompra)
+    public function show($id)
     {
-        //
+        $compra = Compra::where('id','=',$id)->first();
+        $dcompra = DCompra::where('compra_id','=',$id)->get();
+        return view('compras.entradas.show')->with('compra',$compra)
+             ->with('dcompra',$dcompra)->with('location','compras');
     }
 
     /**

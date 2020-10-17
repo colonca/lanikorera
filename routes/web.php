@@ -89,6 +89,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::post('proveedores/guardar','ProveedoresController@save')->name('proveedores.save');
     Route::get('proveedores/get/json','ProveedoresController@json')->name('proveedores.json');
     Route::resource('compras','CompraController');
+    Route::get('compra/detalle/{id}','DcompraController@show')->name('compras.detalles');
 });
 //GRUPO DE RUTAS PARA VENTAS
 Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {

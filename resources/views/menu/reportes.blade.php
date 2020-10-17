@@ -47,7 +47,7 @@
                         @if(session()->exists('PAG_REPORTE-SALIDAS'))
                             <a href="{{route('reporte.salidas')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
                                 <div>
-                                    <i class="fas fa-comment-dollar"></i>
+                                    <i class="far fa-arrow-alt-circle-right"></i>
                                     <span>SALIDAS</span>
                                     <span class="ink animate"></span></div>
                             </a>
