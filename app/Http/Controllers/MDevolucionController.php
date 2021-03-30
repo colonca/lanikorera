@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Clientes;
 use App\DFactura;
+use App\Gasto;
 use App\Kardex;
 use App\Mail\Factura;
 use App\MDevolucion;
@@ -113,6 +114,14 @@ class MDevolucionController extends Controller
 
                 $result = $kardex->save();
 
+            }
+
+            foreach (json_decode($factura->adicionales) as $adicional){
+                $gasto = new Gasto();
+                $gasto->dinero = $adicional->costo*$adicional->cantidad*-1;
+                $gasto->tipo_movimiento = 'efectivo';
+                $gasto->fecha =  date('y-m-d');
+                $gasto->save();
             }
 
             $factura->fecha = date('y-m-d');

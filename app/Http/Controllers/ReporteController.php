@@ -77,12 +77,29 @@ class ReporteController extends Controller
             ->groupBy('tipo_movimiento')
             ->first();
 
+
+
         $gastoTotal = $gastos->total ?? 0;
 
-        $ganancia = $total_vendido-$gastoTotal;
+        $this->gastos($fecha_inicial,$fecha_final);
+
+        $ganancia = $total_vendido-$gastoTotal-$this->gastos($fecha_inicial,$fecha_final);
 
         return $ganancia;
 
+    }
+
+
+    function gastos($inicial,$final){
+        /*SELECT sum(dinero) FROM `gastos`
+        WHERE `fecha` BETWEEN '2020-08-28' and '2020-08-29'
+        */
+        $gasto = DB::table('gastos')
+            ->select(DB::raw('sum(dinero) as total'))
+            ->whereBetween('fecha',[$inicial,$final])
+            ->first();
+
+        return $gasto->total ?? 0;
     }
 
     function margen_ganancia($total_vendido,$ganancia){
@@ -94,24 +111,35 @@ class ReporteController extends Controller
     }
 
     function medios_pago($fecha_incial,$fecha_final){
+
         /*
-         * SELECT MEDIO_PAGO, SUM(TOTAL) FROM m_facturas F
-         * INNER JOIN (SELECT ID FROM m_facturas
-         * WHERE (ESTADO = 'EN DEUDA' OR ESTADO = 'PAGADA') AND TIPO = 'VENTA') M
-         * ON (F.ID=M.ID)GROUP BY MEDIO_PAGO
-         */
-        $facturas = DB::table('m_facturas')
-                   ->select('id')
-                   ->whereRaw("ESTADO = 'PAGADA' AND TIPO = 'VENTA'");
+            SELECT MEDIO_PAGO, SUM(TOTAL) FROM m_facturas F
+            WHERE
+            ESTADO = 'PAGADA' and modalidad_pago <> 'credito'
+            GROUP BY MEDIO_PAGO
+        */
 
         $medios_pago = DB::table('m_facturas')
-                            ->joinSub($facturas,'facturas',function ($join){
-                                $join->on('m_facturas.id','=','facturas.id');
-                             })
                             ->select('m_facturas.medio_pago',DB::raw('SUM(TOTAL) as total'))
+                            ->where([
+                                ['estado','PAGADA'],
+                                ['modalidad_pago','<>','credito'],
+                                ['tipo','VENTA']
+                            ])
                             ->whereBetween('fecha',[$fecha_incial,$fecha_final])
                             ->groupBy('m_facturas.medio_pago')
                             ->get();
+
+        $medios_pago = $medios_pago->map(function($item) use($fecha_incial,$fecha_final){
+            if($item->medio_pago == 'efectivo'){
+                return (object)[
+                    'medio_pago' => 'efectivo',
+                    'total' => $item->total - $this->gastos($fecha_incial,$fecha_final)
+                ];
+            }
+            return $item;
+        });
+
        /*
             select  sum(f.total), sum(d.total_abono), sum(f.total-d.total_abono) as restante from m_facturas f
             join (SELECT factura_id, sum(abono) as total_abono from deudas
@@ -121,6 +149,7 @@ class ReporteController extends Controller
 
         $abonos = DB::table('deudas')
             ->select('factura_id',DB::raw('sum(abono) as total_abono'))
+            ->whereBetween('fecha',[$fecha_incial,$fecha_final])
             ->groupBy('factura_id');
 
         $total = DB::table('m_facturas')
@@ -128,20 +157,41 @@ class ReporteController extends Controller
                      $join->on('m_facturas.id','=','abonos.factura_id');
                   })
                   ->select(DB::raw('sum(m_facturas.total-abonos.total_abono) as total'))
-                  ->where('estado','EN DEUDA')
+                  ->where([
+                      ['modalidad_pago','credito'],
+                      ['estado','<>','DEVUELTA'],
+                      ['tipo','VENTA']
+                  ])
+                  ->whereBetween('fecha',[$fecha_incial,$fecha_final])
                   ->first();
+
         $total->medio_pago = 'deudas';
-        $medios_pago = $medios_pago->concat([$total]);
+        $gasto = new \stdClass();
+        $gasto->medio_pago = 'gastos';
+        $gasto->total = $this->gastos($fecha_incial,$fecha_final);
+        $medios_pago = $medios_pago->concat([$total,$gasto]);
 
         return $medios_pago;
     }
 
     function abonos($fecha_incial,$fecha_final){
-        /*SELECT medio_pago,sum(abono) FROM `deudas`
-          WHERE fecha BETWEEN '2020-08-01' and '2020-08-23'
-          GROUP BY medio_pago
+        /*
+            SELECT medio_pago,sum(abono) FROM `deudas` d INNER JOIN
+            (select id,`estado` from m_facturas WHERE estado <> 'PAGADA' AND estado <> 'DEVUELTA') f on f.id = d.factura_id
+            WHERE fecha BETWEEN '2020-08-01' and '2020-08-31'
+            GROUP BY medio_pago
         */
+        $facturas = DB::table('m_facturas')
+                         ->select('id','estado')
+                         ->where([
+                            ['estado','<>','PAGADA'],
+                            ['estado','<>','DEVUELTA']
+                         ]);
+
         $abonos = DB::table('deudas')
+            /*->joinSub($facturas, 'facturas',function($join){
+                $join->on('deudas.factura_id','=','facturas.id');
+            })*/
             ->select('medio_pago',DB::raw('sum(abono) as total'))
             ->whereBetween('fecha',[$fecha_incial,$fecha_final])
             ->groupBy('medio_pago')

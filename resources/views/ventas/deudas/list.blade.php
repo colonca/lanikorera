@@ -20,9 +20,7 @@
                         <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Identificacion</th>
                                 <th>Nombres</th>
-                                <th>Apellidos</th>
                                 <th>Total</th>
                                 <th>abonos</th>
                                 <th>Restante</th>
@@ -32,12 +30,10 @@
                             <tbody>
                             @foreach($clientes as $cliente)
                                 <tr>
-                                    <td>{{$cliente->identificacion}}</td>
                                     <td>{{$cliente->nombres}}</td>
-                                    <td>{{$cliente->apellidos}}</td>
-                                    <td>{{$cliente->total}}</td>
-                                    <td>{{$cliente->abonos}}</td>
-                                    <td>{{$cliente->resta}}</td>
+                                    <td>{{number_format($cliente->total)}}</td>
+                                    <td>{{number_format($cliente->abonos)}}</td>
+                                    <td>{{number_format($cliente->resta)}}</td>
                                     <td style="text-align: center;">
 
                                         <a href="{{ route('deuda.show',$cliente->id)}}"

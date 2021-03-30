@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Bodegas;
-use App\Clientes;
 use App\Deuda;
 use App\MFactura;
-use App\Serie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,12 +22,12 @@ class DeudaController extends Controller
             ->joinSub($deudas,'deudas',function($join){
                 $join->on('m_facturas.id','=','deudas.factura_id');
             })
-            ->select('clientes.id','clientes.identificacion','clientes.nombres','clientes.apellidos','m_facturas.total','deudas.abonos')
+            ->select('clientes.id','clientes.identificacion','clientes.nombres','m_facturas.total','deudas.abonos')
             ->where([
                 ['m_facturas.estado','=','EN DEUDA'],
             ])
-            ->select('clientes.id','identificacion','nombres','apellidos',DB::raw('sum(total) as total, sum(abonos) as abonos, (sum(total)-sum(abonos)) as resta'))
-            ->groupBy('clientes.id','identificacion','nombres','apellidos')
+            ->select('clientes.id','identificacion','nombres',DB::raw('sum(total) as total, sum(abonos) as abonos, (sum(total)-sum(abonos)) as resta'))
+            ->groupBy('clientes.id','identificacion','nombres')
             ->get();
         return view('ventas.deudas.list')->with('clientes',$clientes)->with('location','ventas');
     }
@@ -59,7 +56,7 @@ class DeudaController extends Controller
             ->joinSub($deudas,'deudas',function($join){
                 $join->on('deudas.factura_id','=','m_facturas.id');
             })
-            ->select('m_facturas.id','clientes.identificacion','clientes.nombres','clientes.apellidos',
+            ->select('m_facturas.id','m_facturas.created_at','clientes.identificacion','clientes.nombres',
                 'deudas.abonos','m_facturas.total',
                 'm_facturas.serie','m_facturas.n_venta',DB::raw('(m_facturas.total-deudas.abonos) as resta'))
             ->where([
@@ -86,7 +83,8 @@ class DeudaController extends Controller
         $location = 'ventas';
         $factura = DB::table('m_facturas')
             ->join('clientes','m_facturas.cliente_id','=','clientes.id')
-            ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta','clientes.nombres','clientes.apellidos','m_facturas.total')
+            ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta','clientes.nombres','m_facturas.total')
+            ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta','clientes.nombres','m_facturas.total')
             ->where('m_facturas.id',$id)->first();
         $abonos = DB::table('deudas')
             ->select('deudas.abono','deudas.medio_pago','deudas.created_at')

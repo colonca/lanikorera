@@ -7,6 +7,7 @@ use App\Clientes;
 use App\Descuento;
 use App\Deuda;
 use App\DFactura;
+use App\Gasto;
 use App\Kardex;
 use App\MFactura;
 use App\ProductoEmbalaje;
@@ -77,7 +78,6 @@ class Factura extends Component
                 $adicionales = [];
 
                 if($result){
-
                     foreach ($this->productos as $producto){
 
                         $dfactura = new DFactura();
@@ -104,19 +104,24 @@ class Factura extends Component
                         $kardex->detalle = 'Venta F/'.$serie->prefijo.'-'.$serie->actual;
                         $kardex->save();
                     }
-
                     if($this->modalidad_pago == 'credito'){
                         $factura->estado = 'EN DEUDA';
                         $deuda = new Deuda();
                         $deuda->factura_id =  $factura->id;
                         $deuda->abono = 0;
+                        $deuda->fecha = date('y-m-d');
                         $deuda->save();
                     }
-
                     $factura->adicionales = json_encode($this->adicionales);
+                    foreach ($this->adicionales as $adicional){
+                        $gasto = new Gasto();
+                        $gasto->dinero = $adicional['costo']*$adicional['cantidad'];
+                        $gasto->tipo_movimiento = 'efectivo';
+                        $gasto->fecha =  date('y-m-d');
+                        $gasto->save();
+                    }
                     $factura->save();
                     $cliente =  Clientes::find($this->cliente_id);
-
                     $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
                         ->setPaper('a4', 'landscape')
                         ->output();

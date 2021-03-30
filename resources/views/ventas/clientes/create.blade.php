@@ -40,10 +40,6 @@
                                         <br/><input type="text" class="form-control" placeholder="Escriba nombre del cliente" name="nombres"required="required"/>
                                     </div>
                                     <div class="form-line">
-                                        <label for="exampleFormControlSelect1">Apellidos</label>
-                                        <br/><input type="text" class="form-control" placeholder="Escriba apellidos del cliente" name="apellidos" required="required"/>
-                                    </div>
-                                    <div class="form-line">
                                         <label for="exampleFormControlSelect1">Telefono</label>
                                         <br/><input type="number" class="form-control" placeholder="Escriba telefono del cliente" name="telefono" required="required"/>
                                     </div>

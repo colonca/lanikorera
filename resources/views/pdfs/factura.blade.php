@@ -1,5 +1,5 @@
 <html>
-<head>
+<head><meta charset="euc-kr">
     <style>
         @page {
             margin: 0cm 0cm;
@@ -100,7 +100,7 @@
         @endforeach
         <tr>
             <td colspan="3" style="text-align: right;">Total</td>
-            <td >{{$factura->total}}</td>
+            <td >{{number_format($factura->total)}}</td>
         </tr>
     </table>
 </main>

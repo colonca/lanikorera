@@ -42,8 +42,8 @@
                                 <tr>
                                     <td>{{$factura->serie.'-'.$factura->n_venta}}</td>
                                     <td>{{$factura->cliente->nombres.''.$factura->cliente->apellidos}}</td>
-                                    <td>{{$factura->fecha}}</td>
-                                    <td>{{$factura->total}}</td>
+                                    <td>{{$factura->created_at}}</td>
+                                    <td>{{number_format($factura->total)}}</td>
                                     <td style="text-align: center;">
                                         <a href="{{route('devoluciones.show',$factura->id)}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"

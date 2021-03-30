@@ -27,7 +27,7 @@
                                             <input type="date" disabled id="datePicker" name="fecha" class="form-control" value="{{date('Y-m-d')}}">
                                         </div>
                                     </div>
-                                    <div class="col-md-6" style="margin-bottom: 0">
+                                    <div class="col-md-9" style="margin-bottom: 0">
                                         <div class="form-group">
                                             <label for="">Cliente</label>
                                             <div class="proveedor" style="display: flex; width: 100%">
@@ -36,12 +36,6 @@
                                                 <button class="btn btn-success btn-circle" onclick="event.preventDefault()" data-toggle="modal" data-target="#Mcreate" style="margin-right: 5px;"><i class="fas fa-plus"></i></button>
                                                 <button class="btn btn-info btn-circle" onclick="clientes(event)"><i class="fas fa-search"></i></button>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3" style="margin-bottom: 0">
-                                        <div class="form-group">
-                                            <label for="">Nombre</label>
-                                            <input type="text"  disabled id="c_nombres" class="form-control" placeholder="JUANITO PROVEEDOR">
                                         </div>
                                     </div>
                                 </div>

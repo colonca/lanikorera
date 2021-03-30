@@ -90,35 +90,24 @@
                                                 <td>{{$detalle->producto_embalaje->producto->nombre.'X'.$detalle->producto_embalaje->producto->presentacion}}</td>
                                                 <td>{{$detalle->producto_embalaje->embalaje->descripcion}}</td>
                                                 <td>{{$detalle->cantidad}}</td>
-                                                <td>$ {{$detalle->precio}}</td>
-                                                <td>$ {{$detalle->cantidad*$detalle->precio}}</td>
+                                                <td>$ {{number_format($detalle->precio)}}</td>
+                                                <td>$ {{number_format($detalle->cantidad*$detalle->precio)}}</td>
                                             </tr>
                                         @endforeach
                                         @foreach(json_decode($factura->adicionales) as $adicional)
                                             <tr>
-                                                <td>{{$adicional->id}}</td>
+                                                <td>{{$adicional->unicode}}</td>
                                                 <td>{{$adicional->nombre}}</td>
                                                 <td>UNIDAD</td>
                                                 <td>{{$adicional->cantidad}}</td>
-                                                <td>$ {{$adicional->precio_venta}}</td>
-                                                <td>$ {{$adicional->cantidad*$adicional->precio_venta}}</td>
+                                                <td>$ {{$adicional->precio}}</td>
+                                                <td>$ {{number_format($adicional->total)}}</td>
                                             </tr>
                                         @endforeach
-                                        @if($factura->medio_pago == 'datafono')
                                             <tr>
-                                                <td colspan="5" style="text-align: right;">IMPUESTO:</td>
-                                                <td>{{$factura->total*0.05}} </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="5" style="text-align: right;">TOTAL:</td>
-                                                <td>{{$factura->total*1.05}} </td>
-                                            </tr>
-                                        @else
-                                            <tr>
-                                                <td colspan="5" style="text-align: right;">TOTAL:</td>
+                                                <td colspan="5" style="text-align: right;">Total:</td>
                                                 <td>{{$factura->total}} </td>
                                             </tr>
-                                        @endif
                                         </tbody>
                                     </table>
                                 </div>

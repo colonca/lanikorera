@@ -18,15 +18,15 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
+                        <table id="table" class="table table-bordered table-striped table-hover table-responsive table-condensed" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>Id factura</th>
                                 <th>Nombres</th>
-                                <th>Apellidos</th>
                                 <th>Total</th>
                                 <th>Abonos</th>
                                 <th>Restante</th>
+                                <th>Fecha</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
@@ -35,18 +35,15 @@
                                 <tr>
                                     <td>{{$factura->serie.'-'.$factura->n_venta}}</td>
                                     <td>{{$factura->nombres}}</td>
-                                    <td>{{$factura->apellidos}}</td>
-                                    <td>{{$factura->total}}</td>
-                                    <td>{{$factura->abonos}}</td>
-                                    <td>{{$factura->resta}}</td>
+                                    <td>{{number_format($factura->total)}}</td>
+                                    <td>{{number_format($factura->abonos)}}</td>
+                                    <td>{{number_format($factura->resta)}}</td>
+                                    <td>{{date('Y-m-d h:m A',strtotime($factura->created_at))}}</td>
                                     <td style="text-align: center;">
-
                                         <a href="{{ route('deuda.detalles',$factura->id)}}"
-
                                            class="btn bg-green waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Ver detalles"><i
                                                 class="material-icons">remove_red_eye</i></a>
-
                                         <a href="{{ route('deuda.edit',$factura->id)}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
                                            data-placement="top" title="Abonar"><i
@@ -65,7 +62,9 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            //$('#tabla').DataTable();
+            $('#table').DataTable({
+                "order": [[5, "desc" ]] // Sort by first column descending
+            });
         });
     </script>
 @endsection

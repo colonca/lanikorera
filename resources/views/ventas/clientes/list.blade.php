@@ -31,7 +31,6 @@
                         <thead>
                             <tr>
                                 <th>Nombres</th>
-                                <th>Apellidos</th>
                                 <th>telefono</th>
                                 <th>Email</th>
                                 <th>Creado</th>
@@ -43,7 +42,6 @@
                             @foreach($clientes as $clientes)
                             <tr>
                                 <td>{{$clientes->nombres}}
-                                <td>{{$clientes->apellidos}}
                                 <td>{{$clientes->telefono}}
                                 <td>{{$clientes->email}}
                                 <td>{{$clientes->created_at}}</td>
@@ -57,6 +55,10 @@
                                        class="btn bg-red waves-effect btn-xs" data-toggle="tooltip"
                                        data-placement="top" title="Eliminar Cliente"><i
                                             class="material-icons">delete</i></a>
+                                      <a href="{{route('clientes.facturas', $clientes->id)}}"
+                                        class="btn bg-green waves-effect btn-xs" data-toggle="tooltip"
+                                        data-placement="top" title="Ver Facturas"><i
+                                        class="material-icons">remove_red_eye</i></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -3,7 +3,7 @@
     <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white"  href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color:white" href="">Facturas</a></li>
+        <li class="active"><a style="color:white" href="{{route('deuda.index')}}">Deudas</a></li>
     </ol>
 @endsection
 @section('content')
@@ -27,11 +27,13 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
+                        <table id="table" class="table table-bordered table-striped table-hover table-responsive table-condensed " width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>factura</th>
                                 <th>Cliente</th>
+                                <th>Modalidad de pago</th>
+                                <th>Medio pago</th>
                                 <th>Fecha</th>
                                 <th>Total</th>
                                 <th>Acciones</th>
@@ -41,9 +43,11 @@
                             @foreach($facturas as $factura)
                                 <tr>
                                     <td>{{$factura->serie.'-'.$factura->n_venta}}</td>
-                                    <td>{{$factura->nombres.''.$factura->apellidos}}</td>
-                                    <td>{{$factura->fecha}}</td>
-                                    <td>{{$factura->total}}</td>
+                                    <td>{{$factura->nombres}}</td>
+                                    <td>{{$factura->modalidad_pago}}</td>
+                                    <td>{{$factura->medio_pago}}</td>
+                                    <td>{{date('Y-m-d h:m A',strtotime($factura->created_at))}}</td>
+                                    <td>{{number_format($factura->total)}}</td>
                                     <td style="text-align: center;">
                                         <a href="{{route('devoluciones.create')."?serie=$factura->serie&n_venta=$factura->n_venta"}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
@@ -62,7 +66,10 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            //$('#tabla').DataTable();
+            $('#table').DataTable({
+                 columnDefs: [ { type: 'date', 'targets': [4] } ],
+                "order": [[4, "desc" ]] // Sort by first column descending
+            });
         });
     </script>
 @endsection

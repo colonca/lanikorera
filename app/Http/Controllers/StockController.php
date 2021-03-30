@@ -10,6 +10,14 @@ class StockController extends Controller
 {
     public function stock(){
 
+        $stock = DB::table('kardexes')
+                   ->select('tipo_movimiento',DB::raw('sum(cantidad*costo) as total'))
+                   ->groupBy('tipo_movimiento')
+                  ->get();
+        $entrada = $stock[0]->total ?? 0;
+        $salida = $stock[1]->total ?? 0;
+        $total =  $entrada-$salida;
+
         $productos = Producto::all();
         $inventario = [];
         foreach ($productos as $producto){
@@ -31,7 +39,11 @@ class StockController extends Controller
                 $inventario[] = $item;
             }
         }
-        return view('reportes.stock.stock')->with('inventario',$inventario)->with('location','reportes');
+        return view('reportes.stock.stock')
+            ->with('inventario',$inventario)
+            ->with('location','reportes')
+            ->with('stock',$total);
+
     }
 
 }

@@ -89,7 +89,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'compras'], function () {
     Route::post('proveedores/guardar','ProveedoresController@save')->name('proveedores.save');
     Route::get('proveedores/get/json','ProveedoresController@json')->name('proveedores.json');
     Route::resource('compras','CompraController');
-    Route::get('compra/detalle/{id}','DcompraController@show')->name('compras.detalles');
+    Route::get('compra/detalle/{id}','DCompraController@show')->name('compras.detalles');
 });
 //GRUPO DE RUTAS PARA VENTAS
 Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
@@ -97,6 +97,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'ventas'], function () {
     Route::resource('clientes','ClientesController');
     Route::post('clientes/guardar','ClientesController@save')->name('clientes.save');
     Route::get('clientes/get/json','ClientesController@json')->name('clientes.json');
+    Route::get('clientesfacturas/{id}','ClientesController@show')->name('clientes.facturas');
+    Route::get('facturasdetalles/{id}','ClientesController@detalles')->name('facturas.detalles');
     Route::post('adicionales/guardar','AdicionalController@save')->name('adicional.save');
     Route::resource('mfacturas','MFacturaController');
     Route::view('facturar','ventas.facturas.create',['location'=>'ventas']);

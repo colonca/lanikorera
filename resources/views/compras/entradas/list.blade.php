@@ -27,7 +27,7 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed dataTable js-exportable" width="100%" cellspacing="0">
+                        <table id="table" class="table table-bordered table-striped table-hover table-responsive table-condensed " width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>Bodega</th>
@@ -45,7 +45,7 @@
                                     <td>{{$entrada->serie}}</td>
                                     <td>{{$entrada->proveedor->nombre}}</td>
                                     <td>{{$entrada->created_at}}</td>
-                                    <td>{{$entrada->total}}</td>
+                                    <td>{{number_format($entrada->total)}}</td>
                                     <td style="text-align: center;">
                                         <a href="{{route('compras.detalles', $entrada->id)}}"
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
@@ -64,7 +64,9 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            //$('#tabla').DataTable();
+            $('#table').DataTable({
+                "order": [[3, "desc" ]] // Sort by first column descending
+            });
         });
     </script>
 @endsection

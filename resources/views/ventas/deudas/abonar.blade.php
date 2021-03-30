@@ -3,7 +3,7 @@
     <ol class="breadcrumb " style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
         <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
-        <li class="active"><a style="color: white"href="{{route('deuda.index')}}">Deudas</a></li>
+        <li class="active"><a style="color: white;" href="{{route('deuda.index')}}">Deudas</a></li>
         <li class="active"><a style="color: white" >Facturas en Deuda</a></li>
         <li class="active"><a style="color: white" >Abonar</a></li>
     </ol>
@@ -34,12 +34,8 @@
                                                <br/><input type="text" class="form-control" placeholder="Nombres del cliente"  value="{{$factura->nombres}}" name="nombres"required="required" disabled/>
                                            </div>
                                            <div class="form-line">
-                                               <label for="exampleFormControlSelect1">Apellidos</label>
-                                               <br/><input type="text" class="form-control" placeholder="apellidos del cliente"  value="{{$factura->apellidos}}"name="apellidos" required="required" disabled/>
-                                           </div>
-                                           <div class="form-line">
                                                <label for="exampleFormControlSelect1">Total</label>
-                                               <br/><input type="number" class="form-control" placeholder="Total de l factura"  value="{{$factura->total}}"name="total" required="required" disabled/>
+                                               <br/><input type="number" class="form-control" placeholder="Total de l factura"  value="{{$factura->total}}" name="total" required="required" disabled/>
                                            </div>
                                            <div class="form-line">
                                                <label for="exampleFormControlSelect1">Medio de Pago</label>

@@ -23,7 +23,7 @@
                             <div class="content">
                                 <div class="text">Valor del Stock</div>
                                 <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">
-
+                                     {{number_format($stock)}}
                                 </div>
                             </div>
                         </div>
@@ -46,7 +46,13 @@
                             <tr>
                                 <td>{{$item->producto}}
                                 <td>{{$item->stock_minimo}}
-                                <td>{{$item->stock}}
+                                @if($item->stock < $item->stock_minimo)
+                                    <td class="bg-danger">{{$item->stock}}</td>
+                                @elseif($item->stock > $item->stock_minimo && $item->stock <= intval($item->stock_maximo / 2))
+                                    <td class="bg-warning">{{$item->stock}}</td>
+                                @else
+                                    <td class="bg-success">{{$item->stock}}</td>
+                                @endif
                                 <td>$ {{number_format($item->costo_promedio)}}</td>
                             </tr>
                         @endforeach

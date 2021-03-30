@@ -10,10 +10,8 @@ use App\DFactura;
 use App\Kardex;
 use App\MFactura;
 use App\Serie;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class MFacturaController extends Controller
@@ -37,8 +35,8 @@ class MFacturaController extends Controller
              })
             ->join('clientes','clientes.id','=','m_facturas.cliente_id')
             ->select('m_facturas.id','m_facturas.serie','m_facturas.n_venta',
-                'm_facturas.fecha','m_facturas.estado','m_facturas.modalidad_pago','m_facturas.medio_pago','m_facturas.total',
-                'clientes.nombres','clientes.apellidos')
+                'm_facturas.created_at','m_facturas.estado','m_facturas.modalidad_pago','m_facturas.medio_pago','m_facturas.total',
+                'clientes.nombres')
             ->get();
 
         $location = 'ventas';

@@ -88,10 +88,6 @@
                                 <br/><input type="text" id="nombres" class="form-control" placeholder="Escriba nombre del cliente" name="nombres"required="required"/>
                             </div>
                             <div class="form-line">
-                                <label for="exampleFormControlSelect1">Apellidos</label>
-                                <br/><input type="text" class="form-control" placeholder="Escriba apellidos del cliente" name="apellidos" required="required"/>
-                            </div>
-                            <div class="form-line">
                                 <label for="exampleFormControlSelect1">Telefono</label>
                                 <br/><input type="number" class="form-control" placeholder="Escriba telefono del cliente" name="telefono" required="required"/>
                             </div>
@@ -114,13 +110,12 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="defaultModalLabel">Buscar Proveedor</h4>
+                <h4 class="modal-title" id="defaultModalLabel">Buscar Cliente</h4>
             </div>
             <div class="modal-body">
                 <table class="table table-striped" id="list-clientes">
                     <thead>
                        <th>ID</th>
-                       <th>IDENTIFICACÓN</th>
                        <th>NOMBRES</th>
                        <th>TELEFONO</th>
                        <th>EMAIL</th>
@@ -137,7 +132,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="defaultModalLabel">Buscar Proveedor</h4>
+                <h4 class="modal-title" id="defaultModalLabel">Adicional</h4>
             </div>
             <div class="modal-body">
                 <form action="" id="form-adicionales">
@@ -212,7 +207,6 @@
                     $('#Mcreate').modal('hide');
                     $('#cliente_id').val(msg.cliente.id);
                     $("#c_identificacion").val(msg.cliente.nombres);
-                    $("#c_nombres").val(msg.cliente.apellidos);
                     window.livewire.emit('selectCustomer',msg.cliente.id);
                 }else if(msg.status == 'error'){
                     notify('Atención', 'El cliente no pudo ser alamacenada.', 'error');
@@ -269,7 +263,6 @@
                                   <tr>
                                        <td>${item.id}</td>
                                        <td>${item.nombres}</td>
-                                       <td>${item.apellidos}</td>
                                        <td>${item.telefono}</td>
                                        <td>${item.email}</td>
                                   </tr>

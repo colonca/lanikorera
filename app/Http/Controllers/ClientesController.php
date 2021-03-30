@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clientes;
+use App\Deuda;
 use App\MFactura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -41,14 +42,12 @@ class ClientesController extends Controller
     {
         $request->validate([
             'nombres' => 'required',
-            'apellidos' => 'required',
             'telefono' => 'required|unique:clientes',
             'email' => 'required'
         ]);
 
         $clientes =  new Clientes();
         $clientes->nombres = $request->nombres;
-        $clientes->apellidos = $request->apellidos;
         $clientes->telefono = $request->telefono;
         $clientes->email = $request->email;
         $result = $clientes->save();
@@ -62,16 +61,35 @@ class ClientesController extends Controller
         }
     }
 
-    /**
+    
+     /**
      * Display the specified resource.
      *
      * @param  \App\Clientes  $clientes
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function show(Clientes $clientes)
+    public function show($cliente_id)
     {
-        //
+        $cliente = Clientes::findOrFail($cliente_id);
+        return view('ventas.clientes.listfact')
+            ->with('location','ventas')
+            ->with('cliente',$cliente);
     }
+    
+    
+    public function detalles($factura_id)
+    {
+        $factura = MFactura::findOrFail($factura_id);
+        $abonos =  Deuda::where([
+            ['factura_id',$factura->id],
+            ['abono','>',0]
+        ])->orderBy('created_at','desc')->get();
+        $location = 'ventas';
+        return view('ventas.clientes.detallesfact',compact('location','factura','abonos'));
+    }
+    
+    
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -98,7 +116,6 @@ class ClientesController extends Controller
         $cliente =  Clientes::findOrFail($id);
         $cliente->identificacion = $request->identificacion;
         $cliente->nombres = $request->nombres;
-        $cliente->apellidos = $request->apellidos;
         $cliente->telefono = $request->telefono;
         $cliente->email = $request->email;
         $result = $cliente->save();
@@ -144,7 +161,6 @@ class ClientesController extends Controller
         parse_str($request->form, $values);
         $validate = Validator::make($values,[
             'nombres' => 'required',
-            'apellidos' => 'required',
             'telefono' => 'required',
             'email' => 'required'
         ]);

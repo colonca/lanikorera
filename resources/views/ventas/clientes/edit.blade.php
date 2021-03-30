@@ -41,10 +41,6 @@
                                         <br/><input type="text" class="form-control" placeholder="Escriba nombre del cliente" value="{{$clientes->nombres}}" name="nombres"required="required"/>
                                     </div>
                                     <div class="form-line">
-                                        <label for="exampleFormControlSelect1">Apellidos</label>
-                                        <br/><input type="text" class="form-control" placeholder="Escriba apellidos del cliente" value="{{$clientes->apellidos}}" name="apellidos" required="required"/>
-                                    </div>
-                                    <div class="form-line">
                                         <label for="exampleFormControlSelect1">Telefono</label>
                                         <br/><input type="number" class="form-control" placeholder="Escriba telefono del cliente" value="{{$clientes->telefono}}" name="telefono" required="required"/>
                                     </div>

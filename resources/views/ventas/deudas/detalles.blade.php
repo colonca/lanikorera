@@ -36,8 +36,8 @@
                                     <td>{{$detalle->producto_embalaje->producto->nombre.'X'.$detalle->producto_embalaje->producto->presentacion}}</td>
                                     <td>{{$detalle->producto_embalaje->embalaje->descripcion}}</td>
                                     <td>{{$detalle->cantidad}}</td>
-                                    <td>$ {{$detalle->precio}}</td>
-                                    <td>$ {{$detalle->cantidad*$detalle->precio}}</td>
+                                    <td>$ {{number_format($detalle->precio)}}</td>
+                                    <td>$ {{number_format($detalle->cantidad*$detalle->precio)}}</td>
                                 </tr>
                             @endforeach
                             @foreach(json_decode($factura->adicionales) as $adicional)
