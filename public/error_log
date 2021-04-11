@@ -1,0 +1,235 @@
+[29-Aug-2020 11:07:50 America/Bogota] PHP Warning:  require(/home3/nikorrie/lanikorera.com/../vendor/autoload.php): failed to open stream: No such file or directory in /home3/nikorrie/lanikorera.com/index.php on line 24
+[29-Aug-2020 11:07:50 America/Bogota] PHP Warning:  require(/home3/nikorrie/lanikorera.com/../vendor/autoload.php): failed to open stream: No such file or directory in /home3/nikorrie/lanikorera.com/index.php on line 24
+[29-Aug-2020 11:07:50 America/Bogota] PHP Fatal error:  require(): Failed opening required '/home3/nikorrie/lanikorera.com/../vendor/autoload.php' (include_path='.:/opt/php71/lib/php') in /home3/nikorrie/lanikorera.com/index.php on line 24
+[29-Aug-2020 16:08:25 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:08:25 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:09:28 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:09:28 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:12:02 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:12:02 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:12:05 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:12:05 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:12:32 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:12:32 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:13:44 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:13:44 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:14:03 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:14:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:14:05 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:14:05 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:14:28 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:14:28 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:14:39 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:14:39 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:14:55 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:14:55 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:15:49 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:15:49 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:15:52 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:15:52 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:18:25 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:18:25 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:21:35 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:21:35 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:24:03 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:24:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:28:49 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:28:49 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:29:04 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:29:04 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:29:33 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:29:33 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:33:43 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:33:43 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:36:32 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:36:32 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:38:16 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:38:16 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:40:00 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:40:00 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:40:43 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:40:43 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:41:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:41:03 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74
+[29-Aug-2020 16:41:33 UTC] PHP Fatal error:  Declaration of Carbon\Translator::setLocale($locale) must be compatible with Symfony\Contracts\Translation\LocaleAwareInterface::setLocale(string $locale) in /home3/nikorrie/nikorera/vendor/nesbot/carbon/src/Carbon/Translator.php on line 18
+[29-Aug-2020 16:41:33 UTC] PHP Fatal error:  Uncaught TypeError: Argument 2 passed to Monolog\Utils::jsonEncode() must be of the type integer or null, unknown given, called in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php on line 237 and defined in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php:74
+Stack trace:
+#0 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php(237): Monolog\Utils::jsonEncode(Array, true)
+#1 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(155): Monolog\Formatter\NormalizerFormatter->toJson(Array, true)
+#2 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(126): Monolog\Formatter\LineFormatter->convertToString(Array)
+#3 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Formatter/LineFormatter.php(102): Monolog\Formatter\LineFormatter->stringify(Array)
+#4 /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Handler/AbstractProcessin in /home3/nikorrie/nikorera/vendor/monolog/monolog/src/Monolog/Utils.php on line 74

@@ -11,6 +11,6 @@ class SerieSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }
