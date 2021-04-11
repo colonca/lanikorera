@@ -53,7 +53,7 @@
                                         <div class="form-line">
                                             <label for="">Codigo de Barras</label>
                                             <input type="hidden" name="producto_embalaje_id" id="producto_embalaje">
-                                            <input type="text" class="form-control" id="codigo" onkeypress="buscarProducto(event)" placeholder="scanee o ingrese el codigo del producto" required="required">
+                                            <input type="text" class="form-control" id="codigo" onkeypress="buscarProducto(event)" onblur="search()" placeholder="scanee o ingrese el codigo del producto" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -89,24 +89,28 @@
 </div>
 @endsection
 @section('script')
+    <script src="{{asset('js/number_format.js')}}"></script>
     <script>
+        function search() {
+            const  codigo = $('#codigo').val();
+            $.ajax({
+                type: 'GET',
+                url: '{{url('almacen/producto/search')}}/'+codigo,
+            }).done(function (msg) {
+                if(msg.status == 'ok'){
+                    $('#producto_embalaje').val(msg.producto.unicode);
+                    //document.getElementById('costo_promedio').value = msg.producto.costo_promedio;
+                    $('#cantidad').focus();
+                }else{
+                    notify('Atención', 'El producto con el codigo ' + $('#cogigo').val() +' no ha sido registrado.!', 'warning');
+                    $('#cogigo').val('');
+                }
+            });
+        }
         function buscarProducto(event){
             if(event.keyCode == 13){
                 event.preventDefault();
-                const  codigo = $('#codigo').val();
-                $.ajax({
-                    type: 'GET',
-                    url: '{{url('almacen/producto/search')}}/'+codigo,
-                }).done(function (msg) {
-                    if(msg.status == 'ok'){
-                        $('#producto_embalaje').val(msg.producto.unicode);
-                        document.getElementById('costo_promedio').value = msg.producto.costo_promedio;
-                        $('#cantidad').focus();
-                    }else{
-                        notify('Atención', 'El producto con el codigo ' + $('#cogigo').val() +' no ha sido registrado.!', 'warning');
-                        $('#cogigo').val('');
-                    }
-                });
+                search();
             }
         }
     </script>

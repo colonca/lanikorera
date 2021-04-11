@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Descuento;
+use App\Producto;
+use App\ProductoEmbalaje;
 use Illuminate\Http\Request;
 
 class DescuentoController extends Controller
@@ -30,12 +32,7 @@ class DescuentoController extends Controller
         return view('ventas.descuentos.create',compact('location'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -49,8 +46,7 @@ class DescuentoController extends Controller
         $descuento =  new Descuento();
         $descuento->fecha_inicio= $request->fecha_inicio;
         $descuento->fecha_fin = $request->fecha_fin;
-        $hoy= date('y-m-d');
-        dd($hoy);
+        $hoy= date('Y-m-d');
         if($request->fecha_inicio<$hoy||$request->fecha_fin<$hoy){
             flash("El Descuento no puede aplicarse a una fecha en el pasado!")->error();
             return  redirect()->back();
@@ -60,7 +56,15 @@ class DescuentoController extends Controller
             return  redirect()->back();
         }
 
-        $descuento-> producto_embalaje_id= $request->producto_embalaje_id;
+        $producto = ProductoEmbalaje::findOrFail($request->producto_embalaje_id);
+        $producto = Producto::search($producto->codigo_de_barras);
+        if( $request->valor < $producto->costo_promedio){
+            $message = "El precio no puede ser menor al costo promedio <strong>$ ".number_format($producto->costo_promedio, 0)."</strong>";
+            flash()->error($message);
+            return  redirect()->back();
+        }
+
+        $descuento->producto_embalaje_id = $request->producto_embalaje_id;
         $descuento->cantidad_destinada = $request->cantidad_destinada;
         $descuento->cantidad_vendida = 0;
         $descuento->valor = $request->valor;
