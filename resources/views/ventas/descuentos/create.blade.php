@@ -30,7 +30,10 @@
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-12" style="margin-bottom: 0;">
-                        <form id="form" action="{{route('descuentos.store')}}" method="POST">
+                        <form id="form" action="{{route('permisos.generar')}}" method="POST">
+                            <input type="hidden" name="route" value="descuentos.store">
+                            <input type="hidden" name="location" value="ventas">
+                            <input type="hidden" name="operation" value="descuento-store">
                             @csrf
                             <div class="row" style="width: 90%; margin: 0 auto;">
                                 <div class="col-md-6" style="margin-bottom: 0">
@@ -79,7 +82,7 @@
                                 <br/><br/><a href="{{route('descuentos.index')}}" class="btn bg-red waves-effect">Cancelar</a>
                                 <button class="btn bg-indigo waves-effect" type="reset">Limpiar Formulario</button>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verification_code">
+                                <button type="submit" class="btn btn-success waves-effect">
                                     Guardar
                                 </button>
                             </div>
@@ -90,7 +93,6 @@
         </div>
     </div>
 </div>
-@include('layouts.permisions')
 @endsection
 @section('script')
     <script src="{{asset('js/number_format.js')}}"></script>
@@ -117,6 +119,5 @@
                 search();
             }
         }
-
     </script>
 @endsection

@@ -224,7 +224,7 @@
                        document.getElementById(`${embalaje_id}`).innerHTML = `<td>${embalaje}</td>
                                                                                 <td>${codigo_de_barras}</td>
                                                                                 <td>${unidades}</td>
-                                                                                <td>${precio_venta}</td>
+                                                                                <td>${number_format(precio_venta,0)}</td>
                                                                                 <td style="text-align: center;">
                                                                                     <a href=""
                                                                                        class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
@@ -241,7 +241,7 @@
                     tr.innerHTML = `<td>${embalaje}</td>
                                     <td>${codigo_de_barras}</td>
                                     <td>${unidades}</td>
-                                    <td>${precio_venta}</td>
+                                    <td>${number_format(precio_venta,0)}</td>
                                     <td style="text-align: center;">
                                         <a href=""
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"

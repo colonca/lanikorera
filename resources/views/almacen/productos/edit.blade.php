@@ -197,6 +197,7 @@
 </div>
 @endsection
 @section('script')
+    <script src="{{asset('js/number_format.js')}}"></script>
     <script>
         $('.select2').select2();
         codigo = document.getElementById('codigo_de_barras');
@@ -223,7 +224,7 @@
                         tr.innerHTML =  `<td>${item.descripcion}</td>
                                         <td>${item.codigo_de_barras}</td>
                                         <td>${item.unidades}</td>
-                                        <td>${item.precio_venta}</td>
+                                        <td>${number_format(item.precio_venta,0)}</td>
                                         <td style="text-align: center;">
                                             <a href=""
                                                class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
@@ -266,7 +267,7 @@
                         document.getElementById(`${embalaje_id}`).innerHTML = `<td>${embalaje}</td>
                                                                                 <td>${codigo_de_barras}</td>
                                                                                 <td>${unidades}</td>
-                                                                                <td>${precio_venta}</td>
+                                                                                <td>${number_format(precio_venta,0)}</td>
                                                                                 <td style="text-align: center;">
                                                                                     <a href=""
                                                                                        class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"
@@ -283,7 +284,7 @@
                     tr.innerHTML = `<td>${embalaje}</td>
                                     <td>${codigo_de_barras}</td>
                                     <td>${unidades}</td>
-                                    <td>${precio_venta}</td>
+                                    <td>${number_format(precio_venta,0)}</td>
                                     <td style="text-align: center;">
                                         <a href=""
                                            class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"

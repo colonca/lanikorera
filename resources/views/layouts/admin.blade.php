@@ -284,6 +284,20 @@
 <script src="{{ asset('js/nestable/jquery.nestable.js')}}"></script>
 <script src="{{ asset('js/pages/ui/sortable-nestable.js')}}"></script>
 <script type="text/javascript">
+   console.log('something went wrong');
+   window.setInterval(function() {
+        $.ajax({
+            url : '{{route('permisos.cancelar')}}',
+            data : {
+                '_token' : $('meta[name="csrf-token"]').attr('content'),
+            },
+            type : 'POST',
+        }).done(function(data) {
+            console.log(data);
+        });
+   },1000*60);
+</script>
+<script type="text/javascript">
 
     var url = "<?php echo config('app.url'); ?>/";
 

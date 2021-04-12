@@ -45,7 +45,7 @@
                             <tr>
                                 <td>{{$descuento->producto_embalaje->producto->nombre.'x'.$descuento->producto_embalaje->producto->presentacion}}</td>
                                 <td>{{$descuento->producto_embalaje->embalaje->descripcion}}</td>
-                                <td>$ {{$descuento->valor}}</td>
+                                <td>$ {{number_format($descuento->valor,0)}}</td>
                                 <td>{{$descuento->cantidad_destinada}}</td>
                                 <td>{{$descuento->cantidad_vendida}}</td>
                                 <td>{{$descuento->fecha_inicio}}</td>

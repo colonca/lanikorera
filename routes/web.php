@@ -124,3 +124,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () 
         Route::get('salidas', 'SalidasController@salidas')->name('reporte.salidas');
         Route::get('permisos', 'PermisosController@index')->name('reporte.permisos');
 });
+
+
+//GRUPO DE RUTAS PARA REPORTES
+Route::group(['middleware' => 'auth', 'prefix' => 'permisos'], function () {
+    date_default_timezone_set('America/Bogota');
+    Route::post('generarPermiso', 'PermisosController@generar')->name('permisos.generar');
+    Route::post('cancelarPermisos','PermisosController@cancelar')->name('permisos.cancelar');
+});
