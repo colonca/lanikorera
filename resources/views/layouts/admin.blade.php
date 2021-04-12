@@ -23,6 +23,7 @@
     <link href="{{asset('plugins/pnotify/dist/pnotify.css')}}" rel="stylesheet">
     <link href="{{asset('plugins/pnotify/dist/pnotify.buttons.css')}}" rel="stylesheet">
     <link href="{{asset('plugins/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
+    <link href="{{asset('css/permission.css')}}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/33bf1ad68d.js" crossorigin="anonymous"></script>
     <!-- JQuery Nestable Css -->
     <link href="{{asset('css/plugins/nestable/jquery-nestable.css')}}" rel="stylesheet"/>

@@ -78,7 +78,10 @@
                             <div class="form-group">
                                 <br/><br/><a href="{{route('descuentos.index')}}" class="btn bg-red waves-effect">Cancelar</a>
                                 <button class="btn bg-indigo waves-effect" type="reset">Limpiar Formulario</button>
-                                <button class="btn bg-green waves-effect" type="submit">Guardar</button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#verification_code">
+                                    Guardar
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -87,6 +90,7 @@
         </div>
     </div>
 </div>
+@include('layouts.permisions')
 @endsection
 @section('script')
     <script src="{{asset('js/number_format.js')}}"></script>
@@ -113,5 +117,6 @@
                 search();
             }
         }
+
     </script>
 @endsection
