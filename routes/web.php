@@ -122,4 +122,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'configuracion'], function () 
         Route::get('ventas', 'ReporteController@index')->name('reporte.ventas');
         Route::get('lista', 'ReporteController@lista')->name('reporte.lista_precios');
         Route::get('salidas', 'SalidasController@salidas')->name('reporte.salidas');
+        Route::get('permisos', 'PermisosController@index')->name('reporte.permisos');
 });

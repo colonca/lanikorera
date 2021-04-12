@@ -52,6 +52,14 @@
                                     <span class="ink animate"></span></div>
                             </a>
                         @endif
+                        @if(session()->exists('PAG_REPORTE-PERMISOS'))
+                            <a href="{{route('reporte.permisos')}}" class="btn btn-lg  waves-effect" style="background-color: #38383A; color:white;">
+                                <div>
+                                    <i class="far fa-arrow-alt-circle-right"></i>
+                                    <span>PERMISOS</span>
+                                    <span class="ink animate"></span></div>
+                            </a>
+                        @endif
                 </div>
             </div>
         </div>
