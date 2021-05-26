@@ -79,7 +79,11 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <div class="col-md-12">
+                                    <img style="max-width:100%" src="{{asset('storage').'/'.$compra->foto}}" alt="">
+                                </div>
                             </div>
+
                     </div>
                 </div>
             </div>

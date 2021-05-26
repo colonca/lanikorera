@@ -38,20 +38,26 @@ class MDevolucionController extends Controller
     {
         $factura = null;
 
-        if(isset($request->serie) && $request->n_venta){
-            $exist =  MFactura::serie($request->serie)
-                ->numeroVenta($request->n_venta)
-                ->where('estado','=','DEVUELTA')
-                ->first();
-            if(!$exist){
-                $factura = MFactura::serie($request->serie)
-                    ->numeroVenta($request->n_venta)
-                    ->where('estado','!=','DEVUELTA')
-                    ->first();
-            }else{
-                flash('<strong>Error: </strong> la factura que intenta buscar ya ha sido devuelta')->warning();
-            }
+        if(!isset($request->serie) || !isset($request->n_venta)){
+            flash('<strong>Error: </strong> debe especificar el numero de serie y el numero de venta');
+            return redirect()->back();
         }
+
+        $factura =  MFactura::serie($request->serie)
+            ->numeroVenta($request->n_venta)
+            ->where('estado','=','DEVUELTA')
+            ->first();
+
+        if($factura) {
+            flash('<strong>Error: </strong> la factura que intenta buscar ya ha sido devuelta')->warning();
+            return redirect()->back();
+        }
+
+        $factura = MFactura::serie($request->serie)
+            ->numeroVenta($request->n_venta)
+            ->first();
+
+
 
         $location = 'ventas';
         return view('ventas.devoluciones.devolucion',compact('location','factura'));
@@ -66,6 +72,16 @@ class MDevolucionController extends Controller
     public function store(Request $request)
     {
         $factura = MFactura::findOrFail($request->factura_id);
+
+        $current = new \DateTime('now');
+        $date = new \DateTime($factura->fecha);
+        $intervalo = $current->diff($date,'days');
+        $numeroDeDias = $intervalo->format('%a');
+
+        if($numeroDeDias > 7){
+            flash('<strong>Error: </strong> ha superado el tiempo limite para realizar esta operación.')->error();
+            return redirect()->back();
+        }
 
         DB::beginTransaction();
 

@@ -13,7 +13,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h2>
+                <h2 class="align-center ">
                   TRANSACCIÓN PROTEGIDA - FAVOR COMUNICARSE CON EL ADMINISTRADOR PARA QUE OTORGUE LOS PERMISOS
                     <small>EL ADMINISTRADOR SUMINISTRARÁ UN CODIGO DE VERIFICACIÓN PARA CONTINUAR </small>
                 </h2>
@@ -21,7 +21,7 @@
             <div class="body">
                 <div class="container_code" >
                    <P>ENTER VERIFICATION CODE</P>
-                    <input type="text" name="code" placeholder="verificated code">
+                    <input type="text" name="code" placeholder="verificated code" minlength="5" maxlength="5">
                     <button class="btn btn-success" style="margin-top: 2em"  >Verificar</button>
                 </div>
             </div>

@@ -54,6 +54,7 @@ class CompraController extends Controller
             'serie' => 'required',
             'bodega_id' => 'required',
             'fecha' => 'required|date',
+            'foto' => 'required'
         ]);
 
         if($validate->fails()){
@@ -96,8 +97,8 @@ class CompraController extends Controller
                     $file = $request->file('file');
                     $extension = $file->getClientOriginalExtension();
                     if ($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg' || $extension == 'gif' || $extension == 'pdf') {
-                        $path = $file->store('compras');
-                        $compra->foto = $path;
+                        $path = $file->store('public/compras');
+                        $compra->foto =  substr($path,7);
                         $compra->save();
                     } else {
                        $status = 'error';

@@ -80,7 +80,7 @@
                                 <div class="col-md-4" style="margin-bottom: 0">
                                     <div class="form-group">
                                         <label for="">Evidencia</label>
-                                        <input type="file" id="foto" name="foto" accept="image/png, image/jpeg, image/jpg, documento/pdf" name="foto" class="form-control" placeholder="numero de venta">
+                                        <input type="file" required id="foto" name="foto" accept="image/png, image/jpeg, image/jpg, documento/pdf" name="foto" class="form-control" placeholder="numero de venta">
                                     </div>
                                 </div>
                             </div>
