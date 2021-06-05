@@ -33,8 +33,6 @@
                                 <th>Nombres</th>
                                 <th>telefono</th>
                                 <th>Email</th>
-                                <th>Creado</th>
-                                <th>Modificado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -44,8 +42,6 @@
                                 <td>{{$clientes->nombres}}
                                 <td>{{$clientes->telefono}}
                                 <td>{{$clientes->email}}
-                                <td>{{$clientes->created_at}}</td>
-                                <td>{{$clientes->updated_at}}</td>
                                 <td style="text-align: center;">
                                     <a href="{{ route('clientes.edit',$clientes->id)}}"
                                        class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip"

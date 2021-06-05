@@ -30,7 +30,7 @@ class DescuentoStore extends Mailable
     public function build()
     {
         return $this->view('emails.descuentoStore')
-            ->attachData($this->pdf, 'soprte.pdf', [
+            ->attachData($this->pdf, 'soporte.pdf', [
                 'mime' => 'application/pdf',
             ]);
     }

@@ -5,6 +5,6 @@ namespace Src\services\permisos;
 interface DocumentManager
 {
 
-    public function generar($request) : void;
+    public function generar($request, $code) : void;
 
 }

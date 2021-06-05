@@ -197,7 +197,7 @@
                     'X-CSRF-TOKEN': '{{csrf_token()}}'
                 },
                 type:'POST',
-                url: '{{route('clientes.save')}}',
+                url: "{{route('clientes.save')}}",
                 data: {
                     '_token' : '{{csrf_token()}}',
                     'form': form
@@ -250,7 +250,7 @@
                     'X-CSRF-TOKEN': '{{csrf_token()}}'
                 },
                 type:'GET',
-                url: '{{route('clientes.json')}}',
+                url: "{{route('clientes.json')}}",
             }).done((msg) => {
                const clientes = msg;
                if(clientes.length == 0){

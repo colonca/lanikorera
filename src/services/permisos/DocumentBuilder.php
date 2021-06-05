@@ -6,7 +6,6 @@ class DocumentBuilder
 {
 
     private string $operation;
-    private DocumentManager $manager;
 
     public function __construct(string $operation){
        $this->operation = $operation;
@@ -19,7 +18,6 @@ class DocumentBuilder
                   $manager =  new DocumentDescuentoStore();
                   break;
         }
-
         return $manager;
     }
 

@@ -114,7 +114,6 @@ class ClientesController extends Controller
     public function update(Request $request, $id)
     {
         $cliente =  Clientes::findOrFail($id);
-        $cliente->identificacion = $request->identificacion;
         $cliente->nombres = $request->nombres;
         $cliente->telefono = $request->telefono;
         $cliente->email = $request->email;

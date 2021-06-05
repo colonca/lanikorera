@@ -122,15 +122,12 @@ class Factura extends Component
                     }
                     $factura->save();
                     $cliente =  Clientes::find($this->cliente_id);
-                    /*$pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
+                    $pdf = PDF::loadView('pdfs.factura',['factura' => $factura])
                         ->setPaper('a4', 'landscape')
                         ->output();
 
-                    Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));*/
-
-
+                    Mail::to($cliente->email)->send(new \App\Mail\Factura($pdf));
                     $status = 'ok';
-
                 }else {
                     $status = 'error';
                 }

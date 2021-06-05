@@ -30,7 +30,11 @@ class PermisosController extends Controller
         $permiso->identification = $user->identificacion;
         $permiso->name = $user->nombres;
         $permiso->operation = $request->operation;
-        $permiso->code = '45688';
+        $code = '';
+        for($i = 0; $i < 5; $i++){
+           $code.=rand(0,9);
+        }
+        $permiso->code = $code;
         $permiso->state = 'PENDIENTE';
         $permiso->time = $moment;
         $permiso->document = $document;
@@ -62,7 +66,6 @@ class PermisosController extends Controller
     public function verificar(){
 
     }
-
 
     public function generarDocument(string $operation,$request){
         $builder = new DocumentBuilder($operation);
