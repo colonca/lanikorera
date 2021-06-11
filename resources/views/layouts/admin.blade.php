@@ -231,7 +231,7 @@
                     sign</a>.
                 </div>
                 <div class="version">
-                    <b>Desarrollado Por: </b> <a href="#">SKAYNET</a>
+                    <b>Desarrollado Por: </b> <a href="#">GroupSkynet</a>
                 </div>
             </div>
             <!-- #Footer -->

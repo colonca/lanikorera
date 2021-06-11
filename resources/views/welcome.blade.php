@@ -36,7 +36,7 @@
             <div class="row bort">
                 <div class="copyright">
                     © 2020 La Nikorera. Todos los Derechos Reservados.
-                    <div class="credits">Desarrollado por <a href="#">SKAYNET</a>
+                    <div class="credits">Desarrollado por <a href="#">GroupSkynet</a>
                     </div>
                 </div>
             </div>

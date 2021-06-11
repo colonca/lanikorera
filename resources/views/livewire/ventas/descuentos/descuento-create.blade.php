@@ -58,8 +58,8 @@
                                                 <label for="">Cantidad Destinda</label>
                                                 <br/>
                                                 <input
-                                                    type="number" 
-                                                    class="form-control" 
+                                                    type="number"
+                                                    class="form-control"
                                                     wire:model.lazy="count"
                                                     placeholder="Cantidad de la promoción"
                                                 />
@@ -70,10 +70,10 @@
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <label for="">Precio</label>
-                                                <br/><input type="number" 
-                                                    class="form-control" 
-                                                    min="1" 
-                                                    wire:model.lazy="precio" 
+                                                <br/><input type="number"
+                                                    class="form-control"
+                                                    min="1"
+                                                    wire:model.lazy="precio"
                                                     placeholder="valor promo"
                                                 />
                                             </div>
@@ -115,7 +115,7 @@
                                 <form class="code" wire:submit.prevent="verification" >
                                         <div class="container_code" >
                                             <P>ENTER VERIFICATION CODE</P>
-                                            <input type="number" wire:model.lazy="code" placeholder="verificated code">
+                                            <input maxlength="5" type="number" wire:model.lazy="code" placeholder="verificated code">
                                             <button type="submit" class="btn btn-success" style="margin-top: 2em">Verificar</button>
                                         </div>
                                 </form>

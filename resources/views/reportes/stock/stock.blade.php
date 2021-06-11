@@ -40,7 +40,9 @@
                                 <th>Producto</th>
                                 <th>Stock Mínimo</th>
                                 <th>Stock Actual</th>
+                                @if(session('ROL') === 'ADMINISTRADOR')
                                 <th>Costo Unitario Promedio</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -55,7 +57,9 @@
                                 @else
                                     <td class="bg-success">{{$item->stock}}</td>
                                 @endif
+                                @if(session('ROL') === 'ADMINISTRADOR')
                                 <td>$ {{number_format($item->costo_promedio)}}</td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

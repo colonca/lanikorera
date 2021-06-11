@@ -17,7 +17,7 @@
                         <form class="code" id="verification_code_form">
                                 <div class="container_code" >
                                     <P>ENTER VERIFICATION CODE</P>
-                                    <input type="text" name="code" placeholder="verificated code">
+                                    <input maxlength="5" type="text" name="code" placeholder="verificated code">
                                     <button type="submit" class="btn btn-success" style="margin-top: 2em">Verificar</button>
                                 </div>
                         </form>

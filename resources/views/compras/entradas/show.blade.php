@@ -2,7 +2,7 @@
 @section('breadcrumb')
     <ol class="breadcrumb" style="margin-bottom: 30px;background-color: #38383A">
         <li><a style="color:white" href="{{route('inicio')}}">Inicio</a></li>
-        <li><a style="color:white" href="{{route('admin.ventas')}}">Ventas</a></li>
+        <li><a style="color:white" href="{{route('admin.compras')}}">Compras</a></li>
         <li class="active"><a style="color:white" href="">lista de entradas</a></li>
     </ol>
 @endsection
