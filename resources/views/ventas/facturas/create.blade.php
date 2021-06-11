@@ -260,7 +260,7 @@
                    table.destroy();
                    clientes.forEach((item)=>{
                          html += `
-                                  <tr>
+                                  <tr style='cursor:pointer'>
                                        <td>${item.id}</td>
                                        <td>${item.nombres}</td>
                                        <td>${item.telefono}</td>

@@ -17,6 +17,9 @@ class DocumentBuilder
             case 'descuento-store' :
                   $manager =  new DocumentDescuentoStore();
                   break;
+            case 'descuento-update':
+                   $manager = new DocumentDescuentoUpdate();
+                   break;
         }
         return $manager;
     }

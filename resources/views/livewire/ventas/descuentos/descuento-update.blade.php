@@ -3,7 +3,7 @@
         <div id="loader"></div>
         <div id="myDiv"></div>
     </div>
-    @if($page === 'descuento-store')
+    @if($page === 'descuento-update')
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
@@ -12,6 +12,7 @@
                     </h2>
                 </div>
                 <div class="body">
+                    @include('flash::message')
                     <div class="col-md-12">
                         @component('layouts.errors')
                         @endcomponent
@@ -39,7 +40,7 @@
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <label for="">Codigo de Barras</label>
-                                                <input type="text" class="form-control" wire:keydown.enter="searchProduct($event.target.value)" placeholder="scanee o ingrese el codigo del producto">
+                                                <input type="text" class="form-control" wire:model="codigo_barras" wire:keydown.enter="searchProduct($event.target.value)" placeholder="scanee o ingrese el codigo del producto">
                                             </div>
                                         </div>
                                     </div>
@@ -105,6 +106,7 @@
                     </div>
                     <div class="body">
                         <div class="col-md-12">
+                            @include('flash::message')
                             @component('layouts.errors')
                             @endcomponent
                         </div>

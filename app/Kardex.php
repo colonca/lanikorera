@@ -13,11 +13,14 @@ class Kardex extends Model
 
     public static function costo_promedio($producto){
         //tiempo en meses
-        $time = 3;
+        $time = config('admin.tiempo_costo_promedio',3);
+        $current = date('Y-m-d');
+        $date = date("Y-m-d",strtotime($current."- $time month"));
         $costo = 0;
         $entradas = Kardex::where([
             ['tipo_movimiento','ENTRADA'],
-            ['producto_id',$producto]
+            ['producto_id',$producto], 
+            ['created_at', '>=', $date]
         ])->get();
         $cantidad = 0;
         $total  = 0;

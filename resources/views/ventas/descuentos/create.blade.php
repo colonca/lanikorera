@@ -42,6 +42,6 @@
     </style>
 @endsection
 @section('content')
-    <livewire:ventas.descuentos />
+    <livewire:ventas.descuentos.descuento-create/>
 @endsection
 

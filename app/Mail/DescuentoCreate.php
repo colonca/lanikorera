@@ -2,24 +2,29 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DescuentoStore extends Mailable
+class DescuentoCreate extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $pdf;
+    public $code;
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($pdf)
+    public function __construct($pdf, $code,User $user)
     {
         $this->pdf = $pdf;
+        $this->code = $code;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +34,7 @@ class DescuentoStore extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.descuentoStore')
+        return $this->markdown('emails.ventas.permisos.descuentoCreate')
             ->attachData($this->pdf, 'soporte.pdf', [
                 'mime' => 'application/pdf',
             ]);
